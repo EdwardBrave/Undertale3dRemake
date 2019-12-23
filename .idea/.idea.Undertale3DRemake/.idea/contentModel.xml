@@ -1,19 +1,29 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\EdwardBrave\.Rider2019.2\system\extResources" t="IncludeRecursive" />
     <e p="C:\Users\EdwardBrave\.Rider2019.2\system\resharper-host\local\Transient\ReSharperHost\v192\SolutionCaches\_Undertale3DRemake.-1719326710.00" t="ExcludeRecursive" />
     <e p="D:\Projects\Develop\Unity\unity_2020\Undertale3DRemake" t="IncludeRecursive">
+      <e p="Assembly-CSharp-firstpass.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
-        <e p="DesperateDevs" t="Include">
-          <e p="Compile.cs" t="Include" />
-        </e>
-        <e p="Entitas" t="Include">
-          <e p="Entitas.xml" t="Include" />
-          <e p="LICENSE.txt" t="Include" />
+        <e p="Plugins" t="Include">
+          <e p="DesperateDevs" t="Include">
+            <e p="Compile.cs" t="Include" />
+          </e>
+          <e p="Entitas" t="Include">
+            <e p="Entitas.xml" t="Include" />
+            <e p="LICENSE.txt" t="Include" />
+          </e>
         </e>
         <e p="Sources" t="Include">
+          <e p="Core" t="Include">
+            <e p="GameManager.cs" t="Include" />
+            <e p="GameSystemsLists" t="Include">
+              <e p="MainMenuSystems.cs" t="Include" />
+            </e>
+            <e p="Globals.cs" t="Include" />
+          </e>
           <e p="Generated" t="Include">
             <e p="Contexts.cs" t="Include" />
             <e p="Feature.cs" t="Include" />
