@@ -8,7 +8,9 @@ public sealed class GameManager : MonoBehaviour
     private void Awake()
     {
         var contexts = Contexts.sharedInstance;
+        contexts.game.DestroyAllEntities();
         _systems = GetNewSystemsList(contexts);
+        var e = contexts.game.CreateEntity();
     }
     
     Feature GetNewSystemsList(Contexts contexts) => new MainMenuSystems(contexts);
