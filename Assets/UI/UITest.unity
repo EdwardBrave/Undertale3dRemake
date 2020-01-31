@@ -392,7 +392,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &742674867
 MonoBehaviour:
@@ -485,12 +485,13 @@ GameObject:
   - component: {fileID: 1848338206}
   - component: {fileID: 1848338208}
   - component: {fileID: 1848338207}
+  - component: {fileID: 1848338209}
   m_Layer: 5
   m_Name: Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!224 &1848338206
 RectTransform:
@@ -547,3 +548,48 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1848338205}
   m_CullTransparentMesh: 0
+--- !u!114 &1848338209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1848338205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b8b48f9a7cfd5a45a1fb4ee405e0aff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bondedImages:
+  - id: 0
+    name: ROOT
+    depth: -1
+    component: {fileID: 0}
+  - id: 9
+    name: Item 9
+    depth: 0
+    component: {fileID: 0}
+  - id: 8
+    name: Item 8
+    depth: 0
+    component: {fileID: 1848338207}
+  - id: 7
+    name: Item 7
+    depth: 0
+    component: {fileID: 0}
+  - id: 6
+    name: Item 6
+    depth: 0
+    component: {fileID: 0}
+  - id: 5
+    name: Item 5
+    depth: 0
+    component: {fileID: 0}
+  - id: 4
+    name: Item 4
+    depth: 0
+    component: {fileID: 0}
+  - id: 3
+    name: Item 3
+    depth: 0
+    component: {fileID: 0}
