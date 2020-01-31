@@ -11,6 +11,7 @@ namespace UI
     [Serializable]
     public class BondedImage : MultiColumnTreeElement
     {
+        [SerializeField]
         public Image component;
 
         public BondedImage()

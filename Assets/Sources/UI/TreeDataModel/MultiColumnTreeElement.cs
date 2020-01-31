@@ -35,11 +35,16 @@ namespace UI.TreeDataModel
 			cells.Add(new CellData(DrawNameCell, () => name));
 		}
 
-		void DrawNameCell(Rect cellRect, float offset) => name = EditorGUI.TextField(cellRect, name);
+		void DrawNameCell(Rect cellRect, float offset)
+		{
+			cellRect.x += offset;
+			cellRect.width -= offset;
+			name = EditorGUI.TextField(cellRect, name);
+		}
 
 		protected virtual void InitHeaders(List<MColumn> headers)
 		{
-			headers.Add(GetDefaultColumn("Name", 150, "The name of bonded image"));
+			headers.Add(GetDefaultColumn("Name", 100, "The name of bonded image"));
 		}
 
 		protected MColumn GetDefaultColumn(string colName, float width, string tooltip = "")

@@ -128,7 +128,7 @@ namespace UI.TreeDataModel
 			{
 				Rect cellRect = args.GetCellRect(i);
 				CenterRectUsingSingleLineHeight(ref cellRect);
-				float offset = isRecursive ? GetContentIndent(item) : 0f;
+				float offset = GetContentIndent(item);
 				item.Data.cells[args.GetColumn(i)].painter.Invoke(cellRect, offset);
 			}
 		}

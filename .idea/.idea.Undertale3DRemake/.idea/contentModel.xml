@@ -95,7 +95,10 @@
           <e p="UI" t="Include">
             <e p="BindingsListEditor.cs" t="Include" />
             <e p="bondedImage.cs" t="Include" />
+            <e p="BondedSprite.cs" t="Include" />
+            <e p="BondedString.cs" t="Include" />
             <e p="BondedText.cs" t="Include" />
+            <e p="BondedUIBinder.cs" t="Include" />
             <e p="BondedUIConfig.cs" t="Include" />
             <e p="TreeDataModel" t="Include">
               <e p="MultiColumnTreeElement.cs" t="Include" />
@@ -107,6 +110,7 @@
             </e>
             <e p="UIBinder.cs" t="Include" />
             <e p="UIConfig.cs" t="Include" />
+            <e p="UIConfigEditor.cs" t="Include" />
           </e>
         </e>
       </e>

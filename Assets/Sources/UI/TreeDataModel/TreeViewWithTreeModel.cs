@@ -91,7 +91,7 @@ namespace UI.TreeDataModel
 			return _rows;
 		}
 
-		public void DrawToolBar(MonoBehaviour asset)
+		public void DrawToolBar(UnityEngine.Object asset)
 		{
 			using (new EditorGUILayout.HorizontalScope())
 			{
@@ -303,6 +303,8 @@ namespace UI.TreeDataModel
 		bool ValidDrag(TreeViewItem parent, List<TreeViewItem> draggedItems)
 		{
 			TreeViewItem currentParent = parent;
+			if (currentParent.GetType() != draggedItems.First().GetType())
+				return false;
 			if (!isRecursive)
 				return currentParent.depth == -1;
 			while (currentParent != null)

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UI.TreeDataModel;
 using UnityEditor;
 using UnityEditor.IMGUI.Controls;
@@ -7,31 +8,33 @@ using UnityEngine.UI;
 
 namespace UI
 {
+    [Serializable]
     public class BondedText : MultiColumnTreeElement
     {
-        public Text text;
+        [SerializeField]
+        public Text component;
     
         public BondedText()
         {
-            cells.Add(new CellData(DrawImageCell, () => text));
+            cells.Add(new CellData(DrawTextCell, () => component));
         }
 
         public BondedText(string name, int depth, int id) : base(name, depth, id)
         {
-            text = null;
-            cells.Add(new CellData(DrawImageCell, () => text));
+            component = null;
+            cells.Add(new CellData(DrawTextCell, () => component));
         }
     
-        private void DrawImageCell(Rect cellRect, float offset)
+        private void DrawTextCell(Rect cellRect, float offset)
         {
             cellRect.xMin += 5f;
-            text = (Text)EditorGUI.ObjectField(cellRect, GUIContent.none, text, typeof(Image), true);
+            component = (Text)EditorGUI.ObjectField(cellRect, GUIContent.none, component, typeof(Text), true);
         }
 
         protected override void InitHeaders(List<MultiColumnHeaderState.Column> headers)
         {
-            base.InitHeaders(headers);
-            headers.Add(GetDefaultColumn("Image", 100, "bonded image link"));
+            base.InitHeaders(headers); 
+            headers.Add(GetDefaultColumn("Component", 100, "bonded image link"));
         }
     }
 }
