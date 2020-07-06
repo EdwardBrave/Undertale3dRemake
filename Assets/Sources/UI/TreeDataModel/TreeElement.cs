@@ -15,6 +15,8 @@ namespace UI.TreeDataModel
 		[NonSerialized] public List<TreeElement> children;
 
 		public bool HasChildren => children != null && children.Count > 0;
+		
+		public bool IsNamedAs(string kayName) => name == kayName;
 
 		public TreeElement()
 		{
@@ -26,6 +28,11 @@ namespace UI.TreeDataModel
 			this.name = name;
 			this.depth = depth;
 		}
+	}
 
+	public static class ListExtension
+	{
+		public static T Get<T>(this List<T> list, string name) where T: TreeElement 
+			=> list.Find(o => o.IsNamedAs(name));
 	}
 }

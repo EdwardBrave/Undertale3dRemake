@@ -8,15 +8,21 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
+    public const int UiEvents = 0;
+    public const int UiRequest = 1;
+    public const int Command = 2;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 3;
 
     public static readonly string[] componentNames = {
-
+        "UiEvents",
+        "UiRequest",
+        "Command"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(Components.Input.UiEventsComponent),
+        typeof(Components.Input.UiRequestComponent),
+        typeof(Components.UI.CommandComponent)
     };
 }

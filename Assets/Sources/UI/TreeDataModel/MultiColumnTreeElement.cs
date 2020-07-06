@@ -1,26 +1,16 @@
 using System;
 using System.Collections.Generic;
 using UnityEditor;
-using UnityEditor.IMGUI.Controls;
 using UnityEngine;
+#if UNITY_EDITOR
 using MColumn = UnityEditor.IMGUI.Controls.MultiColumnHeaderState.Column;
-
+#endif
 namespace UI.TreeDataModel
 {
 	[Serializable]
 	public class MultiColumnTreeElement : TreeElement
 	{
 		public readonly List<CellData> cells = new List<CellData>();
-
-		public List<MColumn> ColumnHeaders
-		{
-			get
-			{
-				var headers = new List<MColumn>();
-				InitHeaders(headers);
-				return headers;
-			}
-		}
 
 		public MultiColumnTreeElement()
 		{
@@ -39,9 +29,22 @@ namespace UI.TreeDataModel
 		{
 			cellRect.x += offset;
 			cellRect.width -= offset;
+#if UNITY_EDITOR
 			name = EditorGUI.TextField(cellRect, name);
+#endif
 		}
 
+#if UNITY_EDITOR
+		public List<MColumn> ColumnHeaders
+		{
+			get
+			{
+				var headers = new List<MColumn>();
+				InitHeaders(headers);
+				return headers;
+			}
+		}
+		
 		protected virtual void InitHeaders(List<MColumn> headers)
 		{
 			headers.Add(GetDefaultColumn("Name", 100, "The name of bonded image"));
@@ -61,6 +64,7 @@ namespace UI.TreeDataModel
 				allowToggleVisibility = true
 			};
 		}
+#endif
 	}
 
 	public class CellData
