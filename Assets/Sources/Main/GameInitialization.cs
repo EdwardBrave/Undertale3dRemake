@@ -20,9 +20,11 @@ namespace Main
             switch (systems)
             {
                 case Features.Default:
-                    return typeof(MainMenuSystems);
+                    return typeof(GameSystems);
                 case Features.MainMenu:
                     return typeof(MainMenuSystems);
+                case Features.Game:
+                    return typeof(GameSystems);
                 default:
                     throw new ArgumentOutOfRangeException(nameof(systems), systems, null);
             }
@@ -32,6 +34,7 @@ namespace Main
     public enum Features
     {
         Default,
-        MainMenu
+        MainMenu,
+        Game
     }
 }

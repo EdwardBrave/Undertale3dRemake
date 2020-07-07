@@ -8,15 +8,39 @@
 //------------------------------------------------------------------------------
 public static class GameComponentsLookup {
 
+    public const int Animator = 0;
+    public const int Destroyed = 1;
+    public const int Motion = 2;
+    public const int MoveInDirection = 3;
+    public const int PlayerController = 4;
+    public const int Position = 5;
+    public const int Prefab = 6;
+    public const int Rotation = 7;
+    public const int View = 8;
 
-
-    public const int TotalComponents = 0;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
-
+        "Animator",
+        "Destroyed",
+        "Motion",
+        "MoveInDirection",
+        "PlayerController",
+        "Position",
+        "Prefab",
+        "Rotation",
+        "View"
     };
 
     public static readonly System.Type[] componentTypes = {
-
+        typeof(Components.Game.AnimatorComponent),
+        typeof(Components.Game.DestroyedComponent),
+        typeof(Components.Game.MotionComponent),
+        typeof(Components.Game.MoveInDirectionComponent),
+        typeof(Components.Game.PlayerControllerComponent),
+        typeof(Components.Game.PositionComponent),
+        typeof(Components.Game.PrefabComponent),
+        typeof(Components.Game.RotationComponent),
+        typeof(Components.Game.ViewComponent)
     };
 }
