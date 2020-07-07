@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Components.Input;
 using Entitas;
 using UnityEngine;
 
@@ -37,25 +38,17 @@ namespace Systems.Game
                 return;
             }
 
-            Vector3 direction;
-            switch (eventEntity.keyPressed.key.ToUpper())
-            {
-                case "W":
-                    direction = Vector3.forward;
-                    break;
-                case "A":
-                    direction = Vector3.left;
-                    break;
-                case "S":
-                    direction = Vector3.back;
-                    break;
-                case "D":
-                    direction = Vector3.right;
-                    break;
-                default:
-                    return;
-            } 
-            
+            Vector3 direction = Vector3.zero;
+            var key = eventEntity.keyPressed.key;
+            if ((key & GameKey.Up) != GameKey.None)
+                direction.z += 1;
+            if ((key & GameKey.Left) != GameKey.None)
+                direction.x -= 1;
+            if ((key & GameKey.Down) != GameKey.None)
+                direction.z -= 1;
+            if ((key & GameKey.Right) != GameKey.None)
+                direction.x += 1;
+
             foreach (var entity in _playerControllers)
             {
                 entity.ReplaceMoveInDirection(direction);

@@ -10,7 +10,7 @@ namespace Systems.Features
             Add(new CreatePlayerSystem(contexts));
             Add(new InitViewSystem(contexts));
             
-            Add(new KeyboardEventsSystem(contexts));
+            Add(new InputGameEventsSystem(contexts));
             Add(new PlayerControllerSystem(contexts));
             Add(new MotionSystem(contexts));
             Add(new PositionSystem(contexts));

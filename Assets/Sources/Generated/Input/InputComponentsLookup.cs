@@ -9,16 +9,20 @@
 public static class InputComponentsLookup {
 
     public const int KeyboardEvents = 0;
-    public const int KeyPressed = 1;
-    public const int UiEvents = 2;
-    public const int UiRequest = 3;
-    public const int Command = 4;
+    public const int KeyDown = 1;
+    public const int KeyPressed = 2;
+    public const int KeyUp = 3;
+    public const int UiEvents = 4;
+    public const int UiRequest = 5;
+    public const int Command = 6;
 
-    public const int TotalComponents = 5;
+    public const int TotalComponents = 7;
 
     public static readonly string[] componentNames = {
         "KeyboardEvents",
+        "KeyDown",
         "KeyPressed",
+        "KeyUp",
         "UiEvents",
         "UiRequest",
         "Command"
@@ -26,7 +30,9 @@ public static class InputComponentsLookup {
 
     public static readonly System.Type[] componentTypes = {
         typeof(Components.Input.KeyboardEventsComponent),
+        typeof(Components.Input.KeyDownComponent),
         typeof(Components.Input.KeyPressedComponent),
+        typeof(Components.Input.KeyUpComponent),
         typeof(Components.Input.UiEventsComponent),
         typeof(Components.Input.UiRequestComponent),
         typeof(Components.UI.CommandComponent)

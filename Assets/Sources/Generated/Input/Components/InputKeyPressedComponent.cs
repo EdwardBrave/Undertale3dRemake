@@ -11,14 +11,14 @@ public partial class InputEntity {
     public Components.Input.KeyPressedComponent keyPressed { get { return (Components.Input.KeyPressedComponent)GetComponent(InputComponentsLookup.KeyPressed); } }
     public bool hasKeyPressed { get { return HasComponent(InputComponentsLookup.KeyPressed); } }
 
-    public void AddKeyPressed(string newKey) {
+    public void AddKeyPressed(Components.Input.GameKey newKey) {
         var index = InputComponentsLookup.KeyPressed;
         var component = (Components.Input.KeyPressedComponent)CreateComponent(index, typeof(Components.Input.KeyPressedComponent));
         component.key = newKey;
         AddComponent(index, component);
     }
 
-    public void ReplaceKeyPressed(string newKey) {
+    public void ReplaceKeyPressed(Components.Input.GameKey newKey) {
         var index = InputComponentsLookup.KeyPressed;
         var component = (Components.Input.KeyPressedComponent)CreateComponent(index, typeof(Components.Input.KeyPressedComponent));
         component.key = newKey;

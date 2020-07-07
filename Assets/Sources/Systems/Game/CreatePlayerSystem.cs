@@ -21,7 +21,7 @@ namespace Systems.Game
             entity.AddPrefab(_playerPrefabPath);
             entity.AddRotation(Vector3.zero);
             entity.isPlayerController = true;
-            entity.AddMotion(4, 0);
+            entity.AddMotion(3, 0);
             entity.AddAnimator(null);
         }
     }
