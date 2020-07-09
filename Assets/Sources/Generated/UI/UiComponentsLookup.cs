@@ -8,19 +8,21 @@
 //------------------------------------------------------------------------------
 public static class UiComponentsLookup {
 
-    public const int Canvas = 0;
-    public const int Close = 1;
-    public const int Command = 2;
-    public const int Confirm = 3;
-    public const int Protected = 4;
-    public const int Reject = 5;
-    public const int UiData = 6;
-    public const int View = 7;
-    public const int Window = 8;
+    public const int Bindings = 0;
+    public const int Canvas = 1;
+    public const int Close = 2;
+    public const int Command = 3;
+    public const int Confirm = 4;
+    public const int Protected = 5;
+    public const int Reject = 6;
+    public const int UiData = 7;
+    public const int View = 8;
+    public const int Window = 9;
 
-    public const int TotalComponents = 9;
+    public const int TotalComponents = 10;
 
     public static readonly string[] componentNames = {
+        "Bindings",
         "Canvas",
         "Close",
         "Command",
@@ -33,6 +35,7 @@ public static class UiComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Components.UI.BindingsComponent),
         typeof(Components.UI.CanvasComponent),
         typeof(Components.UI.CloseComponent),
         typeof(Components.UI.CommandComponent),

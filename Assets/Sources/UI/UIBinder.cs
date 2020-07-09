@@ -40,6 +40,8 @@ namespace UI
         
         public BondedText GetText(string kayName) => bondedTexts.Get(kayName);
         
+        public BondedField GetField(string kayName) => bondedFields.Get(kayName);
+        
 
         public void LoadUIData(UIData uiData)
         {

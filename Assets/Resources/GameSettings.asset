@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75e564a6b54ce674ca1794cc0521239d, type: 3}
   m_Name: GameSettings
   m_EditorClassIdentifier: 
-  canvasInitList: []
+  canvasInitList:
+  - name: BaseCanvas
+    windows:
+    - TestPanel

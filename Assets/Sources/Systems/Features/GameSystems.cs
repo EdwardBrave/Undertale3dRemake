@@ -16,6 +16,8 @@ namespace Systems.Features
             Add(new PositionSystem(contexts));
             Add(new RotationSystem(contexts));
             Add(new AnimatorSystem(contexts));
+
+            Add(new UISystems(contexts));
             
             Add(new DestroyedCleanupSystem(contexts));
         }
