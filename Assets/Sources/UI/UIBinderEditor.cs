@@ -15,7 +15,7 @@ namespace UI
 
 		MultiColumnTreeView<BondedImage> _imagesTreeView;
 
-		MultiColumnTreeView<BondedText> _textTreeView;
+		MultiColumnTreeView<BondedText> _textsTreeView;
 
 		MultiColumnTreeView<BondedField> _fieldsTreeView;
 
@@ -39,7 +39,7 @@ namespace UI
 			// BondedTexts ---------------------------------------------------------------------------------------------
 			if (Asset.bondedTexts.Count == 0)
 				Asset.bondedTexts.Add(new BondedText("ROOT", -1, 0));
-			_textTreeView = TreeViewInit(Asset.bondedTexts);
+			_textsTreeView = TreeViewInit(Asset.bondedTexts);
 			
 			// BondedTexts ---------------------------------------------------------------------------------------------
 			if (Asset.bondedFields.Count == 0)
@@ -73,7 +73,7 @@ namespace UI
 		{
 			Perform(_bindsTreeView, Asset.bondedBinders);
 			Perform(_imagesTreeView, Asset.bondedImages);
-			Perform(_textTreeView, Asset.bondedTexts);
+			Perform(_textsTreeView, Asset.bondedTexts);
 			Perform(_fieldsTreeView, Asset.bondedFields);
 		}
 		
@@ -88,8 +88,6 @@ namespace UI
 		{
 			Undo.RecordObject (Asset, $"Moving {draggedRows.Count} Item{(draggedRows.Count > 1 ? "s" : "")}");
 		}
-		
-		
 
 		public override void OnInspectorGUI()
 		{
@@ -100,6 +98,32 @@ namespace UI
 				Rect rectUI = GUILayoutUtility.GetRect(0, 10000, 0, 24);
 				Asset.loadedUIData = (UIData) EditorGUI.ObjectField(rectUI, GUIContent.none, Asset.loadedUIData,
 					typeof(UIData), true);
+			}
+
+			using (new EditorGUILayout.HorizontalScope())
+			{
+				EditorGUILayout.LabelField("isAutoSearch");
+				Asset.isAutoSearch = EditorGUILayout.Toggle(Asset.isAutoSearch);
+			}
+			
+			if (Asset.isAutoSearch)
+				return;
+			
+			if (GUILayout.Button("Find all potential bindings"))
+			{
+				Asset.FindBindings();
+				if (Asset.bondedBinders.Count > 0)
+					Asset.isShowBinders = true;
+				if (Asset.bondedImages.Count > 0)
+					Asset.isShowImages = true;
+				if (Asset.bondedTexts.Count > 0)
+					Asset.isShowTexts = true;
+				if (Asset.bondedFields.Count > 0)
+					Asset.isShowFields = true;
+				_bindsTreeView = TreeViewInit(Asset.bondedBinders);
+				_imagesTreeView = TreeViewInit(Asset.bondedImages);
+				_textsTreeView = TreeViewInit(Asset.bondedTexts);
+				_fieldsTreeView = TreeViewInit(Asset.bondedFields);
 			}
 
 			GUILayout.Space(10f);
@@ -114,7 +138,7 @@ namespace UI
 			// BondedTexts ---------------------------------------------------------------------------------------------
 			Asset.isShowTexts = EditorGUILayout.Foldout(Asset.isShowTexts, "Texts bonded links");
 			if (Asset.isShowTexts)
-				DrawTreeView(_textTreeView, Asset);
+				DrawTreeView(_textsTreeView, Asset);
 			// BondedFields --------------------------------------------------------------------------------------------
 			Asset.isShowFields = EditorGUILayout.Foldout(Asset.isShowFields, "Fields bonded links");
 			if (Asset.isShowFields)

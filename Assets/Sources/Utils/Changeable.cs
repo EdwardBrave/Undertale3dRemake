@@ -23,8 +23,10 @@ namespace Utils
                 _isChanged = true;
             }
         }
+        
+        public Changeable() { }
 
-        public Changeable(T value = default)
+        public Changeable(T value)
         {
             _value = value;
             _isChanged = true;

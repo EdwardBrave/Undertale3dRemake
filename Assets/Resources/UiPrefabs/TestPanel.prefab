@@ -543,6 +543,7 @@ MonoBehaviour:
   isShowImages: 1
   isShowTexts: 1
   isShowFields: 1
+  isAutoSearch: 1
   loadedUIData: {fileID: 0}
   bondedBinders:
   - id: 0
