@@ -112,13 +112,13 @@ namespace UI
 			if (GUILayout.Button("Find all potential bindings"))
 			{
 				Asset.FindBindings();
-				if (Asset.bondedBinders.Count > 0)
+				if (Asset.bondedBinders.Count > 1)
 					Asset.isShowBinders = true;
-				if (Asset.bondedImages.Count > 0)
+				if (Asset.bondedImages.Count > 1)
 					Asset.isShowImages = true;
-				if (Asset.bondedTexts.Count > 0)
+				if (Asset.bondedTexts.Count > 1)
 					Asset.isShowTexts = true;
-				if (Asset.bondedFields.Count > 0)
+				if (Asset.bondedFields.Count > 1)
 					Asset.isShowFields = true;
 				_bindsTreeView = TreeViewInit(Asset.bondedBinders);
 				_imagesTreeView = TreeViewInit(Asset.bondedImages);
