@@ -1,3 +1,4 @@
+using Systems.Input;
 using Systems.UI;
 
 namespace Systems.Features
@@ -11,7 +12,10 @@ namespace Systems.Features
             Add(new OpenWindowSystem(contexts));
             Add(new LoadUIDataSystem(contexts));
             Add(new BindingsSystem(contexts));
-            
+            Add(new UIEventHandlerSystem(contexts));
+            Add(new UIHandlerSystem(contexts));
+
+            Add(new UIRequestsCleanupSystem(contexts));
             Add(new CloseWindowCleanupSystem(contexts));
         }
     }

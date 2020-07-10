@@ -4,13 +4,7 @@
     {
         public MainMenuSystems(Contexts contexts)
         {
-            //Input
-        
-            //Update
-        
-            //View
-        
-            //Events
+            Add(new UISystems(contexts));
         }
     }
 }
