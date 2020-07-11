@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace UI
 {
@@ -20,7 +21,8 @@ namespace UI
 
         public void OpenWindow(string windowName) => OnInterfaceEvent(UIEventArgs.Open + " " + windowName);
         
-        public void CloseSelf() => OnInterfaceEvent(UIEventArgs.Close);
+        public void Close(string windows) => OnInterfaceEvent(UIEventArgs.Close + " " + windows);
+        public void CloseSelf() => OnInterfaceEvent(UIEventArgs.CloseSelf);
         
         public void CloseAllWindows() => OnInterfaceEvent(UIEventArgs.CloseAll);
         
@@ -30,6 +32,8 @@ namespace UI
             string[] args = eventRequest.Split(' ');
             UIEvent?.Invoke(this, new UIEventArgs(identifier, args[0], args.Skip(1).ToArray()));
         }
+
+        public void LoadScene(string sceneName) => SceneManager.LoadScene(sceneName);
         
         public void SendCommand(string command) => OnInterfaceEvent(UIEventArgs.Command + " " + command);
         
@@ -43,7 +47,8 @@ namespace UI
         public const string Pressed = "pressed";
         public const string Released = "released";
         public const string Open = "open";
-        public const string Close = "closeSelf";
+        public const string Close = "close";
+        public const string CloseSelf = "closeSelf";
         public const string CloseAll = "closeAll";
         public const string Command = "aditionalCommand";
         public const string GlobalCommand = "globalAditionalCommand";

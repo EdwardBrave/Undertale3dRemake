@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Entitas;
 using Entitas.Unity;
 using UI;
@@ -52,8 +53,16 @@ namespace Systems.Input
                             uiEntity.ReplaceUiData(windowArgs[1]);
                         break;
                     case UIEventArgs.Close:
+                        var windows = _uiContext.GetEntities(UiMatcher.Window);
+                        foreach (var window in windows)
+                        {
+                            if (data.args.Any(s => s == window.window.path))
+                                window.isClose = true;
+                        }
+                        break;
+                    case UIEventArgs.CloseSelf:
                         if (windowEntity == null) continue;
-                            windowEntity.isClose = true;
+                        windowEntity.isClose = true;
                         break;
                     case UIEventArgs.Command:
                         if (windowEntity == null) continue;

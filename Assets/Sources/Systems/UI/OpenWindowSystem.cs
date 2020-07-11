@@ -41,8 +41,11 @@ namespace Systems.UI
                 {
                     var prefab = Resources.Load<GameObject>(_coreConfig.uiPrefabsPath + entity.window.path);
                     if (!prefab) continue;
-
-                    UiEntity canvasEntity = _canvases.AsEnumerable().First(o => o.canvas.name == canvasName);
+                    
+                    UiEntity canvasEntity = int.TryParse(canvasName, out int canvasIndex) ? 
+                        _canvases.GetEntities()[canvasIndex] : 
+                        _canvases.AsEnumerable().First(o => o.canvas.name == canvasName);
+                    
                     window = Object.Instantiate(prefab, canvasEntity.view.obj.transform);
                     canvasEntity.canvas.windows.Add(entity);
                     entity.AddView(window, canvasEntity);
