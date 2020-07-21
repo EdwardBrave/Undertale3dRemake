@@ -65,7 +65,7 @@ PrefabInstance:
     - target: {fileID: 5193938913310206431, guid: e79921065188dd848b9d33fce3d72360,
         type: 3}
       propertyPath: m_Name
-      value: Gate1_LP
+      value: Gate1_LP Bump
       objectReference: {fileID: 0}
     - target: {fileID: 7083495907461357346, guid: e79921065188dd848b9d33fce3d72360,
         type: 3}
