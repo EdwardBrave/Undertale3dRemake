@@ -12,8 +12,7 @@ namespace Systems.Game
         {
             _context = contexts.game;
             _inMotionEntities = contexts.game.GetGroup(
-                GameMatcher.AllOf(GameMatcher.MoveInDirection, GameMatcher.Motion)
-                    .AnyOf(GameMatcher.Position, GameMatcher.Rotation));
+                GameMatcher.AllOf(GameMatcher.MoveInDirection, GameMatcher.Motion, GameMatcher.View));
             _onMoveEventEntities = contexts.game.CreateCollector(
                 new TriggerOnEvent<GameEntity>(GameMatcher.MoveInDirection, GroupEvent.AddedOrRemoved));
         }
@@ -32,14 +31,10 @@ namespace Systems.Game
             foreach (var entity in _inMotionEntities)
             {
                 var vector = entity.moveInDirection.vector;
-                if(entity.hasPosition)
-                    entity.ReplacePosition(entity.position.value + 
-                                           entity.motion.speed * Time.deltaTime * vector);
-                if (entity.hasRotation)
-                {
-                    float angle = Mathf.Atan2(vector.x, vector.z) * 57.2957795f;
-                    entity.ReplaceRotation(new Vector3(entity.rotation.euler.x,angle, entity.rotation.euler.z));
-                }
+                var transform = entity.view.obj.transform;
+                transform.position += entity.motion.speed * Time.deltaTime * vector;
+                float angle = Mathf.Atan2(vector.x, vector.z) * 57.2957795f;
+                transform.eulerAngles = new Vector3(entity.view.Rotation.x, angle, entity.view.Rotation.z);
             }
         }
     }

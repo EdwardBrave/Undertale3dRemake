@@ -7,8 +7,10 @@ namespace Systems.Features
     {
         public GameSystems(Contexts contexts)
         {
+            Add(new InitSceneSystem(contexts));
             Add(new CreatePlayerSystem(contexts));
             Add(new InitViewSystem(contexts));
+            Add(new FindViewSystem(contexts));
             
             Add(new InputGameEventsSystem(contexts));
             Add(new PlayerControllerSystem(contexts));
@@ -16,6 +18,7 @@ namespace Systems.Features
             Add(new PositionSystem(contexts));
             Add(new RotationSystem(contexts));
             Add(new AnimatorSystem(contexts));
+            Add(new FollowSystem(contexts));
 
             Add(new UISystems(contexts));
             

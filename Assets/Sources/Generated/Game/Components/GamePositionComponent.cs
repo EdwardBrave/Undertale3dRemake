@@ -11,17 +11,19 @@ public partial class GameEntity {
     public Components.Game.PositionComponent position { get { return (Components.Game.PositionComponent)GetComponent(GameComponentsLookup.Position); } }
     public bool hasPosition { get { return HasComponent(GameComponentsLookup.Position); } }
 
-    public void AddPosition(UnityEngine.Vector3 newValue) {
+    public void AddPosition(UnityEngine.Vector3 newValue, bool newIsRelative) {
         var index = GameComponentsLookup.Position;
         var component = (Components.Game.PositionComponent)CreateComponent(index, typeof(Components.Game.PositionComponent));
         component.value = newValue;
+        component.isRelative = newIsRelative;
         AddComponent(index, component);
     }
 
-    public void ReplacePosition(UnityEngine.Vector3 newValue) {
+    public void ReplacePosition(UnityEngine.Vector3 newValue, bool newIsRelative) {
         var index = GameComponentsLookup.Position;
         var component = (Components.Game.PositionComponent)CreateComponent(index, typeof(Components.Game.PositionComponent));
         component.value = newValue;
+        component.isRelative = newIsRelative;
         ReplaceComponent(index, component);
     }
 
