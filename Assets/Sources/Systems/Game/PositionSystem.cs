@@ -6,10 +6,13 @@ namespace Systems.Game
     public class PositionSystem : ReactiveSystem<GameEntity>
     {
         private readonly GameContext _context;
-        
+        private readonly IGroup<GameEntity> _positionGroup;
+
         public PositionSystem(Contexts contexts) : base(contexts.game)
         {
             _context = contexts.game;
+            _positionGroup = _context.GetGroup(GameMatcher.AllOf(
+                GameMatcher.Position, GameMatcher.View, GameMatcher.Motion));
         }
 
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
@@ -26,8 +29,8 @@ namespace Systems.Game
         {
             foreach (var entity in entities)
             {
-                entity.position.value.y = entity.view.obj.transform.localPosition.y;
                 entity.view.obj.transform.localPosition = entity.position.value;
+                entity.RemovePosition();
             }
         }
     }

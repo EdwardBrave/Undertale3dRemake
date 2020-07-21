@@ -11,17 +11,19 @@ public partial class GameEntity {
     public Components.Game.RotationComponent rotation { get { return (Components.Game.RotationComponent)GetComponent(GameComponentsLookup.Rotation); } }
     public bool hasRotation { get { return HasComponent(GameComponentsLookup.Rotation); } }
 
-    public void AddRotation(UnityEngine.Vector3 newEuler) {
+    public void AddRotation(UnityEngine.Vector3 newEuler, bool newIsRelative) {
         var index = GameComponentsLookup.Rotation;
         var component = (Components.Game.RotationComponent)CreateComponent(index, typeof(Components.Game.RotationComponent));
         component.euler = newEuler;
+        component.isRelative = newIsRelative;
         AddComponent(index, component);
     }
 
-    public void ReplaceRotation(UnityEngine.Vector3 newEuler) {
+    public void ReplaceRotation(UnityEngine.Vector3 newEuler, bool newIsRelative) {
         var index = GameComponentsLookup.Rotation;
         var component = (Components.Game.RotationComponent)CreateComponent(index, typeof(Components.Game.RotationComponent));
         component.euler = newEuler;
+        component.isRelative = newIsRelative;
         ReplaceComponent(index, component);
     }
 

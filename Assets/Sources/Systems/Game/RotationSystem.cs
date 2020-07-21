@@ -18,7 +18,7 @@ namespace Systems.Game
 
         protected override bool Filter(GameEntity entity)
         {
-            return entity.hasView && entity.hasPosition;
+            return entity.hasView && entity.hasRotation;
         }
 
         protected override void Execute(List<GameEntity> entities)
@@ -26,6 +26,7 @@ namespace Systems.Game
             foreach (var entity in entities)
             {
                 entity.view.obj.transform.eulerAngles = entity.rotation.euler;
+                entity.RemoveRotation();
             }
         }
     }
