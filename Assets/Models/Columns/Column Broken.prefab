@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2091498462639499692}
   m_Layer: 0
-  m_Name: ColumnBroken
+  m_Name: Column Broken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 32b4ca86760f2394288639ac66b30086, type: 2}
+      objectReference: {fileID: 2100000, guid: 83e14467900cdf643a7f9377bc464807, type: 2}
     - target: {fileID: 919132149155446097, guid: 5289849ab4fc698419bcd0e2d02ba334,
         type: 3}
       propertyPath: m_Name

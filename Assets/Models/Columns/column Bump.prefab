@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8645405281412768170}
   m_Layer: 0
-  m_Name: column
+  m_Name: column Bump
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: b33c410b02aa6d348984f0fb98dc76e2, type: 2}
+      objectReference: {fileID: 2100000, guid: 80c82b0af9ae7b24884210cf22e57002, type: 2}
     - target: {fileID: 919132149155446097, guid: 3ae6e6bcd45f7e84e886f8e207d23adf,
         type: 3}
       propertyPath: m_Name

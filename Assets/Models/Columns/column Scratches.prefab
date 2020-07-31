@@ -66,11 +66,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 15fbc2cae6deeaa45a45ac5369300416, type: 2}
+      objectReference: {fileID: 2100000, guid: 9bffde30003c0fe4aac9a9ff9a1910ca, type: 2}
     - target: {fileID: 8791828494196132196, guid: 0d5537aca817997478421c744c04dd53,
         type: 3}
       propertyPath: m_Name
-      value: column
+      value: column Scratches
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d5537aca817997478421c744c04dd53, type: 3}

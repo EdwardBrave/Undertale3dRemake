@@ -10,13 +10,13 @@ PrefabInstance:
     - target: {fileID: 1347491113133987913, guid: 38a1fd89c3dc6f644abd9187512e8dec,
         type: 3}
       propertyPath: m_Name
-      value: column
+      value: column clear
       objectReference: {fileID: 0}
     - target: {fileID: 1731792602976595436, guid: 38a1fd89c3dc6f644abd9187512e8dec,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 9fb7ce9b5c08e00488dbf154f1c523c7, type: 2}
+      objectReference: {fileID: 2100000, guid: bb551cdf1aeeba44c90f8a7796d38107, type: 2}
     - target: {fileID: 8645405281412768170, guid: 38a1fd89c3dc6f644abd9187512e8dec,
         type: 3}
       propertyPath: m_LocalPosition.x
