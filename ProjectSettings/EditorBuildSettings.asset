@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Main/InProgress.unity
     guid: 8194c43b5e77143499a846f60b68ca3a
+  - enabled: 1
+    path: Assets/Scenes/Ruins/FirstRoomV2.unity
+    guid: d38e1dd7ffc31466494778ba4d7dde55
   m_configObjects: {}
