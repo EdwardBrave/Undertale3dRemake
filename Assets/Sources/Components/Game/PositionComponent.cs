@@ -8,5 +8,6 @@ namespace Components.Game
     public class PositionComponent: IComponent
     {
         public Vector3 value;
+        public bool isRelative;
     }
 }

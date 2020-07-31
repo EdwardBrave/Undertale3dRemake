@@ -16,13 +16,13 @@ namespace Systems.Game
         
         public void Initialize()
         {
-            var entity = _gameContext.CreateEntity();
+            /*var entity = _gameContext.CreateEntity();
             entity.AddPosition(new Vector3(-0.15f, 0,-5.86f));
             entity.AddPrefab(_playerPrefabPath);
             entity.AddRotation(Vector3.zero);
             entity.isPlayerController = true;
             entity.AddMotion(3, 0);
-            entity.AddAnimator(null);
+            entity.AddAnimator(null);*/
         }
     }
 }
