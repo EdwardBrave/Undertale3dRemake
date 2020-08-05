@@ -1,30 +1,32 @@
-﻿using UnityEngine;
+﻿using UnityEditor;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 namespace Scenes
 {
     public class SceneLoader : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
-        
-        }
-
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        public SceneAsset nextScene;
 
         public void LoadScene(string sceneName)
         {
             SceneManager.LoadScene(sceneName);
         }
+        
+        public void LoadSelectedScene()
+        {
+            SceneManager.LoadScene(nextScene.name);
+        }
     
         public void LoadSceneById(int index)
         {
             SceneManager.LoadScene(index);
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.CompareTag("SceneDoor"))
+                SceneManager.LoadScene(nextScene.name);
         }
     }
 }
