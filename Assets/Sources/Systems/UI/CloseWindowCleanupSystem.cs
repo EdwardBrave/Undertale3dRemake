@@ -3,6 +3,7 @@ using Entitas;
 using Entitas.Unity;
 using Entitas.VisualDebugging.Unity;
 using UnityEngine;
+using Utils;
 
 namespace Systems.UI
 {
@@ -31,7 +32,11 @@ namespace Systems.UI
                 if (entity.hasView)
                 {
                     entity.view.obj.Unlink();
-                    entity.view.obj.DestroyGameObject();
+                    var onClose = entity.view.obj.GetComponent<OnCloseAnimEvent>();
+                    if (onClose)
+                        onClose.Close();
+                    else
+                        entity.view.obj.DestroyGameObject();
                     entity.view.canvas.canvas.windows.Remove(entity);
                 }
 

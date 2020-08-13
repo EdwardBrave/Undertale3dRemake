@@ -166,9 +166,11 @@ GameObject:
   - component: {fileID: 7142834135439922792}
   - component: {fileID: 7142834135439922794}
   - component: {fileID: 7142834135439922795}
+  - component: {fileID: 2379518078756763557}
   - component: {fileID: 6579910286499724488}
   - component: {fileID: 6954624460062188919}
   - component: {fileID: 9220795022488221869}
+  - component: {fileID: 8937267164216479277}
   m_Layer: 5
   m_Name: ExitGame_box
   m_TagString: Untagged
@@ -233,6 +235,18 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!225 &2379518078756763557
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7142834135439922793}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!114 &6579910286499724488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -293,7 +307,7 @@ MonoBehaviour:
   tweenTargetIsTargetGO: 1
   delay: 0
   duration: 1
-  easeType: 6
+  easeType: 18
   easeCurve:
     serializedVersion: 2
     m_Curve:
@@ -321,10 +335,10 @@ MonoBehaviour:
   loopType: 0
   loops: 1
   id: 
-  isRelative: 0
+  isRelative: 1
   isFrom: 1
   isIndependentUpdate: 0
-  autoKill: 1
+  autoKill: 0
   isActive: 1
   isValid: 1
   target: {fileID: 7142834135439922792}
@@ -398,7 +412,7 @@ MonoBehaviour:
   tweenTargetIsTargetGO: 1
   delay: 0
   duration: 1
-  easeType: 6
+  easeType: 18
   easeCurve:
     serializedVersion: 2
     m_Curve:
@@ -429,13 +443,13 @@ MonoBehaviour:
   isRelative: 0
   isFrom: 1
   isIndependentUpdate: 0
-  autoKill: 1
+  autoKill: 0
   isActive: 1
   isValid: 1
-  target: {fileID: 7142834135439922795}
+  target: {fileID: 2379518078756763557}
   animationType: 7
   targetType: 3
-  forcedTargetType: 0
+  forcedTargetType: 2
   autoPlay: 1
   useTargetAsV3: 0
   endValueFloat: 0
@@ -450,12 +464,37 @@ MonoBehaviour:
     width: 0
     height: 0
   endValueTransform: {fileID: 0}
-  optionalBool0: 0
+  optionalBool0: 1
   optionalFloat0: 0
   optionalInt0: 0
   optionalRotationMode: 0
   optionalScrambleMode: 0
   optionalString: 
+--- !u!114 &8937267164216479277
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7142834135439922793}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3b7b3a1401e5744ebcd34a286b8cdaa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  isBackwards: 1
+  onClose:
+  - {fileID: 6954624460062188919}
+  - {fileID: 9220795022488221869}
 --- !u!1001 &5855391280385640176
 PrefabInstance:
   m_ObjectHideFlags: 0
