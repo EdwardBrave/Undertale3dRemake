@@ -532,6 +532,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: No_Btn
       objectReference: {fileID: 0}
+    - target: {fileID: 7468690645939425966, guid: fe7a820af36934299b0c7e9bd67576df,
+        type: 3}
+      propertyPath: BypassEffects
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7468690645939425966, guid: fe7a820af36934299b0c7e9bd67576df,
+        type: 3}
+      propertyPath: BypassListenerEffects
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fe7a820af36934299b0c7e9bd67576df, type: 3}
 --- !u!224 &6770617593238497393 stripped

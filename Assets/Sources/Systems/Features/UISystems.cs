@@ -11,7 +11,6 @@ namespace Systems.Features
             
             Add(new OpenWindowSystem(contexts));
             Add(new LoadUIDataSystem(contexts));
-            Add(new BindingsSystem(contexts));
             Add(new UIEventHandlerSystem(contexts));
             Add(new UIHandlerSystem(contexts));
 

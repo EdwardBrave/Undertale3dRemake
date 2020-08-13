@@ -1,66 +1,68 @@
 ﻿using System;
 using System.Collections.Generic;
-using UI.BondedElements;
-using UI.TreeDataModel;
+using Sirenix.OdinInspector;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace UI
 {
     [Serializable]
-    public class UIBinder : MonoBehaviour
+    public class UIBinder : SerializedMonoBehaviour
     {
-        [HideInInspector]
-        public bool isShowBinders = false;
-        [HideInInspector]
-        public bool isShowImages = false;
-        [HideInInspector]
-        public bool isShowTexts = false;
-        [HideInInspector]
-        public bool isShowFields = false;
-        
-        [SerializeField]
         public bool isAutoSearch = true;
 
-        [SerializeField]
-        public UIData loadedUIData;
-
-        [SerializeField]
-        public List<BondedUIBinder> bondedBinders = new List<BondedUIBinder>();
-    
-        [SerializeField]
-        public List<BondedImage> bondedImages = new List<BondedImage>();
-
-        [SerializeField]
-        public List<BondedText> bondedTexts = new List<BondedText>();
+        [TableList]
+        [HideIf("isAutoSearch")]
+        public List<Bonded<UIBinder>> bondedBinders = new List<Bonded<UIBinder>>();
         
-        [SerializeField]
-        public List<BondedField> bondedFields = new List<BondedField>();
-
-        public BondedUIBinder GetBinder(string kayName) => bondedBinders.Get(kayName);
+        [TableList]
+        [HideIf("isAutoSearch")]
+        public List<Bonded<ListLayout>> bondedLists = new List<Bonded<ListLayout>>();
         
-        public BondedImage GetImage(string kayName)
+        [TableList]
+        [HideIf("isAutoSearch")]
+        public List<Bonded<Image>> bondedImages = new List<Bonded<Image>>();
+        
+        [TableList]
+        [HideIf("isAutoSearch")]
+        public List<Bonded<Text>> bondedTexts = new List<Bonded<Text>>();
+        
+        [TableList]
+        [HideIf("isAutoSearch")]
+        public List<Bonded<InputField>> bondedFields = new List<Bonded<InputField>>();
+
+        public UIBinder GetBinder(string kayName) => bondedBinders.Get(kayName);
+        
+        public ListLayout GetListLayout(string kayName)
+        {
+            var args = kayName.Split(new char[]{'/','\\'}, 2);
+            if (args.Length == 1)
+                return bondedLists.Get(kayName);
+            return GetBinder(args[0])?.GetListLayout(args[1]);
+        }
+        
+        public Image GetImage(string kayName)
         {
             var args = kayName.Split(new char[]{'/','\\'}, 2);
             if (args.Length == 1)            
                 return bondedImages.Get(kayName);
-            return GetBinder(args[0]).Content.GetImage(args[1]);
+            return GetBinder(args[0])?.GetImage(args[1]);
         }
         
-        public BondedText GetText(string kayName) 
+        public Text GetText(string kayName) 
         {
             var args = kayName.Split(new char[]{'/','\\'}, 2);
             if (args.Length == 1)            
                 return bondedTexts.Get(kayName);
-            return GetBinder(args[0]).Content.GetText(args[1]);
+            return GetBinder(args[0])?.GetText(args[1]);
         }
         
-        public BondedField GetField(string kayName)
+        public InputField GetField(string kayName)
         {
             var args = kayName.Split(new char[]{'/','\\'}, 2);
             if (args.Length == 1)            
                 return bondedFields.Get(kayName);
-            return GetBinder(args[0]).Content.GetField(args[1]);
+            return GetBinder(args[0])?.GetField(args[1]);
         }
 
         private void Start()
@@ -68,27 +70,18 @@ namespace UI
             if (isAutoSearch)
                 FindBindings();
         }
-
+        
+        [Button]
+        [PropertyOrder(-1)]
         public void FindBindings(Transform parent = null)
         {
             if (!parent)
             {
                 parent = transform;
                 bondedBinders.Clear();
-                bondedBinders.Add(new BondedUIBinder("ROOT", -1, 0) 
-                    {children = new List<TreeElement>()});
-                
                 bondedImages.Clear();
-                bondedImages.Add(new BondedImage("ROOT", -1, 0) 
-                    {children = new List<TreeElement>()});
-                
                 bondedTexts.Clear();
-                bondedTexts.Add(new BondedText("ROOT", -1, 0) 
-                    {children = new List<TreeElement>()});
-                
                 bondedFields.Clear();
-                bondedFields.Add(new BondedField("ROOT", -1, 0) 
-                    {children = new List<TreeElement>()});
             }
             
             foreach (Transform child in parent)
@@ -96,72 +89,75 @@ namespace UI
                 var binder = child.GetComponent<UIBinder>();
                 if (binder && binder != this)
                 {
-                    var item = new BondedUIBinder(binder.name, 0, bondedBinders.Count) 
-                        {parent = bondedBinders[0], Content = binder};
-                    item.parent.children.Add(item);
-                    bondedBinders.Add(item);
+                    bondedBinders.Add(new Bonded<UIBinder>(binder.name, binder));
                     continue;
                 }
-                else if (child.GetComponent<Image>() is Image image && 
+                if (child.GetComponent<ListLayout>() is ListLayout listLayout && 
+                         listLayout.name != "ListLayout" && !listLayout.name.Contains("("))
+                {
+                    bondedLists.Add(new Bonded<ListLayout>(listLayout.name, listLayout));
+                    continue;
+                }
+                if (child.GetComponent<Image>() is Image image && 
                          image.name != "Image" && !image.name.Contains("("))
                 {
-                    var item = new BondedImage(image.name, 0, bondedImages.Count) 
-                        {parent = bondedImages[0], Content = image};
-                    item.parent.children.Add(item);
-                    bondedImages.Add(item);
+                    bondedImages.Add(new Bonded<Image>(image.name, image));
                 }
                 else if (child.GetComponent<Text>() is Text text && 
                          text.name != "Text" && text.name != "Placeholder" && !text.name.Contains("("))
                 {
-                    var item = new BondedText(text.name, 0, bondedTexts.Count) 
-                        {parent = bondedTexts[0], Content = text};
-                    item.parent.children.Add(item);
-                    bondedTexts.Add(item);
+                    bondedTexts.Add(new Bonded<Text>(text.name, text));
                 }
                 if (child.GetComponent<InputField>() is InputField field &&
                          field.name != "InputField" && !field.name.Contains("("))
                 {
-                    var item = new BondedField(field.name, 0, bondedFields.Count) 
-                        {parent = bondedFields[0], Content = field};
-                    item.parent.children.Add(item);
-                    bondedFields.Add(item);
+                    bondedFields.Add(new Bonded<InputField>(field.name, field));
                 }
                 if (child.childCount > 0)
                     FindBindings(child);
             }
         }
         
+        [Button]
+        [PropertyOrder(-1)]
         public void LoadUIData(UIData uiData)
         {
             if (isAutoSearch)
                 FindBindings();
             foreach (var binder in bondedBinders)
             {
-                if (binder.name == "ROOT")
-                    continue;
-                var item = uiData.bondedData.Find(o => o.name == binder.name);
+                var item = uiData.bondedData.Get(binder.name);
+                if (item)
+                    binder.content.LoadUIData(item);
+            }
+            foreach (var list in bondedLists)
+            {
+                var item = uiData.bondedList.Get(list.name);
                 if (item != null)
-                    binder.Content.LoadUIData(item.Content);
+                    list.content.Reload(item);
             }
             foreach (var image in bondedImages)
             {
-                if (image.name == "ROOT")
-                    continue;
-                var item = uiData.bondedSprites.Find(o => o.name == image.name);
-                if (item != null && image.Content != null)
-                    image.Content.sprite = item.Content;
+                var item = uiData.bondedSprites.Get(image.name);
+                if (item)
+                    image.content.sprite = item;
+                var color = uiData.bondedColors.Get(image.name);
+                if (color != Color.clear)
+                    image.content.color = color;
             }
             foreach (var text in bondedTexts)
             {
-                if (text.name == "ROOT")
-                    continue;
-                var item = uiData.bondedStrings.Find(o => o.name == text.name);
-                if (item != null && text.Content != null)
-                    text.Content.text = item.Content;
+                var item = uiData.bondedStrings.Get(text.name);
+                if (item != null)
+                    text.content.text = item;
+                var color = uiData.bondedColors.Get(text.name);
+                if (color != Color.clear)
+                    text.content.color = color;
             }
-            loadedUIData = uiData;
             enabled = false;
             enabled = true;
         }
     }
+    
+    
 }
