@@ -15,4 +15,5 @@ MonoBehaviour:
   canvasInitList:
   - name: BaseCanvas
     windows:
-    - Main_Menu
+    - '!MainMenu_Box'
+    - Instructions_Box

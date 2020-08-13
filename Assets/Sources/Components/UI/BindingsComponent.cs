@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using Entitas;
 using UI;
-using UnityEngine;
-using Utils;
+using UnityEngine.UI;
 
 namespace Components.UI
 {
@@ -10,8 +8,12 @@ namespace Components.UI
     public class BindingsComponent: IComponent
     {
         public UIBinder context;
-        public Dictionary<string, Changeable<Sprite>> sprites;
-        public Dictionary<string, Changeable<string>> texts;
-        public Dictionary<string, Changeable<string>> fields;
+
+        public Image GetImage(string name) => context.GetImage(name);
+        public Text GetText(string name) => context.GetText(name);
+        public InputField GetField(string name) => context.GetField(name);
+        
+        public void LoadUIData(UIData data) => context.LoadUIData(data);
+        
     }
 }

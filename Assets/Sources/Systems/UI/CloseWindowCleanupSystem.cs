@@ -2,6 +2,7 @@
 using Entitas;
 using Entitas.Unity;
 using Entitas.VisualDebugging.Unity;
+using UnityEngine;
 
 namespace Systems.UI
 {
@@ -20,6 +21,13 @@ namespace Systems.UI
         {
             foreach (var entity in _group.GetEntities(_buffer))
             {
+                if (entity.isProtected)
+                {
+                    entity.isClose = false;
+                    Debug.LogWarning("Attempt to close protected window! You should reset the protection.");
+                    continue;
+                }
+                
                 if (entity.hasView)
                 {
                     entity.view.obj.Unlink();

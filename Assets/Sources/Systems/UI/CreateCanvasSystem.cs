@@ -27,7 +27,9 @@ namespace Systems.UI
                 foreach (var windowPath in canvasData.windows)
                 {
                     var windowEntity = _context.CreateEntity();
-                    var args = windowPath.Split(':');
+                    if (windowPath.Contains("!"))
+                        windowEntity.isProtected = true;
+                    var args = windowPath.Replace("!", "").Split(':');
                     windowEntity.AddWindow(canvasData.name, args[0]);
                     if (args.Length > 1)
                         windowEntity.ReplaceUiData(args[1]);
