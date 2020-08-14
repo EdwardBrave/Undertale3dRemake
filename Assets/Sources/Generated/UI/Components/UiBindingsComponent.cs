@@ -11,23 +11,17 @@ public partial class UiEntity {
     public Components.UI.BindingsComponent bindings { get { return (Components.UI.BindingsComponent)GetComponent(UiComponentsLookup.Bindings); } }
     public bool hasBindings { get { return HasComponent(UiComponentsLookup.Bindings); } }
 
-    public void AddBindings(UI.UIBinder newContext, System.Collections.Generic.Dictionary<string, Utils.Changeable<UnityEngine.Sprite>> newSprites, System.Collections.Generic.Dictionary<string, Utils.Changeable<string>> newTexts, System.Collections.Generic.Dictionary<string, Utils.Changeable<string>> newFields) {
+    public void AddBindings(UI.UIBinder newContext) {
         var index = UiComponentsLookup.Bindings;
         var component = (Components.UI.BindingsComponent)CreateComponent(index, typeof(Components.UI.BindingsComponent));
         component.context = newContext;
-        component.sprites = newSprites;
-        component.texts = newTexts;
-        component.fields = newFields;
         AddComponent(index, component);
     }
 
-    public void ReplaceBindings(UI.UIBinder newContext, System.Collections.Generic.Dictionary<string, Utils.Changeable<UnityEngine.Sprite>> newSprites, System.Collections.Generic.Dictionary<string, Utils.Changeable<string>> newTexts, System.Collections.Generic.Dictionary<string, Utils.Changeable<string>> newFields) {
+    public void ReplaceBindings(UI.UIBinder newContext) {
         var index = UiComponentsLookup.Bindings;
         var component = (Components.UI.BindingsComponent)CreateComponent(index, typeof(Components.UI.BindingsComponent));
         component.context = newContext;
-        component.sprites = newSprites;
-        component.texts = newTexts;
-        component.fields = newFields;
         ReplaceComponent(index, component);
     }
 
