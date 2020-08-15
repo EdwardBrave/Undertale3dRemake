@@ -81,10 +81,10 @@ MonoBehaviour:
 
     [ X ] - cancel
 
-    [ C ] - inventarium
+    [ C ] - inventory
 
-    [ F4
-    ] - fullscreen
+    [ F4 ]
+    - fullscreen
 
     [ ESC ] - quit
 
