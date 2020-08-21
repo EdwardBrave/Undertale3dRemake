@@ -489,7 +489,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   serializationData:
-    SerializedFormat: 0
+    SerializedFormat: 2
     SerializedBytes: 
     ReferencedUnityObjects: []
     SerializedBytesString: 
@@ -652,7 +652,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 600, y: -40.64749}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 850, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8002737066513271773
 CanvasRenderer:
@@ -748,7 +748,7 @@ MonoBehaviour:
   m_firstVisibleCharacter: 0
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: -310.38916, y: 0, z: -317.44348, w: 0}
+  m_margin: {x: -0.42681885, y: 0, z: -0.48950195, w: 0}
   m_textInfo:
     textComponent: {fileID: 4587739586929773806}
     characterCount: 22
@@ -810,7 +810,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 598, y: -137}
+  m_AnchoredPosition: {x: 598, y: -160}
   m_SizeDelta: {x: 850, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &4795181792243197903
@@ -1178,7 +1178,7 @@ PrefabInstance:
     - target: {fileID: 636059230361710828, guid: bdfdf8df33d664448918bfa2a41b2750,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -492.58972
+      value: -507
       objectReference: {fileID: 0}
     - target: {fileID: 636059230361710828, guid: bdfdf8df33d664448918bfa2a41b2750,
         type: 3}
