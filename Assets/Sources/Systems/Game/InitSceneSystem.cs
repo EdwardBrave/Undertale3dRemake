@@ -22,7 +22,11 @@ namespace Systems.Game
             
             var camEntity = _gameContext.CreateEntity();
             camEntity.AddSceneObject("MainCamera", true);
-            camEntity.AddFollow(playerEntity, new Vector3(0,4.9f,-4.9f));
+            camEntity.AddFollow(playerEntity, new Vector3(0,8.5f,-12f));
+            
+            var onPlayerObject = _gameContext.CreateEntity();
+            onPlayerObject.AddSceneObject("OnPlayerObject", true);
+            onPlayerObject.AddFollow(playerEntity, new Vector3(0,0.5f,0f));
         }
     }
 }
