@@ -39,9 +39,9 @@ public class QuestChartDemo : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.X))
                 {
                     PlayerPrefs.DeleteAll();
-                    if (System.IO.Directory.Exists(Application.dataPath + "/VIDE/saves"))
+                    if (System.IO.Directory.Exists(Application.dataPath + "PluginsPlugins/VIDE/saves"))
                     {
-                        System.IO.Directory.Delete(Application.dataPath + "/VIDE/saves", true);
+                        System.IO.Directory.Delete(Application.dataPath + "Plugins/VIDE/saves", true);
                         #if UNITY_EDITOR
                         UnityEditor.AssetDatabase.Refresh();
                         #endif

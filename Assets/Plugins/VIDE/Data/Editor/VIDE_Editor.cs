@@ -9,6 +9,7 @@ using System.Reflection;
 using bf = System.Reflection.BindingFlags;
 using System.Text.RegularExpressions;
 using System.Linq;
+using UnityEngine.Networking;
 
 public class VIDE_Editor : EditorWindow
 {
@@ -60,7 +61,7 @@ public class VIDE_Editor : EditorWindow
     string searchWord;
     Vector2 searchScrollView;
 
-    WWW news;
+    UnityWebRequest news;
     List<string> saveNames = new List<string>() { };
     List<string> saveNamesFull = new List<string>() { };
 
@@ -261,7 +262,7 @@ public class VIDE_Editor : EditorWindow
     void CheckNews()
     {
         newsHeadline = "Checking...";
-        news = new WWW("https://chrishendersonb.com/vide/videnews.txt");
+        news = UnityWebRequest.Get("https://chrishendersonb.com/vide/videnews.txt");
     }
 
     double lastTime;
@@ -274,14 +275,14 @@ public class VIDE_Editor : EditorWindow
         if (news != null)
             if (news.isDone)
             {
-                if (news.text.Length > 10)
+                string text = news.downloadHandler.text;
+                if (text.Length > 10)
                 {
-                    string[] st = news.text.Split(","[0]);
+                    string[] st = text.Split(","[0]);
                     newsHeadline = st[0];
                     if (st.Length > 1)
                         newsHeadlineLink = st[1];
                     news = null;
-
                 }
                 else
                 {
@@ -3602,7 +3603,8 @@ public class VIDE_Editor : EditorWindow
                     if (e.button == 0)
                     {
                         holdingBall = false;
-                        ballsGravity[ballsGravity.Count - 1] = new Vector2(Random.Range(-300, 300), Random.Range(200, 600) * -1);
+                        ballsGravity[ballsGravity.Count - 1] =
+                            new Vector2(Random.Range(-300, 300), Random.Range(200, 600) * -1);
                     }
 
                 }
@@ -3615,10 +3617,12 @@ public class VIDE_Editor : EditorWindow
                 {
                     if (d.rect.Contains(e.mousePosition))
                     {
-                        insideNode = true; break;
+                        insideNode = true;
+                        break;
 
                     }
                 }
+
                 foreach (VIDE_EditorDB.ActionNode d in db.actionNodes)
                 {
                     if (d.rect.Contains(e.mousePosition))
@@ -3670,7 +3674,7 @@ public class VIDE_Editor : EditorWindow
 
 
             if (e.type == EventType.MouseUp)
-            {             
+            {
                 if (draggingLine) //Connect node detection
                 {
                     TryConnectToDialogueNode(e.mousePosition, draggedCom);
@@ -3680,6 +3684,7 @@ public class VIDE_Editor : EditorWindow
                     GUIUtility.hotControl = 0;
                     repaintLines = true;
                 }
+
                 if (dragnWindows) // Stop dragging windows
                 {
                     dragnWindows = false;
@@ -3696,6 +3701,22 @@ public class VIDE_Editor : EditorWindow
 
                 insideNode = false;
                 draggingLine = false;
+            }
+            
+            //Delete with multyselection
+            if (e.keyCode == KeyCode.Delete && db.selectedNodes.Count > 0)
+            {
+                foreach(var selection in db.selectedNodes)
+                {
+                    if (selection.aNode != null)
+                        removeAction(selection.aNode);
+                    if (selection.dNode != null)
+                        removeSet(selection.dNode);
+                }
+                db.selectedNodes = new List<VIDE_EditorDB.NodeSelection>();
+                willDeselect = false;
+                needSave = true;
+                Repaint();
             }
 
         }

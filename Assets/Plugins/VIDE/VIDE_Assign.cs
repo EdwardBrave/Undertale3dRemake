@@ -115,7 +115,7 @@ public class VIDE_Assign : MonoBehaviour, ISerializationCallbackReceiver
     {
 
         string fileDataPath = (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer ? Application.persistentDataPath : Application.dataPath);
-        if (!File.Exists(fileDataPath + "/VIDE/saves/VA/" + filename + ".json"))
+        if (!File.Exists(fileDataPath + "Plugins/VIDE/saves/VA/" + filename + ".json"))
         {
             Debug.LogWarning("Could not find save state!");
             return;
@@ -138,7 +138,7 @@ public class VIDE_Assign : MonoBehaviour, ISerializationCallbackReceiver
 
         public static object ReadState(string filename)
         {
-            string jsonString = File.ReadAllText(fileDataPath + "/VIDE/saves/VA/" + filename + ".json");
+            string jsonString = File.ReadAllText(fileDataPath + "Plugins/VIDE/saves/VA/" + filename + ".json");
             return MiniJSON_VIDE.DiagJson.Deserialize(jsonString);
         }
 
@@ -146,13 +146,13 @@ public class VIDE_Assign : MonoBehaviour, ISerializationCallbackReceiver
         {
             if (!Directory.Exists(fileDataPath + "/VIDE"))
                 Directory.CreateDirectory(fileDataPath + "/VIDE");
-            if (!Directory.Exists(fileDataPath + "/VIDE/saves"))
-                Directory.CreateDirectory(fileDataPath + "/VIDE/saves");
-            if (!Directory.Exists(fileDataPath + "/VIDE/saves/VA"))
-                Directory.CreateDirectory(fileDataPath + "/VIDE/saves/VA");
+            if (!Directory.Exists(fileDataPath + "Plugins/VIDE/saves"))
+                Directory.CreateDirectory(fileDataPath + "Plugins/VIDE/saves");
+            if (!Directory.Exists(fileDataPath + "Plugins/VIDE/saves/VA"))
+                Directory.CreateDirectory(fileDataPath + "Plugins/VIDE/saves/VA");
 
             string outString = MiniJSON_VIDE.DiagJson.Serialize(data);
-            File.WriteAllText(fileDataPath + "/VIDE/saves/VA/" + filename, outString);
+            File.WriteAllText(fileDataPath + "Plugins/VIDE/saves/VA/" + filename, outString);
         }
     }
 

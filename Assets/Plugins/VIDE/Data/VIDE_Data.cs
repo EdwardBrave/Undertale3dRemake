@@ -20,7 +20,7 @@ namespace VIDE_Data
     {
         public static TextAsset[] files;
 
-        //static string fileDataPath = Application.dataPath + "/VIDE/dialogues/";
+        //static string fileDataPath = Application.dataPath + "Plugins/VIDE/dialogues/";
         public static object ReadFromFile(string filename)
         {
             TextAsset file = null;
@@ -50,7 +50,7 @@ namespace VIDE_Data
 
         public static object ReadState(string filename)
         {
-            string jsonString = File.ReadAllText(fileDataPath + "/VIDE/saves/" + filename + ".json");
+            string jsonString = File.ReadAllText(fileDataPath + "Plugins/VIDE/saves/" + filename + ".json");
             return MiniJSON_VIDE.DiagJson.Deserialize(jsonString);
         }
 
@@ -59,11 +59,11 @@ namespace VIDE_Data
 
             if (!Directory.Exists(fileDataPath + "/VIDE"))
                 Directory.CreateDirectory(fileDataPath + "/VIDE");
-            if (!Directory.Exists(fileDataPath + "/VIDE/saves"))
-                Directory.CreateDirectory(fileDataPath + "/VIDE/saves");
+            if (!Directory.Exists(fileDataPath + "Plugins/VIDE/saves"))
+                Directory.CreateDirectory(fileDataPath + "Plugins/VIDE/saves");
 
             string outString = MiniJSON_VIDE.DiagJson.Serialize(data);
-            File.WriteAllText(fileDataPath + "/VIDE/saves/" + filename, outString);
+            File.WriteAllText(fileDataPath + "Plugins/VIDE/saves/" + filename, outString);
         }
     }
 
@@ -289,7 +289,7 @@ namespace VIDE_Data
         public static void LoadState(string filename, bool loadAssigned)
         {
             string fileDataPath = (Application.platform == RuntimePlatform.Android || Application.platform == RuntimePlatform.IPhonePlayer ? Application.persistentDataPath : Application.dataPath);
-            if (!File.Exists(fileDataPath + "/VIDE/saves/" + filename + ".json"))
+            if (!File.Exists(fileDataPath + "Plugins/VIDE/saves/" + filename + ".json"))
             {
                 Debug.LogWarning("Save file '" + filename + "' not found!");
                 return;
@@ -3071,7 +3071,7 @@ namespace VIDE_Data
         /// <param name="loadAssigned">Optionally, load the state of every VA found in the scene if filename follows the 'gameObjectName_state' naming convention.</param>
         public void LoadState(string filename, bool loadAssigned)
         {
-            if (!File.Exists(Application.dataPath + "/VIDE/saves/" + filename + ".json"))
+            if (!File.Exists(Application.dataPath + "Plugins/VIDE/saves/" + filename + ".json"))
             {
                 return;
             }
