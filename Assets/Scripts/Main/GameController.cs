@@ -12,7 +12,7 @@ namespace Main
         {
             _gameData = gameData;
             _contexts = contexts;
-            
+            contexts.Reset();
             contexts.core.SetCoreConfig(gameData.config);
             contexts.core.SetGameSettings(gameData.settings);
             

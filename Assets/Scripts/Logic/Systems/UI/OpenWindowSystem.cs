@@ -3,6 +3,7 @@ using System.Linq;
 using Data;
 using Entitas;
 using Entitas.Unity;
+using UI;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -49,6 +50,9 @@ namespace Logic.Systems.UI
                     window = Object.Instantiate(prefab, canvasEntity.view.obj.transform);
                     canvasEntity.canvas.windows.Add(entity);
                     entity.AddView(window, canvasEntity);
+                    var binder = window.GetComponent<UIBinder>();
+                    if (binder)
+                        entity.AddBindings(binder);
                 }
                 else
                 {

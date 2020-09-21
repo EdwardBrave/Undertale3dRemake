@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
-namespace Logic.UI
+namespace UI
 {
 	public struct Bonded<T>
     {

@@ -10,6 +10,8 @@ namespace UI
         public static event Action<UIHandler, UIEventArgs> UIEvent;
         
         public string identifier;
+        
+        private UIHandler _parent;
 
         public void Confirm() => OnInterfaceEvent(UIEventArgs.Confirm);
 
@@ -18,6 +20,8 @@ namespace UI
         public void Pressed() => OnInterfaceEvent(UIEventArgs.Pressed);
         
         public void Released() => OnInterfaceEvent(UIEventArgs.Released);
+        
+        public void Check(bool isOn) => OnInterfaceEvent(UIEventArgs.Check + " " + isOn);
 
         public void OpenWindow(string windowName) => OnInterfaceEvent(UIEventArgs.Open + " " + windowName);
         
@@ -25,12 +29,25 @@ namespace UI
         public void CloseSelf() => OnInterfaceEvent(UIEventArgs.CloseSelf);
         
         public void CloseAllWindows() => OnInterfaceEvent(UIEventArgs.CloseAll);
-        
-        public void OnInterfaceEvent(string eventRequest)
+
+
+        private void Start()
+        {
+            if (transform.parent)
+                _parent = transform.parent.GetComponentInParent<UIHandler>();
+        }
+
+        private void OnInterfaceEvent(string eventRequest, string complexIdentifier = "")
         {
             if (string.IsNullOrWhiteSpace(eventRequest)) return;
-            string[] args = eventRequest.Split(' ');
-            UIEvent?.Invoke(this, new UIEventArgs(identifier, args[0], args.Skip(1).ToArray()));
+            complexIdentifier = identifier + (string.IsNullOrWhiteSpace(complexIdentifier) ? "" : "/"+complexIdentifier);
+            if (_parent)
+                _parent.OnInterfaceEvent(eventRequest, complexIdentifier);
+            else
+            {
+                string[] args = eventRequest.Split(' ');
+                UIEvent?.Invoke(this, new UIEventArgs(complexIdentifier, args[0], args.Skip(1).ToArray()));
+            }
         }
 
         public void LoadScene(string sceneName) => SceneManager.LoadScene(sceneName);
@@ -46,6 +63,7 @@ namespace UI
         public const string Reject = "reject";
         public const string Pressed = "pressed";
         public const string Released = "released";
+        public const string Check = "check";
         public const string Open = "open";
         public const string Close = "close";
         public const string CloseSelf = "closeSelf";

@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Sirenix.OdinInspector;
 using TMPro;
-using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Logic.UI
+namespace UI
 {
     public class ListLayout : SerializedMonoBehaviour
     {
@@ -30,9 +30,9 @@ namespace Logic.UI
             if (uiData)
                 binder.LoadUIData(uiData);
             return binder;
-            Text ads;
-            TextMeshPro asd;
         }
+
+        public UIBinder Get(string identifier) => _items.Find(binder => binder.identifier == identifier);
 
         public void RemoveAt(int index)
         {
@@ -54,10 +54,15 @@ namespace Logic.UI
         
         public void Reload(List<UIData> uiDataList)
         {
+            Clear();
+            AddRange(uiDataList);
+        }
+        
+        public void Clear()
+        {
             foreach(var item in _items)
                 Destroy(item.gameObject);
             _items.Clear();
-            AddRange(uiDataList);
         }
 
         private void Start()

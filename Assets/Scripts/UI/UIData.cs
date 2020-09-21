@@ -25,6 +25,9 @@ namespace UI
       public List<Bonded<String>> bondedStrings = new List<Bonded<String>>();
       
       [TableList]
+      public List<Bonded<bool>> bondedChecks = new List<Bonded<bool>>();
+      
+      [TableList]
       public List<Bonded<String>> settings = new List<Bonded<String>>();
       
       public UIData GetBinder(string kayName) => bondedData.Get(kayName);
@@ -36,6 +39,8 @@ namespace UI
       public Sprite GetSprite(string kayName) => bondedSprites.Get(kayName);
         
       public String GetStrings(string kayName) => bondedStrings.Get(kayName);
+      
+      public bool GetChecks(string kayName) => bondedChecks.Get(kayName);
       
    }
 }

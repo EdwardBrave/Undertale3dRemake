@@ -10,7 +10,7 @@ namespace Logic.Systems.UI
         private readonly string _dataPath;
         public LoadUIDataSystem(Contexts contexts) : base(contexts.ui)
         {
-            _dataPath = contexts.core.coreConfig.value.dataPath;
+            _dataPath = contexts.core.coreConfig.value.uiPrefabsPath;
         }
 
         protected override ICollector<UiEntity> GetTrigger(IContext<UiEntity> context)

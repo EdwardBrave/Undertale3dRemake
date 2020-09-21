@@ -1,4 +1,5 @@
 using Entitas;
+using TMPro;
 using UI;
 using UnityEngine.UI;
 
@@ -10,8 +11,11 @@ namespace Logic.Components.UI
         public UIBinder context;
 
         public Image GetImage(string name) => context.GetImage(name);
-        public Text GetText(string name) => context.GetText(name);
-        public InputField GetField(string name) => context.GetField(name);
+        public TMP_Text GetText(string name) => context.GetText(name);
+        public TMP_InputField GetField(string name) => context.GetField(name);
+        public ListLayout GetListLayout(string name) => context.GetListLayout(name);
+        
+        public Toggle GetToggle(string name) => context.GetToggle(name);
         
         public void LoadUIData(UIData data) => context.LoadUIData(data);
         

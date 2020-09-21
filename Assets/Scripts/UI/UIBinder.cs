@@ -1,6 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Sirenix.OdinInspector;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -10,6 +13,8 @@ namespace UI
     public class UIBinder : SerializedMonoBehaviour
     {
         public bool isAutoSearch = true;
+
+        public string identifier;
 
         [TableList]
         [HideIf("isAutoSearch")]
@@ -22,14 +27,18 @@ namespace UI
         [TableList]
         [HideIf("isAutoSearch")]
         public List<Bonded<Image>> bondedImages = new List<Bonded<Image>>();
+
+        [TableList]
+        [HideIf("isAutoSearch")]
+        public List<Bonded<TMP_Text>> bondedTmpTexts = new List<Bonded<TMP_Text>>();
         
         [TableList]
         [HideIf("isAutoSearch")]
-        public List<Bonded<Text>> bondedTexts = new List<Bonded<Text>>();
+        public List<Bonded<TMP_InputField>> bondedFields = new List<Bonded<TMP_InputField>>();
         
         [TableList]
         [HideIf("isAutoSearch")]
-        public List<Bonded<InputField>> bondedFields = new List<Bonded<InputField>>();
+        public List<Bonded<Toggle>> bondedToggle = new List<Bonded<Toggle>>();
 
         public UIBinder GetBinder(string kayName) => bondedBinders.Get(kayName);
         
@@ -48,21 +57,29 @@ namespace UI
                 return bondedImages.Get(kayName);
             return GetBinder(args[0])?.GetImage(args[1]);
         }
-        
-        public Text GetText(string kayName) 
+
+        public TMP_Text GetText(string kayName) 
         {
             var args = kayName.Split(new char[]{'/','\\'}, 2);
             if (args.Length == 1)            
-                return bondedTexts.Get(kayName);
+                return bondedTmpTexts.Get(kayName);
             return GetBinder(args[0])?.GetText(args[1]);
         }
         
-        public InputField GetField(string kayName)
+        public TMP_InputField GetField(string kayName)
         {
             var args = kayName.Split(new char[]{'/','\\'}, 2);
             if (args.Length == 1)            
                 return bondedFields.Get(kayName);
             return GetBinder(args[0])?.GetField(args[1]);
+        }
+        
+        public Toggle GetToggle(string kayName)
+        {
+            var args = kayName.Split(new char[]{'/','\\'}, 2);
+            if (args.Length == 1)            
+                return bondedToggle.Get(kayName);
+            return GetBinder(args[0])?.GetToggle(args[1]);
         }
 
         private void Start()
@@ -80,7 +97,8 @@ namespace UI
                 parent = transform;
                 bondedBinders.Clear();
                 bondedImages.Clear();
-                bondedTexts.Clear();
+                bondedTmpTexts.Clear();
+                bondedToggle.Clear();
                 bondedFields.Clear();
             }
             
@@ -103,15 +121,20 @@ namespace UI
                 {
                     bondedImages.Add(new Bonded<Image>(image.name, image));
                 }
-                else if (child.GetComponent<Text>() is Text text && 
-                         text.name != "Text" && text.name != "Placeholder" && !text.name.Contains("("))
+                else if (child.GetComponent<TMP_Text>() is TMP_Text tmpText && 
+                         tmpText.name != "Text" && tmpText.name != "Placeholder" && !tmpText.name.Contains("("))
                 {
-                    bondedTexts.Add(new Bonded<Text>(text.name, text));
+                    bondedTmpTexts.Add(new Bonded<TMP_Text>(tmpText.name, tmpText));
                 }
-                if (child.GetComponent<InputField>() is InputField field &&
-                         field.name != "InputField" && !field.name.Contains("("))
+                if (child.GetComponent<TMP_InputField>() is TMP_InputField field &&
+                    field.name != "InputField" && !field.name.Contains("("))
                 {
-                    bondedFields.Add(new Bonded<InputField>(field.name, field));
+                    bondedFields.Add(new Bonded<TMP_InputField>(field.name, field));
+                }
+                if (child.GetComponent<Toggle>() is Toggle toggle &&
+                    toggle.name != "Toggle" && !toggle.name.Contains("("))
+                {
+                    bondedToggle.Add(new Bonded<Toggle>(toggle.name, toggle));
                 }
                 if (child.childCount > 0)
                     FindBindings(child);
@@ -145,7 +168,7 @@ namespace UI
                 if (color != Color.clear)
                     image.content.color = color;
             }
-            foreach (var text in bondedTexts)
+            foreach (var text in bondedTmpTexts)
             {
                 var item = uiData.bondedStrings.Get(text.name);
                 if (item != null)
@@ -153,6 +176,11 @@ namespace UI
                 var color = uiData.bondedColors.Get(text.name);
                 if (color != Color.clear)
                     text.content.color = color;
+            }
+            foreach (var toggle in bondedToggle)
+            {
+                var item = uiData.bondedChecks.Get(toggle.name);
+                toggle.content.isOn = item;
             }
             enabled = false;
             enabled = true;
