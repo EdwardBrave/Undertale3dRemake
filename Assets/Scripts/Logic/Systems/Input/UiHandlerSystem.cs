@@ -47,6 +47,11 @@ namespace Logic.Systems.Input
                         break;
                     case UIEventArgs.Open:
                         var uiEntity = _uiContext.CreateEntity();
+                        if (data.args[0].Contains("!"))
+                        {
+                            uiEntity.isProtected = true;
+                            data.args[0] = data.args[0].Replace("!", "");
+                        }
                         var windowArgs = data.args[0].Split(':');
                         uiEntity.AddWindow((data.args.Length > 2 && data.args[1] == "in") ? data.args[2] : "0", windowArgs[0]);
                         if (windowArgs.Length > 1)
@@ -57,8 +62,17 @@ namespace Logic.Systems.Input
                         foreach (var window in windows)
                         {
                             if (data.args.Any(s => s == window.window.path))
+                            {
+                                window.isProtected = false;
                                 window.isClose = true;
+                            }
                         }
+                        break;
+                    case UIEventArgs.CloseAll:
+                        var closedWindows = _uiContext.GetEntities(UiMatcher.AllOf(UiMatcher.Window)
+                                                                                     .NoneOf(UiMatcher.Canvas));
+                        foreach (var window in closedWindows)
+                            window.isClose = true;
                         break;
                     case UIEventArgs.CloseSelf:
                         if (windowEntity == null) continue;

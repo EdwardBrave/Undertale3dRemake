@@ -1,37 +1,41 @@
 ﻿using System;
 using System.Collections.Generic;
-using UI.BondedElements;
-using UI.TreeDataModel;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace UI
 {
    [Serializable]
    [CreateAssetMenu(fileName = "NewUIData", menuName = "dataFiles/UI Data")]
-   public class UIData : ScriptableObject
+   public class UIData : SerializedScriptableObject
    {
-      [HideInInspector] public bool isShowConfigs = false;
-      [HideInInspector] public bool isShowSprites = true;
-      [HideInInspector] public bool isShowStrings = true;
-      [HideInInspector] public bool isShowSettings = false;
+      [TableList]
+      public List<Bonded<UIData>> bondedData = new List<Bonded<UIData>>();
       
-      [SerializeField]
-      public List<BondedUIData> bondedData = new List<BondedUIData>();
+      [TableList]
+      public List<Bonded<List<UIData>>> bondedList = new List<Bonded<List<UIData>>>();
       
-      [SerializeField]
-      public List<BondedSprite> bondedSprites = new List<BondedSprite>();
+      [TableList]
+      public List<Bonded<Sprite>> bondedSprites = new List<Bonded<Sprite>>();
       
-      [SerializeField]
-      public List<BondedString> bondedStrings = new List<BondedString>();
+      [TableList]
+      public List<Bonded<Color>> bondedColors = new List<Bonded<Color>>();
       
-      [SerializeField]
-      public List<BondedString> settings = new List<BondedString>();
+      [TableList]
+      public List<Bonded<String>> bondedStrings = new List<Bonded<String>>();
       
-      public BondedUIData GetBinder(string kayName) => bondedData.Get(kayName);
+      [TableList]
+      public List<Bonded<String>> settings = new List<Bonded<String>>();
+      
+      public UIData GetBinder(string kayName) => bondedData.Get(kayName);
+      
+      public List<UIData> GetBondedList(string kayName) => bondedList.Get(kayName);
         
-      public BondedSprite GetImage(string kayName) => bondedSprites.Get(kayName);
+      public Color GetColor(string kayName) => bondedColors.Get(kayName);
+      
+      public Sprite GetSprite(string kayName) => bondedSprites.Get(kayName);
         
-      public BondedString GetText(string kayName) => bondedStrings.Get(kayName);
+      public String GetStrings(string kayName) => bondedStrings.Get(kayName);
       
    }
 }

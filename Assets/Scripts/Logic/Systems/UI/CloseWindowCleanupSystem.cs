@@ -2,6 +2,8 @@
 using Entitas;
 using Entitas.Unity;
 using Entitas.VisualDebugging.Unity;
+using UnityEngine;
+using Utils;
 
 namespace Logic.Systems.UI
 {
@@ -20,10 +22,21 @@ namespace Logic.Systems.UI
         {
             foreach (var entity in _group.GetEntities(_buffer))
             {
+                if (entity.isProtected)
+                {
+                    entity.isClose = false;
+                    Debug.LogWarning("Attempt to close protected window! You should reset the protection.");
+                    continue;
+                }
+                
                 if (entity.hasView)
                 {
                     entity.view.obj.Unlink();
-                    entity.view.obj.DestroyGameObject();
+                    var onClose = entity.view.obj.GetComponent<OnCloseAnimEvent>();
+                    if (onClose)
+                        onClose.Close();
+                    else
+                        entity.view.obj.DestroyGameObject();
                     entity.view.canvas.canvas.windows.Remove(entity);
                 }
 
