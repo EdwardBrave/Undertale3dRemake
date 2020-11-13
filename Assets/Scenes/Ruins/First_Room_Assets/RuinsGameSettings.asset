@@ -1,15 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 75e564a6b54ce674ca1794cc0521239d, type: 3}
-  m_Name: RuinsGameSettings
-  m_EditorClassIdentifier: 
-  canvasInitList: []
+version https://git-lfs.github.com/spec/v1
+oid sha256:cea4dd3aacc1b815845354816edae2c6b364687b6350161597c500047023e2f3
+size 442
