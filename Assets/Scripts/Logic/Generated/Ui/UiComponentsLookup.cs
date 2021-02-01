@@ -10,23 +10,27 @@ public static class UiComponentsLookup {
 
     public const int Bindings = 0;
     public const int Canvas = 1;
-    public const int Close = 2;
-    public const int Command = 3;
-    public const int Confirm = 4;
-    public const int Protected = 5;
-    public const int Reject = 6;
-    public const int UiData = 7;
-    public const int View = 8;
-    public const int Window = 9;
+    public const int Check = 2;
+    public const int Close = 3;
+    public const int Command = 4;
+    public const int Confirm = 5;
+    public const int EventIdentifier = 6;
+    public const int Protected = 7;
+    public const int Reject = 8;
+    public const int UiData = 9;
+    public const int View = 10;
+    public const int Window = 11;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 12;
 
     public static readonly string[] componentNames = {
         "Bindings",
         "Canvas",
+        "Check",
         "Close",
         "Command",
         "Confirm",
+        "EventIdentifier",
         "Protected",
         "Reject",
         "UiData",
@@ -37,9 +41,11 @@ public static class UiComponentsLookup {
     public static readonly System.Type[] componentTypes = {
         typeof(Logic.Components.UI.BindingsComponent),
         typeof(Logic.Components.UI.CanvasComponent),
+        typeof(Logic.Components.UI.CheckComponent),
         typeof(Logic.Components.UI.CloseComponent),
         typeof(Logic.Components.UI.CommandComponent),
         typeof(Logic.Components.UI.ConfirmComponent),
+        typeof(Logic.Components.UI.EventIdentifierComponent),
         typeof(Logic.Components.UI.ProtectedComponent),
         typeof(Logic.Components.UI.RejectComponent),
         typeof(Logic.Components.UI.UiDataComponent),
