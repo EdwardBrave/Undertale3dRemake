@@ -30,8 +30,6 @@ namespace Logic.UI
             if (uiData)
                 binder.LoadUIData(uiData);
             return binder;
-            Text ads;
-            TextMeshPro asd;
         }
 
         public void RemoveAt(int index)
