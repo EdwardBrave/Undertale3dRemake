@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace Data
+namespace Core.Data
 {
     [Serializable]
     public class UserData

@@ -1,7 +1,7 @@
 ﻿using Entitas.CodeGeneration.Attributes;
 using UnityEngine;
 
-namespace Data
+namespace Core.Data
 {
      [Core, Unique, CreateAssetMenu(fileName = "NewCoreConfig", menuName = "gameConfigs/CoreConfig")]
      public class CoreConfig : ScriptableObject

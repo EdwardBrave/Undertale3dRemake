@@ -6,13 +6,16 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Core.Data;
+
 public partial class CoreContext {
 
     public CoreEntity userDataEntity { get { return GetGroup(CoreMatcher.UserData).GetSingleEntity(); } }
     public Logic.Components.Core.UserDataComponent userData { get { return userDataEntity.userData; } }
     public bool hasUserData { get { return userDataEntity != null; } }
 
-    public CoreEntity SetUserData(Data.UserData newData) {
+    public CoreEntity SetUserData(UserData newData) {
         if (hasUserData) {
             throw new Entitas.EntitasException("Could not set UserData!\n" + this + " already has an entity with Logic.Components.Core.UserDataComponent!",
                 "You should check if the context already has a userDataEntity before setting it or use context.ReplaceUserData().");
@@ -22,7 +25,7 @@ public partial class CoreContext {
         return entity;
     }
 
-    public void ReplaceUserData(Data.UserData newData) {
+    public void ReplaceUserData(UserData newData) {
         var entity = userDataEntity;
         if (entity == null) {
             entity = SetUserData(newData);
@@ -49,14 +52,14 @@ public partial class CoreEntity {
     public Logic.Components.Core.UserDataComponent userData { get { return (Logic.Components.Core.UserDataComponent)GetComponent(CoreComponentsLookup.UserData); } }
     public bool hasUserData { get { return HasComponent(CoreComponentsLookup.UserData); } }
 
-    public void AddUserData(Data.UserData newData) {
+    public void AddUserData(UserData newData) {
         var index = CoreComponentsLookup.UserData;
         var component = (Logic.Components.Core.UserDataComponent)CreateComponent(index, typeof(Logic.Components.Core.UserDataComponent));
         component.data = newData;
         AddComponent(index, component);
     }
 
-    public void ReplaceUserData(Data.UserData newData) {
+    public void ReplaceUserData(UserData newData) {
         var index = CoreComponentsLookup.UserData;
         var component = (Logic.Components.Core.UserDataComponent)CreateComponent(index, typeof(Logic.Components.Core.UserDataComponent));
         component.data = newData;

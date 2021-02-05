@@ -6,12 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using UI.Binding;
+
 public partial class InputEntity {
 
     public Logic.Components.Input.UiRequestComponent uiRequest { get { return (Logic.Components.Input.UiRequestComponent)GetComponent(InputComponentsLookup.UiRequest); } }
     public bool hasUiRequest { get { return HasComponent(InputComponentsLookup.UiRequest); } }
 
-    public void AddUiRequest(UI.UIHandler newSender, UI.UIEventArgs newData) {
+    public void AddUiRequest(UIHandler newSender, UIEventArgs newData) {
         var index = InputComponentsLookup.UiRequest;
         var component = (Logic.Components.Input.UiRequestComponent)CreateComponent(index, typeof(Logic.Components.Input.UiRequestComponent));
         component.sender = newSender;
@@ -19,7 +22,7 @@ public partial class InputEntity {
         AddComponent(index, component);
     }
 
-    public void ReplaceUiRequest(UI.UIHandler newSender, UI.UIEventArgs newData) {
+    public void ReplaceUiRequest(UIHandler newSender, UIEventArgs newData) {
         var index = InputComponentsLookup.UiRequest;
         var component = (Logic.Components.Input.UiRequestComponent)CreateComponent(index, typeof(Logic.Components.Input.UiRequestComponent));
         component.sender = newSender;

@@ -6,13 +6,16 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Core.Data;
+
 public partial class CoreContext {
 
     public CoreEntity gameSettingsEntity { get { return GetGroup(CoreMatcher.GameSettings).GetSingleEntity(); } }
     public GameSettingsComponent gameSettings { get { return gameSettingsEntity.gameSettings; } }
     public bool hasGameSettings { get { return gameSettingsEntity != null; } }
 
-    public CoreEntity SetGameSettings(Data.GameSettings newValue) {
+    public CoreEntity SetGameSettings(GameSettings newValue) {
         if (hasGameSettings) {
             throw new Entitas.EntitasException("Could not set GameSettings!\n" + this + " already has an entity with GameSettingsComponent!",
                 "You should check if the context already has a gameSettingsEntity before setting it or use context.ReplaceGameSettings().");
@@ -22,7 +25,7 @@ public partial class CoreContext {
         return entity;
     }
 
-    public void ReplaceGameSettings(Data.GameSettings newValue) {
+    public void ReplaceGameSettings(GameSettings newValue) {
         var entity = gameSettingsEntity;
         if (entity == null) {
             entity = SetGameSettings(newValue);
@@ -49,14 +52,14 @@ public partial class CoreEntity {
     public GameSettingsComponent gameSettings { get { return (GameSettingsComponent)GetComponent(CoreComponentsLookup.GameSettings); } }
     public bool hasGameSettings { get { return HasComponent(CoreComponentsLookup.GameSettings); } }
 
-    public void AddGameSettings(Data.GameSettings newValue) {
+    public void AddGameSettings(GameSettings newValue) {
         var index = CoreComponentsLookup.GameSettings;
         var component = (GameSettingsComponent)CreateComponent(index, typeof(GameSettingsComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceGameSettings(Data.GameSettings newValue) {
+    public void ReplaceGameSettings(GameSettings newValue) {
         var index = CoreComponentsLookup.GameSettings;
         var component = (GameSettingsComponent)CreateComponent(index, typeof(GameSettingsComponent));
         component.value = newValue;

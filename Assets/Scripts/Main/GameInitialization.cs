@@ -1,5 +1,5 @@
 ﻿using System;
-using Data;
+using Core.Data;
 using UnityEngine;
 
 namespace Main

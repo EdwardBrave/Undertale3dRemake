@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Entitas.CodeGeneration.Attributes;
 using UnityEngine;
 
-namespace Data
+namespace Core.Data
 {
     [Core, Unique, CreateAssetMenu(fileName = "NewGameSettings", menuName = "gameConfigs/GameSettings")]
     public class GameSettings : ScriptableObject
