@@ -24305,7 +24305,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206280303}
-  m_Mesh: {fileID: 613384173}
+  m_Mesh: {fileID: 1365221689}
 --- !u!4 &1207448810 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8554037625032407927, guid: 3f507ecc503a5476daae44db07ce2c22,
@@ -34510,7 +34510,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450041699}
-  m_Mesh: {fileID: 1254240036}
+  m_Mesh: {fileID: 655124513}
 --- !u!1 &1450593797
 GameObject:
   m_ObjectHideFlags: 0
