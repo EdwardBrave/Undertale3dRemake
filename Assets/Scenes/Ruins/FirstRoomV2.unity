@@ -4225,7 +4225,7 @@ PlayableDirector:
   m_Enabled: 1
   serializedVersion: 3
   m_PlayableAsset: {fileID: 11400000, guid: e154fdbbb02880c41ad00521cea00213, type: 2}
-  m_InitialState: 1
+  m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
   m_InitialTime: 0
@@ -13091,7 +13091,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ed959708e0f59489aa5fed61d98bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  systems: 2
+  gameState: 1
   config: {fileID: 11400000, guid: 76e29dc50b1ff404d98b98015986f15e, type: 2}
   settings: {fileID: 11400000, guid: 2217e381db178451181e206031be368c, type: 2}
 --- !u!4 &946345114
@@ -24305,7 +24305,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1206280303}
-  m_Mesh: {fileID: 1365221689}
+  m_Mesh: {fileID: 613384173}
 --- !u!4 &1207448810 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8554037625032407927, guid: 3f507ecc503a5476daae44db07ce2c22,
@@ -34510,7 +34510,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450041699}
-  m_Mesh: {fileID: 655124513}
+  m_Mesh: {fileID: 1254240036}
 --- !u!1 &1450593797
 GameObject:
   m_ObjectHideFlags: 0

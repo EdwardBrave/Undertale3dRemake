@@ -1,5 +1,4 @@
 ﻿using System;
-using Logic.Systems.Features;
 using Data;
 using UnityEngine;
 
@@ -7,34 +6,66 @@ namespace Main
 {
     public sealed class GameInitialization : MonoBehaviour
     {
-        public Features systems;
-        public CoreConfig config;
-        public GameSettings settings;
-        private static GameController _gameController;
-        void Awake() => _gameController = new GameController(this, Contexts.sharedInstance, GetFeatureType(systems));
-        void Start() => _gameController.Initialize();
-        void Update() => _gameController.Execute();
+        ////////////////////////////////////////////////////////////////////
+        #region Variables
         
-        private static Type GetFeatureType(Features systems)
+        [SerializeField] private GameController.GameState gameState;
+        [SerializeField] internal CoreConfig config;
+        [SerializeField] internal GameSettings settings;
+        
+        private static GameController _gameController;
+
+        #endregion
+        ////////////////////////////////////////////////////////////////////
+        #region Interface
+
+        public void SwitchState(GameController.GameState newGameState)
         {
-            switch (systems)
+            _gameController.SwitchState(newGameState, false);
+        }
+        
+        public void SwitchStateWithReset(GameController.GameState newGameState)
+        {
+            _gameController.SwitchState(newGameState, true);
+        }
+
+        public void ClearContexts()
+        {
+            _gameController.ClearContexts();
+        }
+        
+        #endregion
+        ////////////////////////////////////////////////////////////////////
+        #region Implementation
+        
+        private void Awake()
+        {
+            if (_gameController == null)
             {
-                case Features.Default:
-                    return typeof(GameSystems);
-                case Features.MainMenu:
-                    return typeof(MainMenuSystems);
-                case Features.Game:
-                    return typeof(GameSystems);
-                default:
-                    throw new ArgumentOutOfRangeException(nameof(systems), systems, null);
+                _gameController = new GameController(this, Contexts.sharedInstance, gameState);
+            }
+            else
+            {
+                _gameController.SwitchState(gameState, true);
             }
         }
-    }
         
-    public enum Features
-    {
-        Default,
-        MainMenu,
-        Game
+        private void Start()
+        {
+            _gameController.Initialize();
+        }
+        
+        private void Update()
+        {
+            _gameController.Execute();
+        }
+        
+        private void LateUpdate()
+        {
+            _gameController.Cleanup();
+        }
+
+        #endregion
+        ////////////////////////////////////////////////////////////////////
     }
 }

@@ -1,33 +1,119 @@
 ﻿using System;
+using Entitas.CodeGeneration.Attributes;
+using Main.Features;
+using UnityEngine;
 
 namespace Main
 {
-    public sealed class GameController 
+    [Core, Unique]
+    public sealed class GameController
     {
-        private readonly GameInitialization _gameData;
+        ////////////////////////////////////////////////////////////////////
+        #region Variables
+        
         private readonly Contexts _contexts;
-        private readonly Feature _systems;
+        private Feature _systems;
 
-        public GameController(GameInitialization gameData, Contexts contexts, Type feature)
+        #endregion
+        ////////////////////////////////////////////////////////////////////
+        #region Interface
+        
+        public void ClearContexts()
         {
-            _gameData = gameData;
-            _contexts = contexts;
-            contexts.Reset();
-            contexts.core.SetCoreConfig(gameData.config);
-            contexts.core.SetGameSettings(gameData.settings);
-            
-            _systems = (Feature) Activator.CreateInstance(feature, contexts);
+            if (_systems != null)
+            {
+                _systems.DeactivateReactiveSystems();
+                _systems.TearDown();
+            }
+            _contexts.input.Reset();
+            _contexts.game.Reset();
+            _contexts.ui.Reset();
+            _systems?.ActivateReactiveSystems();
         }
 
-        public void Initialize()
+        public void SwitchState(GameState newState, bool clearContexts = false)
+        {
+            if (_systems != null)
+            {
+                _systems.DeactivateReactiveSystems();
+                _systems.TearDown();
+            }
+            
+            if (clearContexts)
+            {
+                _contexts.input.Reset();
+                _contexts.game.Reset();
+                _contexts.ui.Reset();
+            }
+
+            switch (newState)
+            {
+                case GameState.None:
+                {
+                    _systems = new Feature();
+                    Debug.LogWarning("GameState is None. All systems are disabled.");
+                    break;
+                }
+                case GameState.Travel:
+                {
+                    _systems = new TravelSystems(_contexts);
+                    break;
+                }
+                case GameState.Battle:
+                {
+                    _systems = new BattleSystems(_contexts);
+                    break;
+                }
+                case GameState.UI:
+                {
+                    _systems = new UISystems(_contexts);
+                    break;
+                }
+                case GameState.MainMenu:
+                {
+                    _systems = new MainMenuSystems(_contexts);
+                    break;
+                }
+                default:
+                    throw new ArgumentOutOfRangeException(nameof(newState), newState, $"GameState is not implemented");
+            }
+        }
+        
+        internal GameController(GameInitialization gameData, Contexts contexts, GameState gameState)
+        {
+            _contexts = contexts;
+            contexts.Reset();
+            contexts.core.SetGameController(this);
+            contexts.core.SetCoreConfig(gameData.config);
+            contexts.core.SetGameSettings(gameData.settings);
+            SwitchState(gameState);
+        }
+
+        internal void Initialize()
         {
             _systems.Initialize();
         }
 
-        public void Execute()
+        internal void Execute()
         {
             _systems.Execute();
+        }
+
+        internal void Cleanup()
+        {
             _systems.Cleanup();
+        }
+        
+        #endregion
+        ////////////////////////////////////////////////////////////////////
+
+        public enum GameState
+        {
+            None,
+            Travel,
+            Battle,
+            UI,
+            MainMenu
         }
     }
 }
