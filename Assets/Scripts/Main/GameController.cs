@@ -64,6 +64,11 @@ namespace Main
                     _systems = new BattleSystems(_contexts);
                     break;
                 }
+                case GameState.CutScene:
+                {
+                    _systems = new CutSceneSystems(_contexts);
+                    break;
+                }
                 case GameState.UI:
                 {
                     _systems = new UISystems(_contexts);
@@ -112,6 +117,7 @@ namespace Main
             None,
             Travel,
             Battle,
+            CutScene,
             UI,
             MainMenu
         }
