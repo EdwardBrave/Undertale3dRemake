@@ -1,5 +1,4 @@
-using Logic.Systems.Game;
-using Logic.Systems.Input;
+using Game.SceneLoad;
 
 namespace Main.Features
 {
@@ -7,7 +6,7 @@ namespace Main.Features
     {
         public CutSceneSystems(Contexts contexts)
         {
-            
+            Add(new InitFromSceneSystem(contexts));
         }
     }
 }

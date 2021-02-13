@@ -1,3 +1,4 @@
+using Game.SceneLoad;
 using Logic.Systems.Game;
 using Logic.Systems.Input;
 
@@ -7,6 +8,7 @@ namespace Main.Features
     {
         public BattleSystems(Contexts contexts)
         {
+            Add(new InitFromSceneSystem(contexts));
             Add(new InitSceneSystem(contexts));
             Add(new CreatePlayerSystem(contexts));
             Add(new InitViewSystem(contexts));
