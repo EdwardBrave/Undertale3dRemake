@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Logic.Components.Game.MoveInDirectionComponent moveInDirection { get { return (Logic.Components.Game.MoveInDirectionComponent)GetComponent(GameComponentsLookup.MoveInDirection); } }
+    public Game.Motion.MoveInDirectionComponent moveInDirection { get { return (Game.Motion.MoveInDirectionComponent)GetComponent(GameComponentsLookup.MoveInDirection); } }
     public bool hasMoveInDirection { get { return HasComponent(GameComponentsLookup.MoveInDirection); } }
 
     public void AddMoveInDirection(UnityEngine.Vector3 newVector) {
         var index = GameComponentsLookup.MoveInDirection;
-        var component = (Logic.Components.Game.MoveInDirectionComponent)CreateComponent(index, typeof(Logic.Components.Game.MoveInDirectionComponent));
+        var component = (Game.Motion.MoveInDirectionComponent)CreateComponent(index, typeof(Game.Motion.MoveInDirectionComponent));
         component.vector = newVector;
         AddComponent(index, component);
     }
 
     public void ReplaceMoveInDirection(UnityEngine.Vector3 newVector) {
         var index = GameComponentsLookup.MoveInDirection;
-        var component = (Logic.Components.Game.MoveInDirectionComponent)CreateComponent(index, typeof(Logic.Components.Game.MoveInDirectionComponent));
+        var component = (Game.Motion.MoveInDirectionComponent)CreateComponent(index, typeof(Game.Motion.MoveInDirectionComponent));
         component.vector = newVector;
         ReplaceComponent(index, component);
     }

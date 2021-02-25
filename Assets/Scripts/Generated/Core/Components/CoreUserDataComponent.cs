@@ -6,18 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Core.Data;
-
 public partial class CoreContext {
 
     public CoreEntity userDataEntity { get { return GetGroup(CoreMatcher.UserData).GetSingleEntity(); } }
-    public Logic.Components.Core.UserDataComponent userData { get { return userDataEntity.userData; } }
+    public Core.Save.UserDataComponent userData { get { return userDataEntity.userData; } }
     public bool hasUserData { get { return userDataEntity != null; } }
 
-    public CoreEntity SetUserData(UserData newData) {
+    public CoreEntity SetUserData(Core.Save.UserData newData) {
         if (hasUserData) {
-            throw new Entitas.EntitasException("Could not set UserData!\n" + this + " already has an entity with Logic.Components.Core.UserDataComponent!",
+            throw new Entitas.EntitasException("Could not set UserData!\n" + this + " already has an list with Core.Save.UserDataComponent!",
                 "You should check if the context already has a userDataEntity before setting it or use context.ReplaceUserData().");
         }
         var entity = CreateEntity();
@@ -25,7 +22,7 @@ public partial class CoreContext {
         return entity;
     }
 
-    public void ReplaceUserData(UserData newData) {
+    public void ReplaceUserData(Core.Save.UserData newData) {
         var entity = userDataEntity;
         if (entity == null) {
             entity = SetUserData(newData);
@@ -49,19 +46,19 @@ public partial class CoreContext {
 //------------------------------------------------------------------------------
 public partial class CoreEntity {
 
-    public Logic.Components.Core.UserDataComponent userData { get { return (Logic.Components.Core.UserDataComponent)GetComponent(CoreComponentsLookup.UserData); } }
+    public Core.Save.UserDataComponent userData { get { return (Core.Save.UserDataComponent)GetComponent(CoreComponentsLookup.UserData); } }
     public bool hasUserData { get { return HasComponent(CoreComponentsLookup.UserData); } }
 
-    public void AddUserData(UserData newData) {
+    public void AddUserData(Core.Save.UserData newData) {
         var index = CoreComponentsLookup.UserData;
-        var component = (Logic.Components.Core.UserDataComponent)CreateComponent(index, typeof(Logic.Components.Core.UserDataComponent));
+        var component = (Core.Save.UserDataComponent)CreateComponent(index, typeof(Core.Save.UserDataComponent));
         component.data = newData;
         AddComponent(index, component);
     }
 
-    public void ReplaceUserData(UserData newData) {
+    public void ReplaceUserData(Core.Save.UserData newData) {
         var index = CoreComponentsLookup.UserData;
-        var component = (Logic.Components.Core.UserDataComponent)CreateComponent(index, typeof(Logic.Components.Core.UserDataComponent));
+        var component = (Core.Save.UserDataComponent)CreateComponent(index, typeof(Core.Save.UserDataComponent));
         component.data = newData;
         ReplaceComponent(index, component);
     }

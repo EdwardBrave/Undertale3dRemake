@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Logic.Components.Game.DestroyedComponent destroyedComponent = new Logic.Components.Game.DestroyedComponent();
+    static readonly Game.Cleanup.DestroyedComponent destroyedComponent = new Game.Cleanup.DestroyedComponent();
 
     public bool isDestroyed {
         get { return HasComponent(GameComponentsLookup.Destroyed); }

@@ -8,20 +8,26 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Logic.Components.Game.ViewComponent view { get { return (Logic.Components.Game.ViewComponent)GetComponent(GameComponentsLookup.View); } }
+    public Game.Motion.ViewComponent view { get { return (Game.Motion.ViewComponent)GetComponent(GameComponentsLookup.View); } }
     public bool hasView { get { return HasComponent(GameComponentsLookup.View); } }
 
-    public void AddView(UnityEngine.GameObject newObj) {
+    public void AddView(UnityEngine.GameObject newObj, UnityEngine.Vector3 newPosition, UnityEngine.Vector3 newRotation, UnityEngine.Vector3 newScale) {
         var index = GameComponentsLookup.View;
-        var component = (Logic.Components.Game.ViewComponent)CreateComponent(index, typeof(Logic.Components.Game.ViewComponent));
+        var component = (Game.Motion.ViewComponent)CreateComponent(index, typeof(Game.Motion.ViewComponent));
         component.obj = newObj;
+        component.Position = newPosition;
+        component.Rotation = newRotation;
+        component.Scale = newScale;
         AddComponent(index, component);
     }
 
-    public void ReplaceView(UnityEngine.GameObject newObj) {
+    public void ReplaceView(UnityEngine.GameObject newObj, UnityEngine.Vector3 newPosition, UnityEngine.Vector3 newRotation, UnityEngine.Vector3 newScale) {
         var index = GameComponentsLookup.View;
-        var component = (Logic.Components.Game.ViewComponent)CreateComponent(index, typeof(Logic.Components.Game.ViewComponent));
+        var component = (Game.Motion.ViewComponent)CreateComponent(index, typeof(Game.Motion.ViewComponent));
         component.obj = newObj;
+        component.Position = newPosition;
+        component.Rotation = newRotation;
+        component.Scale = newScale;
         ReplaceComponent(index, component);
     }
 

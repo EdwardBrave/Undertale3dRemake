@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Logic.Components.Game.ReactionComponent reaction { get { return (Logic.Components.Game.ReactionComponent)GetComponent(GameComponentsLookup.Reaction); } }
+    public Game.Reaction.ReactionComponent reaction { get { return (Game.Reaction.ReactionComponent)GetComponent(GameComponentsLookup.Reaction); } }
     public bool hasReaction { get { return HasComponent(GameComponentsLookup.Reaction); } }
 
-    public void AddReaction(UnityEngine.Events.UnityEvent newOnReaction) {
+    public void AddReaction(Bolt.FlowMachine newOnReaction) {
         var index = GameComponentsLookup.Reaction;
-        var component = (Logic.Components.Game.ReactionComponent)CreateComponent(index, typeof(Logic.Components.Game.ReactionComponent));
+        var component = (Game.Reaction.ReactionComponent)CreateComponent(index, typeof(Game.Reaction.ReactionComponent));
         component.onReaction = newOnReaction;
         AddComponent(index, component);
     }
 
-    public void ReplaceReaction(UnityEngine.Events.UnityEvent newOnReaction) {
+    public void ReplaceReaction(Bolt.FlowMachine newOnReaction) {
         var index = GameComponentsLookup.Reaction;
-        var component = (Logic.Components.Game.ReactionComponent)CreateComponent(index, typeof(Logic.Components.Game.ReactionComponent));
+        var component = (Game.Reaction.ReactionComponent)CreateComponent(index, typeof(Game.Reaction.ReactionComponent));
         component.onReaction = newOnReaction;
         ReplaceComponent(index, component);
     }

@@ -6,18 +6,15 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Core.Data;
-
 public partial class CoreContext {
 
     public CoreEntity coreConfigEntity { get { return GetGroup(CoreMatcher.CoreConfig).GetSingleEntity(); } }
     public CoreConfigComponent coreConfig { get { return coreConfigEntity.coreConfig; } }
     public bool hasCoreConfig { get { return coreConfigEntity != null; } }
 
-    public CoreEntity SetCoreConfig(CoreConfig newValue) {
+    public CoreEntity SetCoreConfig(Core.Data.CoreConfig newValue) {
         if (hasCoreConfig) {
-            throw new Entitas.EntitasException("Could not set CoreConfig!\n" + this + " already has an entity with CoreConfigComponent!",
+            throw new Entitas.EntitasException("Could not set CoreConfig!\n" + this + " already has an list with CoreConfigComponent!",
                 "You should check if the context already has a coreConfigEntity before setting it or use context.ReplaceCoreConfig().");
         }
         var entity = CreateEntity();
@@ -25,7 +22,7 @@ public partial class CoreContext {
         return entity;
     }
 
-    public void ReplaceCoreConfig(CoreConfig newValue) {
+    public void ReplaceCoreConfig(Core.Data.CoreConfig newValue) {
         var entity = coreConfigEntity;
         if (entity == null) {
             entity = SetCoreConfig(newValue);
@@ -52,14 +49,14 @@ public partial class CoreEntity {
     public CoreConfigComponent coreConfig { get { return (CoreConfigComponent)GetComponent(CoreComponentsLookup.CoreConfig); } }
     public bool hasCoreConfig { get { return HasComponent(CoreComponentsLookup.CoreConfig); } }
 
-    public void AddCoreConfig(CoreConfig newValue) {
+    public void AddCoreConfig(Core.Data.CoreConfig newValue) {
         var index = CoreComponentsLookup.CoreConfig;
         var component = (CoreConfigComponent)CreateComponent(index, typeof(CoreConfigComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
-    public void ReplaceCoreConfig(CoreConfig newValue) {
+    public void ReplaceCoreConfig(Core.Data.CoreConfig newValue) {
         var index = CoreComponentsLookup.CoreConfig;
         var component = (CoreConfigComponent)CreateComponent(index, typeof(CoreConfigComponent));
         component.value = newValue;

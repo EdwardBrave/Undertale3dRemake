@@ -1,4 +1,4 @@
-using Game.SceneLoad;
+using Game.InitObjects;
 
 namespace Main.Features
 {

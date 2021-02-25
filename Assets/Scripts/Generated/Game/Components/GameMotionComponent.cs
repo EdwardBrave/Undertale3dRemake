@@ -8,12 +8,12 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Logic.Components.Game.MotionComponent motion { get { return (Logic.Components.Game.MotionComponent)GetComponent(GameComponentsLookup.Motion); } }
+    public Game.Motion.MotionComponent motion { get { return (Game.Motion.MotionComponent)GetComponent(GameComponentsLookup.Motion); } }
     public bool hasMotion { get { return HasComponent(GameComponentsLookup.Motion); } }
 
     public void AddMotion(float newMaxSpeed, float newSpeed) {
         var index = GameComponentsLookup.Motion;
-        var component = (Logic.Components.Game.MotionComponent)CreateComponent(index, typeof(Logic.Components.Game.MotionComponent));
+        var component = (Game.Motion.MotionComponent)CreateComponent(index, typeof(Game.Motion.MotionComponent));
         component.maxSpeed = newMaxSpeed;
         component.speed = newSpeed;
         AddComponent(index, component);
@@ -21,7 +21,7 @@ public partial class GameEntity {
 
     public void ReplaceMotion(float newMaxSpeed, float newSpeed) {
         var index = GameComponentsLookup.Motion;
-        var component = (Logic.Components.Game.MotionComponent)CreateComponent(index, typeof(Logic.Components.Game.MotionComponent));
+        var component = (Game.Motion.MotionComponent)CreateComponent(index, typeof(Game.Motion.MotionComponent));
         component.maxSpeed = newMaxSpeed;
         component.speed = newSpeed;
         ReplaceComponent(index, component);

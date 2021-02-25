@@ -9,50 +9,41 @@
 public static class GameComponentsLookup {
 
     public const int Animator = 0;
-    public const int CollisionTrigger = 1;
-    public const int Destroyed = 2;
+    public const int Destroyed = 1;
+    public const int PlayerController = 2;
     public const int Follow = 3;
     public const int Motion = 4;
     public const int MoveInDirection = 5;
-    public const int PlayerController = 6;
-    public const int Position = 7;
-    public const int Prefab = 8;
+    public const int View = 6;
+    public const int Collision = 7;
+    public const int CollisionTriggered = 8;
     public const int Reaction = 9;
-    public const int Rotation = 10;
-    public const int SceneObject = 11;
-    public const int View = 12;
 
-    public const int TotalComponents = 13;
+    public const int TotalComponents = 10;
 
     public static readonly string[] componentNames = {
         "Animator",
-        "CollisionTrigger",
         "Destroyed",
+        "PlayerController",
         "Follow",
         "Motion",
         "MoveInDirection",
-        "PlayerController",
-        "Position",
-        "Prefab",
-        "Reaction",
-        "Rotation",
-        "SceneObject",
-        "View"
+        "View",
+        "Collision",
+        "CollisionTriggered",
+        "Reaction"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Logic.Components.Game.AnimatorComponent),
-        typeof(Logic.Components.Game.CollisionTriggerComponent),
-        typeof(Logic.Components.Game.DestroyedComponent),
-        typeof(Logic.Components.Game.FollowComponent),
-        typeof(Logic.Components.Game.MotionComponent),
-        typeof(Logic.Components.Game.MoveInDirectionComponent),
-        typeof(Logic.Components.Game.PlayerControllerComponent),
-        typeof(Logic.Components.Game.PositionComponent),
-        typeof(Logic.Components.Game.PrefabComponent),
-        typeof(Logic.Components.Game.ReactionComponent),
-        typeof(Logic.Components.Game.RotationComponent),
-        typeof(Logic.Components.Game.SceneObjectComponent),
-        typeof(Logic.Components.Game.ViewComponent)
+        typeof(Game.Animation.AnimatorComponent),
+        typeof(Game.Cleanup.DestroyedComponent),
+        typeof(Game.Controllers.PlayerControllerComponent),
+        typeof(Game.Follow.FollowComponent),
+        typeof(Game.Motion.MotionComponent),
+        typeof(Game.Motion.MoveInDirectionComponent),
+        typeof(Game.Motion.ViewComponent),
+        typeof(Game.Reaction.CollisionComponent),
+        typeof(Game.Reaction.CollisionTriggeredComponent),
+        typeof(Game.Reaction.ReactionComponent)
     };
 }

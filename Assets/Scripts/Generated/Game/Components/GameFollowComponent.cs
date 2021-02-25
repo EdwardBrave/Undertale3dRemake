@@ -8,20 +8,20 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Logic.Components.Game.FollowComponent follow { get { return (Logic.Components.Game.FollowComponent)GetComponent(GameComponentsLookup.Follow); } }
+    public Game.Follow.FollowComponent follow { get { return (Game.Follow.FollowComponent)GetComponent(GameComponentsLookup.Follow); } }
     public bool hasFollow { get { return HasComponent(GameComponentsLookup.Follow); } }
 
-    public void AddFollow(GameEntity newTarget, UnityEngine.Vector3 newRelativePosition) {
+    public void AddFollow(UnityEngine.GameObject newTarget, UnityEngine.Vector3 newRelativePosition) {
         var index = GameComponentsLookup.Follow;
-        var component = (Logic.Components.Game.FollowComponent)CreateComponent(index, typeof(Logic.Components.Game.FollowComponent));
+        var component = (Game.Follow.FollowComponent)CreateComponent(index, typeof(Game.Follow.FollowComponent));
         component.target = newTarget;
         component.relativePosition = newRelativePosition;
         AddComponent(index, component);
     }
 
-    public void ReplaceFollow(GameEntity newTarget, UnityEngine.Vector3 newRelativePosition) {
+    public void ReplaceFollow(UnityEngine.GameObject newTarget, UnityEngine.Vector3 newRelativePosition) {
         var index = GameComponentsLookup.Follow;
-        var component = (Logic.Components.Game.FollowComponent)CreateComponent(index, typeof(Logic.Components.Game.FollowComponent));
+        var component = (Game.Follow.FollowComponent)CreateComponent(index, typeof(Game.Follow.FollowComponent));
         component.target = newTarget;
         component.relativePosition = newRelativePosition;
         ReplaceComponent(index, component);

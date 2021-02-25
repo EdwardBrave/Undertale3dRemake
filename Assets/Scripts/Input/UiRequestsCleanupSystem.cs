@@ -19,8 +19,8 @@ namespace Logic.Systems.Input
                     entity.RemoveUiRequest();
                 if (entity.hasCommand)
                     entity.RemoveCommand();
-                /*if (entity.hasThrowDices)
-                    entity.RemoveThrowDices();*/
+                /*if (list.hasThrowDices)
+                    list.RemoveThrowDices();*/
             }
             _collector.ClearCollectedEntities();
         }

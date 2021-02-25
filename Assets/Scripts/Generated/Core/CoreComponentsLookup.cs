@@ -8,27 +8,27 @@
 //------------------------------------------------------------------------------
 public static class CoreComponentsLookup {
 
-    public const int CoreConfig = 0;
-    public const int GameController = 1;
-    public const int GameSettings = 2;
-    public const int UpdateUserProgress = 3;
-    public const int UserData = 4;
+    public const int SaveUserProgress = 0;
+    public const int UserData = 1;
+    public const int CoreConfig = 2;
+    public const int GameController = 3;
+    public const int GameSettings = 4;
 
     public const int TotalComponents = 5;
 
     public static readonly string[] componentNames = {
+        "SaveUserProgress",
+        "UserData",
         "CoreConfig",
         "GameController",
-        "GameSettings",
-        "UpdateUserProgress",
-        "UserData"
+        "GameSettings"
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Core.Save.SaveUserProgressComponent),
+        typeof(Core.Save.UserDataComponent),
         typeof(CoreConfigComponent),
         typeof(GameControllerComponent),
-        typeof(GameSettingsComponent),
-        typeof(Logic.Components.Core.UpdateUserProgressComponent),
-        typeof(Logic.Components.Core.UserDataComponent)
+        typeof(GameSettingsComponent)
     };
 }

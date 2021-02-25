@@ -6,10 +6,7 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using Core.Data;
-
 [Entitas.CodeGeneration.Attributes.DontGenerate(false)]
 public sealed class CoreConfigComponent : Entitas.IComponent {
-    public CoreConfig value;
+    public Core.Data.CoreConfig value;
 }

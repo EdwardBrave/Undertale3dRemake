@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    static readonly Logic.Components.Game.PlayerControllerComponent playerControllerComponent = new Logic.Components.Game.PlayerControllerComponent();
+    static readonly Game.Controllers.PlayerControllerComponent playerControllerComponent = new Game.Controllers.PlayerControllerComponent();
 
     public bool isPlayerController {
         get { return HasComponent(GameComponentsLookup.PlayerController); }

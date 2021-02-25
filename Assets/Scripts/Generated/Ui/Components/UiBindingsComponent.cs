@@ -6,22 +6,19 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using UI.Binding;
-
 public partial class UiEntity {
 
     public Logic.Components.UI.BindingsComponent bindings { get { return (Logic.Components.UI.BindingsComponent)GetComponent(UiComponentsLookup.Bindings); } }
     public bool hasBindings { get { return HasComponent(UiComponentsLookup.Bindings); } }
 
-    public void AddBindings(UIBinder newContext) {
+    public void AddBindings(UI.Binding.UIBinder newContext) {
         var index = UiComponentsLookup.Bindings;
         var component = (Logic.Components.UI.BindingsComponent)CreateComponent(index, typeof(Logic.Components.UI.BindingsComponent));
         component.context = newContext;
         AddComponent(index, component);
     }
 
-    public void ReplaceBindings(UIBinder newContext) {
+    public void ReplaceBindings(UI.Binding.UIBinder newContext) {
         var index = UiComponentsLookup.Bindings;
         var component = (Logic.Components.UI.BindingsComponent)CreateComponent(index, typeof(Logic.Components.UI.BindingsComponent));
         component.context = newContext;

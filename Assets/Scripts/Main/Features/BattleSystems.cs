@@ -1,5 +1,10 @@
-using Game.SceneLoad;
-using Logic.Systems.Game;
+using Game.Animation;
+using Game.Cleanup;
+using Game.Controllers;
+using Game.Follow;
+using Game.InitObjects;
+using Game.Motion;
+using Game.Reaction;
 using Logic.Systems.Input;
 
 namespace Main.Features
@@ -9,17 +14,12 @@ namespace Main.Features
         public BattleSystems(Contexts contexts)
         {
             Add(new InitFromSceneSystem(contexts));
-            Add(new InitSceneSystem(contexts));
-            Add(new CreatePlayerSystem(contexts));
-            Add(new InitViewSystem(contexts));
-            Add(new FindViewSystem(contexts));
-            
+
             Add(new InputGameEventsSystem(contexts));
             Add(new PlayerControllerSystem(contexts));
             Add(new MotionSystem(contexts));
-            Add(new PositionSystem(contexts));
-            Add(new RotationSystem(contexts));
-            Add(new AnimatorSystem(contexts));
+            Add(new ReactionSystem(contexts));
+            Add(new AnimationSystem(contexts));
             Add(new FollowSystem(contexts));
 
             Add(new UISystems(contexts));

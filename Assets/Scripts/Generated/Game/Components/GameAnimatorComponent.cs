@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Logic.Components.Game.AnimatorComponent animator { get { return (Logic.Components.Game.AnimatorComponent)GetComponent(GameComponentsLookup.Animator); } }
+    public Game.Animation.AnimatorComponent animator { get { return (Game.Animation.AnimatorComponent)GetComponent(GameComponentsLookup.Animator); } }
     public bool hasAnimator { get { return HasComponent(GameComponentsLookup.Animator); } }
 
     public void AddAnimator(UnityEngine.Animator newValue) {
         var index = GameComponentsLookup.Animator;
-        var component = (Logic.Components.Game.AnimatorComponent)CreateComponent(index, typeof(Logic.Components.Game.AnimatorComponent));
+        var component = (Game.Animation.AnimatorComponent)CreateComponent(index, typeof(Game.Animation.AnimatorComponent));
         component.value = newValue;
         AddComponent(index, component);
     }
 
     public void ReplaceAnimator(UnityEngine.Animator newValue) {
         var index = GameComponentsLookup.Animator;
-        var component = (Logic.Components.Game.AnimatorComponent)CreateComponent(index, typeof(Logic.Components.Game.AnimatorComponent));
+        var component = (Game.Animation.AnimatorComponent)CreateComponent(index, typeof(Game.Animation.AnimatorComponent));
         component.value = newValue;
         ReplaceComponent(index, component);
     }
