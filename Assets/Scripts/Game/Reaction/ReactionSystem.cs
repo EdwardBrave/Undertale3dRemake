@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using Bolt;
 using Entitas;
@@ -13,7 +12,7 @@ namespace Game.Reaction
 
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
-            return context.CreateCollector(GameMatcher.CollisionTriggered);
+            return context.CreateCollector(GameMatcher.Collider);
         }
 
         protected override bool Filter(GameEntity entity)
@@ -25,7 +24,7 @@ namespace Game.Reaction
         {
             foreach (var entity in entities)
             {
-                foreach(var gameEntity in entity.collisionTriggered.list)
+                foreach(var gameEntity in entity.collider.list)
                 {
                     CustomEvent.Trigger(entity.reaction.onReaction.gameObject, ReactionEventName, gameEntity);
                 }

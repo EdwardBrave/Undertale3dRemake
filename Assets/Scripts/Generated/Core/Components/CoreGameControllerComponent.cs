@@ -14,7 +14,7 @@ public partial class CoreContext {
 
     public CoreEntity SetGameController(Main.GameController newValue) {
         if (hasGameController) {
-            throw new Entitas.EntitasException("Could not set GameController!\n" + this + " already has an list with GameControllerComponent!",
+            throw new Entitas.EntitasException("Could not set GameController!\n" + this + " already has an entity with GameControllerComponent!",
                 "You should check if the context already has a gameControllerEntity before setting it or use context.ReplaceGameController().");
         }
         var entity = CreateEntity();

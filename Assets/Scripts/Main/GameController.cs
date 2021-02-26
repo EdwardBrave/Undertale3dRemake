@@ -23,10 +23,11 @@ namespace Main
             if (_systems != null)
             {
                 _systems.DeactivateReactiveSystems();
+                _systems.Cleanup();
                 _systems.TearDown();
             }
-            _contexts.input.Reset();
             _contexts.game.Reset();
+            _contexts.input.Reset();
             _contexts.ui.Reset();
             _systems?.ActivateReactiveSystems();
         }
@@ -36,6 +37,7 @@ namespace Main
             if (_systems != null)
             {
                 _systems.DeactivateReactiveSystems();
+                _systems.Cleanup();
                 _systems.TearDown();
             }
             

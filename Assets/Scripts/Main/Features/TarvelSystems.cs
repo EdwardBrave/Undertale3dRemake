@@ -4,6 +4,7 @@ using Game.Controllers;
 using Game.Follow;
 using Game.InitObjects;
 using Game.Motion;
+using Game.Reaction;
 using Logic.Systems.Input;
 
 namespace Main.Features
@@ -17,6 +18,7 @@ namespace Main.Features
             Add(new InputGameEventsSystem(contexts));
             Add(new PlayerControllerSystem(contexts));
             Add(new MotionSystem(contexts));
+            Add(new ReactionSystem(contexts));
             Add(new AnimationSystem(contexts));
             Add(new FollowSystem(contexts));
 

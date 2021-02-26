@@ -14,7 +14,7 @@ public partial class CoreContext {
 
     public CoreEntity SetUserData(Core.Save.UserData newData) {
         if (hasUserData) {
-            throw new Entitas.EntitasException("Could not set UserData!\n" + this + " already has an list with Core.Save.UserDataComponent!",
+            throw new Entitas.EntitasException("Could not set UserData!\n" + this + " already has an entity with Core.Save.UserDataComponent!",
                 "You should check if the context already has a userDataEntity before setting it or use context.ReplaceUserData().");
         }
         var entity = CreateEntity();

@@ -14,7 +14,7 @@ public partial class CoreContext {
 
     public CoreEntity SetGameSettings(Core.Data.GameSettings newValue) {
         if (hasGameSettings) {
-            throw new Entitas.EntitasException("Could not set GameSettings!\n" + this + " already has an list with GameSettingsComponent!",
+            throw new Entitas.EntitasException("Could not set GameSettings!\n" + this + " already has an entity with GameSettingsComponent!",
                 "You should check if the context already has a gameSettingsEntity before setting it or use context.ReplaceGameSettings().");
         }
         var entity = CreateEntity();

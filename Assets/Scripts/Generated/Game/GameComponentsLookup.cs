@@ -15,11 +15,10 @@ public static class GameComponentsLookup {
     public const int Motion = 4;
     public const int MoveInDirection = 5;
     public const int View = 6;
-    public const int Collision = 7;
-    public const int CollisionTriggered = 8;
-    public const int Reaction = 9;
+    public const int Collider = 7;
+    public const int Reaction = 8;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -29,8 +28,7 @@ public static class GameComponentsLookup {
         "Motion",
         "MoveInDirection",
         "View",
-        "Collision",
-        "CollisionTriggered",
+        "Collider",
         "Reaction"
     };
 
@@ -42,8 +40,7 @@ public static class GameComponentsLookup {
         typeof(Game.Motion.MotionComponent),
         typeof(Game.Motion.MoveInDirectionComponent),
         typeof(Game.Motion.ViewComponent),
-        typeof(Game.Reaction.CollisionComponent),
-        typeof(Game.Reaction.CollisionTriggeredComponent),
+        typeof(Game.Reaction.ColliderComponent),
         typeof(Game.Reaction.ReactionComponent)
     };
 }

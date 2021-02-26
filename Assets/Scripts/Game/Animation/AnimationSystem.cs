@@ -4,11 +4,16 @@ using UnityEngine;
 
 namespace Game.Animation
 {
-    public class AnimationSystem: ReactiveSystem<GameEntity>
+    public class AnimationSystem: ReactiveSystem<GameEntity>, ITearDownSystem
     {
         private static readonly int Speed = Animator.StringToHash("speed");
+        
+        private readonly IGroup<GameEntity> _animationGroup;
 
-        public AnimationSystem(Contexts contexts): base(contexts.game) { }
+        public AnimationSystem(Contexts contexts) : base(contexts.game)
+        {
+            _animationGroup = contexts.game.GetGroup(GameMatcher.AllOf(GameMatcher.Animator, GameMatcher.Motion));
+        }
 
         protected override ICollector<GameEntity> GetTrigger(IContext<GameEntity> context)
         {
@@ -25,6 +30,17 @@ namespace Game.Animation
             foreach (var entity in entities)
             {
                 entity.animator.value.SetFloat(Speed, entity.motion.speed);
+            }
+        }
+
+        public void TearDown()
+        {
+            foreach (var entity in _animationGroup)
+            {
+                if (entity.animator.value)
+                {
+                    entity.animator.value.SetFloat(Speed, entity.motion.speed);
+                }
             }
         }
     }

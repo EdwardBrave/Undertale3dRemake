@@ -5,7 +5,7 @@ using Entitas.VisualDebugging.Unity;
 
 namespace Game.Cleanup
 {
-    public class DestroyedCleanupSystem: ICleanupSystem, ITearDownSystem
+    public class DestroyedCleanupSystem: ICleanupSystem
     {
         private readonly IGroup<GameEntity> _destroyedEntities;
         
@@ -30,19 +30,6 @@ namespace Game.Cleanup
                     entity.view.obj.DestroyGameObject();
                 }
                 entity.Destroy();
-            }
-        }
-
-        public void TearDown()
-        {
-            foreach (var entity in _gameContext.GetGroup(GameMatcher.View))
-            {
-                if (entity.view.obj)
-                {
-                    entity.view.obj.Unlink();
-                    entity.view.obj.DestroyGameObject();
-                    entity.Destroy();
-                }
             }
         }
     }

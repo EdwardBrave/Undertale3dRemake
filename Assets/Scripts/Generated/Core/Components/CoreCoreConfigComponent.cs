@@ -14,7 +14,7 @@ public partial class CoreContext {
 
     public CoreEntity SetCoreConfig(Core.Data.CoreConfig newValue) {
         if (hasCoreConfig) {
-            throw new Entitas.EntitasException("Could not set CoreConfig!\n" + this + " already has an list with CoreConfigComponent!",
+            throw new Entitas.EntitasException("Could not set CoreConfig!\n" + this + " already has an entity with CoreConfigComponent!",
                 "You should check if the context already has a coreConfigEntity before setting it or use context.ReplaceCoreConfig().");
         }
         var entity = CreateEntity();

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Game.Motion
 {
-    public class MotionSystem : IExecuteSystem
+    public class MotionSystem : IExecuteSystem, ITearDownSystem
     {
         private readonly IGroup<GameEntity> _inMotionEntities;
         private readonly ICollector<GameEntity> _endMoveEntities;
@@ -43,6 +43,15 @@ namespace Game.Motion
                 float speed = (Mathf.Abs(entity.view.Rotation.y - angle) + 360 ) * Time.deltaTime;
                 angle = Mathf.MoveTowardsAngle(entity.view.Rotation.y, angle, speed);
                 entity.view.Rotation = new Vector3(entity.view.Rotation.x, angle, entity.view.Rotation.z);
+            }
+        }
+
+        public void TearDown()
+        {
+            foreach (var entity in _inMotionEntities.GetEntities())
+            {
+                entity.RemoveMoveInDirection();
+                entity.ReplaceMotion(entity.motion.maxSpeed, 0);
             }
         }
     }
