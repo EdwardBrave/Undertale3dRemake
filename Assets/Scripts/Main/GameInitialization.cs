@@ -1,5 +1,5 @@
-﻿using System;
-using Core.Data;
+﻿using Core.Data;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Main
@@ -9,6 +9,7 @@ namespace Main
         ////////////////////////////////////////////////////////////////////
         #region Variables
         
+        [OnValueChanged("OnStateChanged")]
         [SerializeField] private GameController.GameState gameState;
         [SerializeField] internal CoreConfig config;
         [SerializeField] internal GameSettings settings;
@@ -21,11 +22,13 @@ namespace Main
 
         public void SwitchState(GameController.GameState newGameState)
         {
+            gameState = newGameState;
             _gameController.SwitchState(newGameState, false);
         }
         
         public void SwitchStateWithReset(GameController.GameState newGameState)
         {
+            gameState = newGameState;
             _gameController.SwitchState(newGameState, true);
         }
 
@@ -37,6 +40,14 @@ namespace Main
         #endregion
         ////////////////////////////////////////////////////////////////////
         #region Implementation
+
+        private void OnStateChanged()
+        {
+            if (Application.isPlaying)
+            {
+                SwitchState(gameState);
+            }
+        }
         
         private void Awake()
         {

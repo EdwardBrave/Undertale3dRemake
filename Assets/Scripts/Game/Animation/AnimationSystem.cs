@@ -35,7 +35,7 @@ namespace Game.Animation
 
         public void TearDown()
         {
-            foreach (var entity in _animationGroup)
+            foreach (var entity in _animationGroup.GetEntities())
             {
                 if (entity.animator.value)
                 {
