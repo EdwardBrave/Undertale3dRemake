@@ -1,10 +1,9 @@
-﻿using Entitas;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace Game.Motion
+namespace Game
 {
     [Game]
-    public class ViewComponent : IComponent
+    public class ViewComponent : IGameComponent
     {
         public GameObject obj;
 

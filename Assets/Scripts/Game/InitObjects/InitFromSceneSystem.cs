@@ -8,11 +8,11 @@ namespace Game.InitObjects
 {
     public class InitFromSceneSystem : IExecuteSystem
     {
-        private static readonly Queue<List<IComponent>> InitQueue = new Queue<List<IComponent>>();
+        private static readonly Queue<List<IGameComponent>> InitQueue = new Queue<List<IGameComponent>>();
         
         private readonly GameContext _gameContext;
 
-        public static void AddToInitQueue(List<IComponent> entityInitList)
+        public static void AddToInitQueue(List<IGameComponent> entityInitList)
         {
             InitQueue.Enqueue(entityInitList);
         }

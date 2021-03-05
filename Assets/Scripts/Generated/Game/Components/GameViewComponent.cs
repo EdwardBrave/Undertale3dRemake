@@ -6,14 +6,17 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using Game;
+
 public partial class GameEntity {
 
-    public Game.Motion.ViewComponent view { get { return (Game.Motion.ViewComponent)GetComponent(GameComponentsLookup.View); } }
+    public ViewComponent view { get { return (ViewComponent)GetComponent(GameComponentsLookup.View); } }
     public bool hasView { get { return HasComponent(GameComponentsLookup.View); } }
 
     public void AddView(UnityEngine.GameObject newObj, UnityEngine.Vector3 newPosition, UnityEngine.Vector3 newRotation, UnityEngine.Vector3 newScale) {
         var index = GameComponentsLookup.View;
-        var component = (Game.Motion.ViewComponent)CreateComponent(index, typeof(Game.Motion.ViewComponent));
+        var component = (ViewComponent)CreateComponent(index, typeof(ViewComponent));
         component.obj = newObj;
         component.Position = newPosition;
         component.Rotation = newRotation;
@@ -23,7 +26,7 @@ public partial class GameEntity {
 
     public void ReplaceView(UnityEngine.GameObject newObj, UnityEngine.Vector3 newPosition, UnityEngine.Vector3 newRotation, UnityEngine.Vector3 newScale) {
         var index = GameComponentsLookup.View;
-        var component = (Game.Motion.ViewComponent)CreateComponent(index, typeof(Game.Motion.ViewComponent));
+        var component = (ViewComponent)CreateComponent(index, typeof(ViewComponent));
         component.obj = newObj;
         component.Position = newPosition;
         component.Rotation = newRotation;

@@ -3,7 +3,7 @@ using Entitas;
 namespace Game.Motion
 {
     [Game]
-    public class MotionComponent: IComponent
+    public class MotionComponent: IGameComponent
     {
         public float maxSpeed;
         public float speed;

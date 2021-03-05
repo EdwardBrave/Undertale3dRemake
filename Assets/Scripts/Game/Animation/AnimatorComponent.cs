@@ -4,7 +4,7 @@ using UnityEngine;
 namespace Game.Animation
 {
     [Game]
-    public class AnimatorComponent: IComponent
+    public class AnimatorComponent: IGameComponent
     {
         public Animator value;
     }

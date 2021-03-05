@@ -39,7 +39,7 @@ public static class GameComponentsLookup {
         typeof(Game.Follow.FollowComponent),
         typeof(Game.Motion.MotionComponent),
         typeof(Game.Motion.MoveInDirectionComponent),
-        typeof(Game.Motion.ViewComponent),
+        typeof(Game.ViewComponent),
         typeof(Game.Reaction.ColliderComponent),
         typeof(Game.Reaction.ReactionComponent)
     };
