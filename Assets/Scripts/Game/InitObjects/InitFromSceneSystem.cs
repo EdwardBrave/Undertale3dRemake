@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using Entitas;
 using Entitas.Unity;
-using Game.Motion;
 
 namespace Game.InitObjects
 {

@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using Entitas;
-using Game.Motion;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

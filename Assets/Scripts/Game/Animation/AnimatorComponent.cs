@@ -1,4 +1,3 @@
-using Entitas;
 using UnityEngine;
 
 namespace Game.Animation

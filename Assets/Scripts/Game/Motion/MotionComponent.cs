@@ -1,4 +1,3 @@
-using Entitas;
 
 namespace Game.Motion
 {

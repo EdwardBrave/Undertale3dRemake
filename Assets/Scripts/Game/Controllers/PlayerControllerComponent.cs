@@ -1,5 +1,3 @@
-using Entitas;
-
 namespace Game.Controllers
 {
     [Game]
