@@ -6,9 +6,12 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using UI.Close;
+
 public partial class UiEntity {
 
-    static readonly Logic.Components.UI.ProtectedComponent protectedComponent = new Logic.Components.UI.ProtectedComponent();
+    static readonly ProtectedComponent protectedComponent = new ProtectedComponent();
 
     public bool isProtected {
         get { return HasComponent(UiComponentsLookup.Protected); }

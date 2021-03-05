@@ -6,6 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
+
+using UI.Close;
+
 public static class UiComponentsLookup {
 
     public const int Canvas = 0;
@@ -44,7 +47,7 @@ public static class UiComponentsLookup {
 
     public static readonly System.Type[] componentTypes = {
         typeof(Logic.Components.UI.CanvasComponent),
-        typeof(Logic.Components.UI.ProtectedComponent),
+        typeof(ProtectedComponent),
         typeof(Logic.Components.UI.WindowComponent),
         typeof(Main.Globals.GlobalEventsComponent),
         typeof(UI.Events.CancelComponent),
@@ -56,6 +59,6 @@ public static class UiComponentsLookup {
         typeof(UI.Global.CloseWindowsComponent),
         typeof(UI.Global.OpenWindowComponent),
         typeof(UI.ViewComponent),
-        typeof(UI.Windows.CloseComponent)
+        typeof(CloseComponent)
     };
 }

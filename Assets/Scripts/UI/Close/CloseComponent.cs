@@ -1,6 +1,6 @@
 using Entitas;
 
-namespace UI.Windows
+namespace UI.Close
 {
     [Ui]
     public class CloseComponent: IComponent { }

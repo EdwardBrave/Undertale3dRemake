@@ -1,30 +1,25 @@
-﻿using System.Collections.Generic;
-using Entitas;
+﻿using Entitas;
 using Entitas.Unity;
 using Entitas.VisualDebugging.Unity;
-using UnityEngine;
 
-namespace UI
+namespace UI.Close
 {
     public class CloseWindowCleanupSystem: ICleanupSystem
     {
         private readonly IGroup<UiEntity> _group;
 
-        private readonly List<UiEntity> _buffer;
         public CloseWindowCleanupSystem(Contexts contexts)
         {
-            //_group = contexts.ui.GetGroup(UiMatcher.Close);
-            _buffer = new List<UiEntity>();
+            _group = contexts.ui.GetGroup(UiMatcher.Close);
         }
 
         public void Cleanup()
         {
-            foreach (var entity in _group.GetEntities(_buffer))
+            foreach (var entity in _group.GetEntities())
             {
                 if (entity.isProtected)
                 {
-                    //entity.isClose = false;
-                    Debug.LogWarning("Attempt to close protected window! You should reset the protection.");
+                    entity.isClose = false;
                     continue;
                 }
                 

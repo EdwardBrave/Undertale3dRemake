@@ -4,12 +4,13 @@ using Entitas.Unity;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
-namespace UI.Common
+namespace UI.Open
 {
-    public class ExtendUiOnInit: SerializedMonoBehaviour
+    public class InitUiEntity: SerializedMonoBehaviour
     {
-        [SerializeField]
-        internal List<IUiComponent> components;
+        [SerializeField] internal GameObject containerPrefab;
+        
+        [SerializeField] internal List<IUiComponent> components;
 
         private void Update()
         {
