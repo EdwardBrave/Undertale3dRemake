@@ -17,8 +17,9 @@ public static class GameComponentsLookup {
     public const int Collider = 6;
     public const int Reaction = 7;
     public const int View = 8;
+    public const int GlobalEvents = 9;
 
-    public const int TotalComponents = 9;
+    public const int TotalComponents = 10;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -29,7 +30,8 @@ public static class GameComponentsLookup {
         "MoveInDirection",
         "Collider",
         "Reaction",
-        "View"
+        "View",
+        "GlobalEvents"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -41,6 +43,7 @@ public static class GameComponentsLookup {
         typeof(Game.Motion.MoveInDirectionComponent),
         typeof(Game.Reaction.ColliderComponent),
         typeof(Game.Reaction.ReactionComponent),
-        typeof(Game.ViewComponent)
+        typeof(Game.ViewComponent),
+        typeof(Main.Globals.GlobalEventsComponent)
     };
 }

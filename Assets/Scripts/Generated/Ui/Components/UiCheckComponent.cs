@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class UiEntity {
 
-    public Logic.Components.UI.CheckComponent check { get { return (Logic.Components.UI.CheckComponent)GetComponent(UiComponentsLookup.Check); } }
+    public UI.Events.CheckComponent check { get { return (UI.Events.CheckComponent)GetComponent(UiComponentsLookup.Check); } }
     public bool hasCheck { get { return HasComponent(UiComponentsLookup.Check); } }
 
     public void AddCheck(bool newState) {
         var index = UiComponentsLookup.Check;
-        var component = (Logic.Components.UI.CheckComponent)CreateComponent(index, typeof(Logic.Components.UI.CheckComponent));
+        var component = (UI.Events.CheckComponent)CreateComponent(index, typeof(UI.Events.CheckComponent));
         component.state = newState;
         AddComponent(index, component);
     }
 
     public void ReplaceCheck(bool newState) {
         var index = UiComponentsLookup.Check;
-        var component = (Logic.Components.UI.CheckComponent)CreateComponent(index, typeof(Logic.Components.UI.CheckComponent));
+        var component = (UI.Events.CheckComponent)CreateComponent(index, typeof(UI.Events.CheckComponent));
         component.state = newState;
         ReplaceComponent(index, component);
     }

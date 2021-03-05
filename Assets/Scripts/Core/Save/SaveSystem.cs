@@ -33,7 +33,7 @@ namespace Core.Save
         protected override void Execute(List<CoreEntity> entities)
         {
             foreach (var entity in entities){}
-                /*list.isUpdateUserProgress = false;
+                /*queue.isUpdateUserProgress = false;
             SaveProgress(_coreContext.userProgress.data);*/
         }
 

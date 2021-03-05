@@ -2,7 +2,7 @@ using Game.Animation;
 using Game.Cleanup;
 using Game.Controllers;
 using Game.Follow;
-using Game.InitObjects;
+using Game.InitLogic;
 using Game.Motion;
 using Game.Reaction;
 using Logic.Systems.Input;

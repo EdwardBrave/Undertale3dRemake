@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class UiEntity {
 
-    static readonly Logic.Components.UI.ConfirmComponent confirmComponent = new Logic.Components.UI.ConfirmComponent();
+    static readonly UI.Events.ConfirmComponent confirmComponent = new UI.Events.ConfirmComponent();
 
     public bool isConfirm {
         get { return HasComponent(UiComponentsLookup.Confirm); }

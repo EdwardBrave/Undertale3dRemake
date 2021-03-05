@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class UiEntity {
 
-    static readonly Logic.Components.UI.RejectComponent rejectComponent = new Logic.Components.UI.RejectComponent();
+    static readonly UI.Events.RejectComponent rejectComponent = new UI.Events.RejectComponent();
 
     public bool isReject {
         get { return HasComponent(UiComponentsLookup.Reject); }

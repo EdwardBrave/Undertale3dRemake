@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 public partial class UiEntity {
 
-    static readonly Logic.Components.UI.CloseComponent closeComponent = new Logic.Components.UI.CloseComponent();
+    static readonly UI.Windows.CloseComponent closeComponent = new UI.Windows.CloseComponent();
 
     public bool isClose {
         get { return HasComponent(UiComponentsLookup.Close); }

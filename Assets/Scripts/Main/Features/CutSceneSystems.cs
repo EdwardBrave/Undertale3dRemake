@@ -1,4 +1,4 @@
-using Game.InitObjects;
+using Game.InitLogic;
 
 namespace Main.Features
 {

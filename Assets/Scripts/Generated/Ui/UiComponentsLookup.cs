@@ -8,48 +8,54 @@
 //------------------------------------------------------------------------------
 public static class UiComponentsLookup {
 
-    public const int Bindings = 0;
-    public const int Canvas = 1;
-    public const int Check = 2;
-    public const int Close = 3;
-    public const int Command = 4;
-    public const int Confirm = 5;
-    public const int EventIdentifier = 6;
-    public const int Protected = 7;
+    public const int Canvas = 0;
+    public const int Protected = 1;
+    public const int Window = 2;
+    public const int GlobalEvents = 3;
+    public const int Cancel = 4;
+    public const int Check = 5;
+    public const int Confirm = 6;
+    public const int Pressed = 7;
     public const int Reject = 8;
-    public const int UiData = 9;
-    public const int View = 10;
-    public const int Window = 11;
+    public const int CloseAll = 9;
+    public const int CloseWindows = 10;
+    public const int OpenWindow = 11;
+    public const int View = 12;
+    public const int Close = 13;
 
-    public const int TotalComponents = 12;
+    public const int TotalComponents = 14;
 
     public static readonly string[] componentNames = {
-        "Bindings",
         "Canvas",
-        "Check",
-        "Close",
-        "Command",
-        "Confirm",
-        "EventIdentifier",
         "Protected",
+        "Window",
+        "GlobalEvents",
+        "Cancel",
+        "Check",
+        "Confirm",
+        "Pressed",
         "Reject",
-        "UiData",
+        "CloseAll",
+        "CloseWindows",
+        "OpenWindow",
         "View",
-        "Window"
+        "Close"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Logic.Components.UI.BindingsComponent),
         typeof(Logic.Components.UI.CanvasComponent),
-        typeof(Logic.Components.UI.CheckComponent),
-        typeof(Logic.Components.UI.CloseComponent),
-        typeof(Logic.Components.UI.CommandComponent),
-        typeof(Logic.Components.UI.ConfirmComponent),
-        typeof(Logic.Components.UI.EventIdentifierComponent),
         typeof(Logic.Components.UI.ProtectedComponent),
-        typeof(Logic.Components.UI.RejectComponent),
-        typeof(Logic.Components.UI.UiDataComponent),
-        typeof(Logic.Components.UI.ViewComponent),
-        typeof(Logic.Components.UI.WindowComponent)
+        typeof(Logic.Components.UI.WindowComponent),
+        typeof(Main.Globals.GlobalEventsComponent),
+        typeof(UI.Events.CancelComponent),
+        typeof(UI.Events.CheckComponent),
+        typeof(UI.Events.ConfirmComponent),
+        typeof(UI.Events.PressedComponent),
+        typeof(UI.Events.RejectComponent),
+        typeof(UI.Global.CloseAllComponent),
+        typeof(UI.Global.CloseWindowsComponent),
+        typeof(UI.Global.OpenWindowComponent),
+        typeof(UI.ViewComponent),
+        typeof(UI.Windows.CloseComponent)
     };
 }
