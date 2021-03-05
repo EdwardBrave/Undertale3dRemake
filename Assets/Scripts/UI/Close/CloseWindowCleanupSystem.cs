@@ -27,7 +27,7 @@ namespace UI.Close
                 {
                     entity.view.obj.Unlink();
                     entity.view.obj.DestroyGameObject();
-                    entity.view.parent.canvas.windows.Remove(entity);
+                    //entity.view.parent.container.windows.Remove(entity);
                 }
 
                 entity.Destroy();

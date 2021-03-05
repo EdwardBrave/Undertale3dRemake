@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using Entitas;
 
-namespace Logic.Components.UI
+namespace UI.Open
 {
     [Ui]
-    public class CanvasComponent : IComponent
+    public class ContainerComponent : IComponent
     {
-        public string name;
         public List<UiEntity> windows;
     }
 }

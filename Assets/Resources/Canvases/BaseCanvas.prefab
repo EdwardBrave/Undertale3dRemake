@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4853005759625216981}
   - component: {fileID: 8331843630215801497}
   - component: {fileID: 3960259582130174587}
+  - component: {fileID: 2871705779050457634}
   m_Layer: 5
   m_Name: BaseCanvas
   m_TagString: Untagged
@@ -81,6 +82,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &3960259582130174587
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -98,3 +100,38 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 55
+--- !u!114 &2871705779050457634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738658818642732903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62d7633f1c063554693b0e0054f00209, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: components
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[UI.IUiComponent, Assembly-CSharp]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  containerPrefab: {fileID: 0}

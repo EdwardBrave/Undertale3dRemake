@@ -6,12 +6,9 @@
 //     the code is regenerated.
 // </auto-generated>
 //------------------------------------------------------------------------------
-
-using UI.Close;
-
 public partial class UiEntity {
 
-    static readonly CloseComponent closeComponent = new CloseComponent();
+    static readonly UI.Close.CloseComponent closeComponent = new UI.Close.CloseComponent();
 
     public bool isClose {
         get { return HasComponent(UiComponentsLookup.Close); }

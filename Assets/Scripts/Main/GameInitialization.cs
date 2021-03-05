@@ -1,5 +1,6 @@
-﻿using Core.Data;
-using Sirenix.OdinInspector;
+﻿using Sirenix.OdinInspector;
+using UI.Data;
+using UI.Open;
 using UnityEngine;
 
 namespace Main
@@ -11,8 +12,7 @@ namespace Main
         
         [OnValueChanged("OnStateChanged")]
         [SerializeField] private GameController.GameState gameState;
-        [SerializeField] internal CoreConfig config;
-        [SerializeField] internal GameSettings settings;
+        [SerializeField] internal UiConfig uiConfig;
         
         private static GameController _gameController;
 

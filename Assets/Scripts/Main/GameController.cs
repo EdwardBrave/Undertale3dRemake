@@ -1,6 +1,7 @@
 ﻿using System;
 using Entitas.CodeGeneration.Attributes;
 using Main.Features;
+using UI.Open;
 using UnityEngine;
 
 namespace Main
@@ -91,8 +92,7 @@ namespace Main
             _contexts = contexts;
             contexts.Reset();
             contexts.core.SetGameController(this);
-            contexts.core.SetCoreConfig(gameData.config);
-            contexts.core.SetGameSettings(gameData.settings);
+            contexts.ui.SetUiConfig(gameData.uiConfig);
             SwitchState(gameState);
         }
 
