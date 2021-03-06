@@ -21,7 +21,7 @@ namespace UI.Events
 
         public void ActCheck(bool isOn) => OnEvent(uiEntity => uiEntity.ReplaceCheck(isOn));
 
-        public void ActCloseSelf(bool isForce = false) => OnEvent(uiEntity => uiEntity.ReplaceClose(isForce));
+        public void ActCloseSelf() => OnEvent(uiEntity => uiEntity.ReplaceClose(true));
         
         public void ActOpenWindow(InitUiEntity data) => EcsEnvironment.UiEventsEntity.ReplaceOpenWindow(data);
 
