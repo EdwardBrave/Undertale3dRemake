@@ -1,7 +1,7 @@
-using Logic.Systems.Input;
-using Logic.Systems.UI;
-using UI;
+using UI.Animation;
 using UI.Close;
+using UI.Events;
+using UI.Global;
 using UI.Open;
 
 namespace Main.Features
@@ -10,10 +10,13 @@ namespace Main.Features
     {
         public UISystems(Contexts contexts)
         {
-            Add(new CreateCanvasSystem(contexts));
-            
-            Add(new OpenWindowSystem(contexts));
+            Add(new InitWindowsSystem(contexts));
 
+            Add(new UiEventsHandlerSystem(contexts));
+            Add(new CreateWindowSystem(contexts));
+
+            Add(new WindowAnimationSystem(contexts));
+            Add(new UiEventsCleanupSystem(contexts));
             Add(new CloseWindowCleanupSystem(contexts));
         }
     }

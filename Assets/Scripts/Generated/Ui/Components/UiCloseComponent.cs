@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 public partial class UiEntity {
 
-    static readonly UI.Close.CloseComponent closeComponent = new UI.Close.CloseComponent();
+    public UI.Close.CloseComponent close { get { return (UI.Close.CloseComponent)GetComponent(UiComponentsLookup.Close); } }
+    public bool hasClose { get { return HasComponent(UiComponentsLookup.Close); } }
 
-    public bool isClose {
-        get { return HasComponent(UiComponentsLookup.Close); }
-        set {
-            if (value != isClose) {
-                var index = UiComponentsLookup.Close;
-                if (value) {
-                    var componentPool = GetComponentPool(index);
-                    var component = componentPool.Count > 0
-                            ? componentPool.Pop()
-                            : closeComponent;
+    public void AddClose(bool newIsForce) {
+        var index = UiComponentsLookup.Close;
+        var component = (UI.Close.CloseComponent)CreateComponent(index, typeof(UI.Close.CloseComponent));
+        component.isForce = newIsForce;
+        AddComponent(index, component);
+    }
 
-                    AddComponent(index, component);
-                } else {
-                    RemoveComponent(index);
-                }
-            }
-        }
+    public void ReplaceClose(bool newIsForce) {
+        var index = UiComponentsLookup.Close;
+        var component = (UI.Close.CloseComponent)CreateComponent(index, typeof(UI.Close.CloseComponent));
+        component.isForce = newIsForce;
+        ReplaceComponent(index, component);
+    }
+
+    public void RemoveClose() {
+        RemoveComponent(UiComponentsLookup.Close);
     }
 }
 

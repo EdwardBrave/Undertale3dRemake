@@ -1,7 +1,6 @@
 ﻿using System;
 using Entitas.CodeGeneration.Attributes;
 using Main.Features;
-using UI.Open;
 using UnityEngine;
 
 namespace Main
@@ -93,6 +92,10 @@ namespace Main
             contexts.Reset();
             contexts.core.SetGameController(this);
             contexts.ui.SetUiConfig(gameData.uiConfig);
+            contexts.game.isGlobalEvents = true;
+            contexts.ui.isGlobalEvents = true;
+            contexts.core.isGlobalEvents = true;
+            contexts.input.isGlobalEvents = true;
             SwitchState(gameState);
         }
 

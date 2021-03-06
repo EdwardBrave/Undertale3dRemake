@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using Entitas.Unity;
+﻿using System.Collections.Generic;
+using DG.Tweening;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -11,5 +10,10 @@ namespace UI.Open
         [SerializeField] internal InitUiEntity containerPrefab;
         
         [SerializeField] internal List<IUiComponent> components = new List<IUiComponent>();
+
+        internal void DestroySelf()
+        {
+            Destroy(this);
+        }
     }
 }

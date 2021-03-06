@@ -1,6 +1,7 @@
 ﻿using System;
 using Entitas.Unity;
 using Main.Globals;
+using UI.Open;
 using UnityEngine;
 
 namespace UI.Events
@@ -20,13 +21,15 @@ namespace UI.Events
 
         public void ActCheck(bool isOn) => OnEvent(uiEntity => uiEntity.ReplaceCheck(isOn));
 
-        public void ActCloseSelf() => OnEvent(uiEntity => uiEntity.isClose = true);
+        public void ActCloseSelf(bool isForce = false) => OnEvent(uiEntity => uiEntity.ReplaceClose(isForce));
         
-        public void ActOpenWindow(GameObject prefab) => EcsEnvironment.UiEventsEntity.ReplaceOpenWindow(prefab);
+        public void ActOpenWindow(InitUiEntity data) => EcsEnvironment.UiEventsEntity.ReplaceOpenWindow(data);
 
-        public void ActClose(GameObject prefab) => EcsEnvironment.UiEventsEntity.ReplaceCloseWindows(prefab);
+        public void ActClose(InitUiEntity data) => EcsEnvironment.UiEventsEntity.ReplaceCloseWindows(data, false);
+        
+        public void ActForceClose(InitUiEntity data) => EcsEnvironment.UiEventsEntity.ReplaceCloseWindows(data, true);
 
-        public void ActCloseAllWindows() => EcsEnvironment.UiEventsEntity.isCloseAll = true;
+        public void ActCloseAllWindows(bool isForce = false) => EcsEnvironment.UiEventsEntity.ReplaceCloseAll(isForce);
         
         //public void ActLoadScene(SceneAsset scene) => OnEvent(UiEventArgs.Type.LoadScene, scene);
 

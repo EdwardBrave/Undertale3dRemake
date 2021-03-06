@@ -9,25 +9,27 @@
 public static class UiComponentsLookup {
 
     public const int GlobalEvents = 0;
-    public const int Close = 1;
-    public const int Protected = 2;
-    public const int Cancel = 3;
-    public const int Check = 4;
-    public const int Confirm = 5;
-    public const int Pressed = 6;
-    public const int Reject = 7;
-    public const int CloseAll = 8;
-    public const int CloseWindows = 9;
-    public const int OpenWindow = 10;
-    public const int Container = 11;
-    public const int CreateWindow = 12;
-    public const int View = 13;
-    public const int UiConfig = 14;
+    public const int Animation = 1;
+    public const int Close = 2;
+    public const int Protected = 3;
+    public const int Cancel = 4;
+    public const int Check = 5;
+    public const int Confirm = 6;
+    public const int Pressed = 7;
+    public const int Reject = 8;
+    public const int CloseAll = 9;
+    public const int CloseWindows = 10;
+    public const int OpenWindow = 11;
+    public const int Container = 12;
+    public const int CreateWindow = 13;
+    public const int View = 14;
+    public const int UiConfig = 15;
 
-    public const int TotalComponents = 15;
+    public const int TotalComponents = 16;
 
     public static readonly string[] componentNames = {
         "GlobalEvents",
+        "Animation",
         "Close",
         "Protected",
         "Cancel",
@@ -46,6 +48,7 @@ public static class UiComponentsLookup {
 
     public static readonly System.Type[] componentTypes = {
         typeof(Main.Globals.GlobalEventsComponent),
+        typeof(UI.Animation.AnimationComponent),
         typeof(UI.Close.CloseComponent),
         typeof(UI.Close.ProtectedComponent),
         typeof(UI.Events.CancelComponent),

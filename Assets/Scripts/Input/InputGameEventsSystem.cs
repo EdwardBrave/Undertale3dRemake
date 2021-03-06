@@ -5,7 +5,7 @@ using UInput = UnityEngine.Input;
 
 namespace Logic.Systems.Input
 {
-    public class InputGameEventsSystem: IExecuteSystem, IInitializeSystem, ICleanupSystem
+    public class InputGameEventsSystem: IExecuteSystem, ICleanupSystem
     {
         private readonly InputContext _inputContext;
         private InputEntity _kEventsEntity;
@@ -13,10 +13,6 @@ namespace Logic.Systems.Input
         public InputGameEventsSystem(Contexts contexts)
         {
             _inputContext = contexts.input;
-        }
-
-        public void Initialize()
-        {
             _inputContext.isKeyboardEvents = true;
             _kEventsEntity = _inputContext.keyboardEventsEntity;
         }

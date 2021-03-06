@@ -1,11 +1,12 @@
 using Entitas;
-using UnityEngine;
+using UI.Open;
 
 namespace UI.Global
 {
     [Ui]
     public class CloseWindowsComponent: IComponent
     {
-        public GameObject prefab;
+        public InitUiEntity data;
+        public bool isForce = false;
     }
 }

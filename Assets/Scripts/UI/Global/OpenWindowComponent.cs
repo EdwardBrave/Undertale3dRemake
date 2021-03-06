@@ -1,11 +1,11 @@
 using Entitas;
-using UnityEngine;
+using UI.Open;
 
 namespace UI.Global
 {
     [Ui]
     public class OpenWindowComponent: IComponent
     {
-        public GameObject prefab;
+        public InitUiEntity data;
     }
 }

@@ -17,21 +17,40 @@ namespace UI.Close
         {
             foreach (var entity in _group.GetEntities())
             {
-                if (entity.isProtected)
+                if (!entity.close.isForce && IsRecursiveProtected(entity))
                 {
-                    entity.isClose = false;
+                    entity.RemoveClose();
                     continue;
                 }
                 
                 if (entity.hasView)
                 {
                     entity.view.obj.Unlink();
-                    entity.view.obj.DestroyGameObject();
-                    //entity.view.parent.container.windows.Remove(entity);
+                    if (!entity.isAnimation)
+                    {
+                        entity.view.obj.DestroyGameObject();
+                    }
+                    entity.view.parent?.container.windows.Remove(entity);
                 }
 
                 entity.Destroy();
             }
+        }
+
+        private static bool IsRecursiveProtected(UiEntity entity)
+        {
+            if (entity.hasContainer)
+            {
+                foreach (var subEntity in entity.container.windows)
+                {
+                    if (IsRecursiveProtected(subEntity))
+                    {
+                        return true;
+                    }
+                }
+            }
+            
+            return entity.isProtected;
         }
     }
 }

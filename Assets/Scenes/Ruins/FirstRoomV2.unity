@@ -12943,8 +12943,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 1
-  config: {fileID: 11400000, guid: 76e29dc50b1ff404d98b98015986f15e, type: 2}
-  settings: {fileID: 11400000, guid: 2217e381db178451181e206031be368c, type: 2}
+  uiConfig: {fileID: 11400000, guid: ebcaa0b75b51cc94c9f69f7700a99b45, type: 2}
 --- !u!4 &946345114
 Transform:
   m_ObjectHideFlags: 0
@@ -13159,7 +13158,6 @@ GameObject:
   - component: {fileID: 1026093115}
   - component: {fileID: 1026093114}
   - component: {fileID: 1026093120}
-  - component: {fileID: 1026093122}
   - component: {fileID: 1026093121}
   m_Layer: 0
   m_Name: GameObject
@@ -13231,6 +13229,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 1026093113}
+    - {fileID: 1026093114}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -13242,13 +13241,40 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 3
     - Name: 
       Entry: 7
       Data: 1|Game.ViewComponent, Assembly-CSharp
     - Name: obj
       Entry: 10
       Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|Game.Reaction.ColliderComponent, Assembly-CSharp
+    - Name: list
+      Entry: 7
+      Data: 3|System.Collections.Generic.List`1[[GameEntity, Assembly-CSharp]], mscorlib
+    - Name: 
+      Entry: 12
+      Data: 0
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|Game.Reaction.ReactionComponent, Assembly-CSharp
+    - Name: onReaction
+      Entry: 10
+      Data: 1
     - Name: 
       Entry: 8
       Data: 
@@ -13305,7 +13331,7 @@ PlayableDirector:
   - key: {fileID: 7834516418795480893, guid: f55fca066b885a441a7c6f5bc60cb838, type: 2}
     value: {fileID: 1538667858}
   - key: {fileID: 4843125964243272596, guid: f55fca066b885a441a7c6f5bc60cb838, type: 2}
-    value: {fileID: 1026093122}
+    value: {fileID: 0}
   m_ExposedReferences:
     m_References: []
 --- !u!114 &1026093121
@@ -13321,25 +13347,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   nextScene: {fileID: 102900000, guid: c92dfecaec5e74c23857fa554d5d8415, type: 3}
---- !u!95 &1026093122
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1026093113}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!4 &1027573888 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 3940579fc87ce4c618a503097b2290c4,
@@ -13371,7 +13378,7 @@ PrefabInstance:
     - target: {fileID: 4054918099600431038, guid: 3883f1867074f044a8f265d05e9a7088,
         type: 3}
       propertyPath: m_RootOrder
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4054918099600431038, guid: 3883f1867074f044a8f265d05e9a7088,
         type: 3}
@@ -34848,12 +34855,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538667851}
-  m_LocalRotation: {x: 0.27563733, y: -2.6576233e-24, z: -4.6566126e-10, w: 0.9612617}
-  m_LocalPosition: {x: 22.7, y: 9, z: -2.51}
+  m_LocalRotation: {x: 0.27563733, y: -0, z: -9.313226e-10, w: 0.9612617}
+  m_LocalPosition: {x: 6.73, y: 7.23, z: -5.6000023}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 32, y: 0, z: 0}
 --- !u!114 &1538667855
 MonoBehaviour:
@@ -34949,6 +34956,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 1538667851}
+    - {fileID: 1560940242}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -34960,13 +34968,37 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 2
     - Name: 
       Entry: 7
       Data: 1|Game.ViewComponent, Assembly-CSharp
     - Name: obj
       Entry: 10
       Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|Game.Follow.FollowComponent, Assembly-CSharp
+    - Name: target
+      Entry: 10
+      Data: 1
+    - Name: relativePosition
+      Entry: 7
+      Data: UnityEngine.Vector3, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: -0.1179108
+    - Name: 
+      Entry: 4
+      Data: 6.64
+    - Name: 
+      Entry: 4
+      Data: -8.491538
+    - Name: 
+      Entry: 8
+      Data: 
     - Name: 
       Entry: 8
       Data: 
@@ -35211,6 +35243,7 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 1560940242}
+    - {fileID: 1560940246}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -35222,12 +35255,39 @@ MonoBehaviour:
         mscorlib
     - Name: 
       Entry: 12
-      Data: 1
+      Data: 4
     - Name: 
       Entry: 7
       Data: 1|Game.ViewComponent, Assembly-CSharp
     - Name: obj
       Entry: 10
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 2|Game.Animation.AnimatorComponent, Assembly-CSharp
+    - Name: value
+      Entry: 10
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 3|Game.Controllers.PlayerControllerComponent, Assembly-CSharp
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: 4|Game.Motion.MotionComponent, Assembly-CSharp
+    - Name: maxSpeed
+      Entry: 4
+      Data: 3
+    - Name: speed
+      Entry: 4
       Data: 0
     - Name: 
       Entry: 8

@@ -11,17 +11,19 @@ public partial class UiEntity {
     public UI.Global.CloseWindowsComponent closeWindows { get { return (UI.Global.CloseWindowsComponent)GetComponent(UiComponentsLookup.CloseWindows); } }
     public bool hasCloseWindows { get { return HasComponent(UiComponentsLookup.CloseWindows); } }
 
-    public void AddCloseWindows(UnityEngine.GameObject newPrefab) {
+    public void AddCloseWindows(UI.Open.InitUiEntity newData, bool newIsForce) {
         var index = UiComponentsLookup.CloseWindows;
         var component = (UI.Global.CloseWindowsComponent)CreateComponent(index, typeof(UI.Global.CloseWindowsComponent));
-        component.prefab = newPrefab;
+        component.data = newData;
+        component.isForce = newIsForce;
         AddComponent(index, component);
     }
 
-    public void ReplaceCloseWindows(UnityEngine.GameObject newPrefab) {
+    public void ReplaceCloseWindows(UI.Open.InitUiEntity newData, bool newIsForce) {
         var index = UiComponentsLookup.CloseWindows;
         var component = (UI.Global.CloseWindowsComponent)CreateComponent(index, typeof(UI.Global.CloseWindowsComponent));
-        component.prefab = newPrefab;
+        component.data = newData;
+        component.isForce = newIsForce;
         ReplaceComponent(index, component);
     }
 

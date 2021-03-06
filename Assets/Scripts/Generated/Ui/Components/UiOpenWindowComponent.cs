@@ -11,17 +11,17 @@ public partial class UiEntity {
     public UI.Global.OpenWindowComponent openWindow { get { return (UI.Global.OpenWindowComponent)GetComponent(UiComponentsLookup.OpenWindow); } }
     public bool hasOpenWindow { get { return HasComponent(UiComponentsLookup.OpenWindow); } }
 
-    public void AddOpenWindow(UnityEngine.GameObject newPrefab) {
+    public void AddOpenWindow(UI.Open.InitUiEntity newData) {
         var index = UiComponentsLookup.OpenWindow;
         var component = (UI.Global.OpenWindowComponent)CreateComponent(index, typeof(UI.Global.OpenWindowComponent));
-        component.prefab = newPrefab;
+        component.data = newData;
         AddComponent(index, component);
     }
 
-    public void ReplaceOpenWindow(UnityEngine.GameObject newPrefab) {
+    public void ReplaceOpenWindow(UI.Open.InitUiEntity newData) {
         var index = UiComponentsLookup.OpenWindow;
         var component = (UI.Global.OpenWindowComponent)CreateComponent(index, typeof(UI.Global.OpenWindowComponent));
-        component.prefab = newPrefab;
+        component.data = newData;
         ReplaceComponent(index, component);
     }
 
