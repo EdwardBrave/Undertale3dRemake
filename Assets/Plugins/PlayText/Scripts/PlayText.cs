@@ -4,6 +4,7 @@ using GraphSpace;
 using PlayTextSupport;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -183,6 +184,8 @@ public class PlayText : MonoBehaviour
     {
         //Here is the event that PlayText support. 
         EventCenter.GetInstance().AddEventListener<DialogueGraph>("PlayText.Play", StartTalking);
+        EventCenter.GetInstance().AddEventListener("PlayText.Next", PlayTextNext);
+        EventCenter.GetInstance().AddEventListener("PlayText.Stop", StopTalking);
         EventCenter.GetInstance().AddEventListener("PlayText.TalkingFinished", FinishTalking);
         EventCenter.GetInstance().AddEventListener<string>("PlayText.ChangeLanguage", ChangeLanguage);
         EventCenter.GetInstance().AddEventListener<int>("PlayText.OptionSelect", OptionSelect);
@@ -221,6 +224,26 @@ public class PlayText : MonoBehaviour
             else
                 AudioMgr.GetInstance().PlayAudio(GetCurVoice(), 0.6f, false);
         } 
+    }
+    
+    void StopTalking()
+    {
+        dialogueGraph.current = null;
+        IsFinished = true;
+        GoToState(STATE.PAUSED);
+        PlayTextNext();
+        if (!hasOptionShowed)
+        {
+            return;
+        }
+        foreach (var item in OptionGameObject)
+        {
+            Destroy(item.gameObject);
+        }
+        OptionPanel.gameObject.SetActive(false);
+        OptionGameObject.Clear();
+        hasOptionShowed = false;
+        OptionIndex = 0;
     }
 
     void FinishTalking()
@@ -619,7 +642,7 @@ public class PlayText : MonoBehaviour
                     int StringNum = Value.Length + 2;
                     int Index = d_match.Index - 1;
                     temp = temp.Remove(Index + StartingIndex, StringNum);
-                    float MatchCurveScale = float.Parse(Regex.Match(Value, @"(?<==).+").Value);
+                    float MatchCurveScale = FloatParse(Regex.Match(Value, @"(?<==).+").Value);
                     waveEffects.Add(new WaveEffect {StartIndex = Index + StartingIndex - SymbolLength, EndIndex = Index + StartingIndex - SymbolLength, CurveScale = MatchCurveScale});
                 }
                 else if(Value.Contains("sh="))
@@ -630,7 +653,7 @@ public class PlayText : MonoBehaviour
                     string AfterE = Regex.Match(Value, @"(?<==).+").Value;
                     AfterE = AfterE.Replace("，", ",");
                     string[] ThreeValue = Regex.Split(AfterE, ",");
-                    jitterEffects.Add(new JitterEffect { StartIndex = Index + StartingIndex - SymbolLength, EndIndex = Index + StartingIndex - SymbolLength, AngleMultiplier = float.Parse(ThreeValue[0]), CurveScale = float.Parse(ThreeValue[1])});
+                    jitterEffects.Add(new JitterEffect { StartIndex = Index + StartingIndex - SymbolLength, EndIndex = Index + StartingIndex - SymbolLength, AngleMultiplier = FloatParse(ThreeValue[0]), CurveScale = FloatParse(ThreeValue[1])});
                 }
                 else if(Value.Equals("/wa"))
                 {
@@ -757,6 +780,11 @@ public class PlayText : MonoBehaviour
         return dialogueProfile.DefaultVoice;
     }
 
+    float FloatParse(string str)
+    {
+        return float.Parse(str, CultureInfo.InvariantCulture);
+    }
+
     void EventTrigger(string str)
     {
         switch (str)
@@ -799,18 +827,18 @@ public class PlayText : MonoBehaviour
             {
                 case "w":
                     IsWaitingTime = true;
-                    WaitingTime = float.Parse(AValue);
+                    WaitingTime = FloatParse(AValue);
                     break;
                 case "sp":
                     IsTypingSpeed = true;
-                    ChangeTypingSpeed = float.Parse(AValue);
+                    ChangeTypingSpeed = FloatParse(AValue);
                     break;
                 case "p":
                     Match m_intensity = Regex.Match(AValue, BeforeComma);
                     Match m_time = Regex.Match(AValue, AfterComma);
                     string intensity = m_intensity.Value;
                     string time = m_time.Value;
-                    Root.DOShakePosition(float.Parse(time), float.Parse(intensity), 10, 50, false, true);
+                    Root.DOShakePosition(FloatParse(time), FloatParse(intensity), 10, 50, false, true);
                     break;
                 case "e":
                     Match m_event = Regex.Match(AValue, BeforeComma);
@@ -821,7 +849,7 @@ public class PlayText : MonoBehaviour
                     break;
                 case "v":
                     IsChangingVolume = true;
-                    Volume = float.Parse(AValue);
+                    Volume = FloatParse(AValue);
                     break;
                 default:
                     break;

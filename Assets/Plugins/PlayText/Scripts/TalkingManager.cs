@@ -15,6 +15,11 @@ public class TalkingManager : MonoBehaviour
         {
             EventCenter.GetInstance().EventTriggered("PlayText.Play", Graph);
         }
+        
+        if(Input.GetKeyDown(KeyCode.Q))
+        {
+            EventCenter.GetInstance().EventTriggered("PlayText.Stop");
+        }
 
         if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.UpArrow))
         {
