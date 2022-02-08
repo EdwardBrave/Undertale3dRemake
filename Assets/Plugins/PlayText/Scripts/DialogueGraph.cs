@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using XNode;
@@ -25,14 +24,19 @@ namespace GraphSpace
         public EventNode eventNode;
         public CommentNode commentNode;
         public ProfileNode profileNode;
-
         public Node current;
+
+        OptionNode opt = null;
+        DialogueNode dia = null;
+        StartNode sta = null;
+        EventNode evt = null;
+        ReceiveFromCode rec = null;
 
         public void Continue(int index = 0)
         {
-            OptionNode opt = current as OptionNode;
-            DialogueNode dia = current as DialogueNode;
-            StartNode sta = current as StartNode;
+            opt = current as OptionNode;
+            dia = current as DialogueNode;
+            sta = current as StartNode;
             if (opt != null)
             {
                 current = opt.MoveNext(index);
@@ -45,12 +49,39 @@ namespace GraphSpace
             {
                 current = sta.MoveNext();
             }
-            EventNode evt = current as EventNode;
-            while (evt != null)
+            
+            while (current is EventNode)
             {
-                current = evt.MoveNext();
                 evt = current as EventNode;
+                evt.Trigger();
+
+                if (!evt.IsWaiting)
+                {
+                    current = evt.MoveNext();
+                }
+                else
+                {
+                    break;
+                }
             }
+
+            while(current is ReceiveFromCode)
+            {
+                rec = current as ReceiveFromCode;
+                rec.Trigger();
+                if (!rec.IsWaiting)
+                    current = rec.MoveNext();
+                else
+                    break;
+            }
+        }
+
+        public static bool IsVaildNodeForMoveNext(Node node)
+        {
+            if (node is DialogueNode || node is OptionNode || node is EventNode || node is ReceiveFromCode)
+                return true;
+            else
+                return false;
         }
 
         public DialogueProfile GetProfile()

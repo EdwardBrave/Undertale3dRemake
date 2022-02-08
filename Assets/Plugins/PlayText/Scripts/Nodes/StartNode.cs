@@ -40,27 +40,14 @@ namespace GraphSpace
             }
 
             Node node = exitPort.Connection.node;
-            DialogueNode dia = node as DialogueNode;
-            if (dia != null)
+            if (DialogueGraph.IsVaildNodeForMoveNext(node))
+                return node;
+            else
             {
-                return dia as Node;
+                EventCenter.GetInstance().EventTriggered("PlayText.TalkingFinished");
+                Debug.LogWarning("Start Node isn't connected");
+                return this;
             }
-
-            OptionNode opt = node as OptionNode;
-            if (opt != null)
-            {
-                return opt as Node;
-            }
-
-            EventNode evt = node as EventNode;
-            if(evt != null)
-            {
-                return evt as Node;
-            }
-
-            EventCenter.GetInstance().EventTriggered("PlayText.TalkingFinished");
-            Debug.LogWarning("Start Node isn't connected");
-            return this;
         }
     }
 }

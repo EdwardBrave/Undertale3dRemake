@@ -4,7 +4,6 @@ using GraphSpace;
 using PlayTextSupport;
 using System.Collections;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
@@ -25,7 +24,8 @@ public class PlayText : MonoBehaviour
     {
         Dialogue,
         Option,
-        Event
+        Event,
+        ReceiveFromCode
     }
     [HideInInspector]
     public DialogueGraph dialogueGraph;
@@ -86,8 +86,11 @@ public class PlayText : MonoBehaviour
     [HideInInspector]
     public bool IsBubbleFollow;
     [HideInInspector]
-    public bool IsCameraFollow;
+    public bool AllowCameraFollow = false;
+    bool IsCameraFollow;
     bool IsShowBubble = false;
+    [HideInInspector]
+    public GameObject NextIcon;
 
     [Header("Effect")]
     [HideInInspector]
@@ -129,8 +132,8 @@ public class PlayText : MonoBehaviour
     bool justEnter;
     bool IsFinished = false;
 
-    STATE state = STATE.OFF;
-    Current current = Current.Dialogue;
+    public STATE state = STATE.OFF;
+    public Current current = Current.Dialogue;
 
     float timervalue = 0f;
     int WordCount = 0;
@@ -161,13 +164,27 @@ public class PlayText : MonoBehaviour
 
     void Awake()
     {
+        state = STATE.OFF;
+        current = Current.Dialogue;
         DOTween.Init(true,true,LogBehaviour.Default);
 
         DefaultTypingSpeed = TypingSpeed;
 
         cam = GetComponent<CinemachineVirtualCamera>();
         Scaler = canvas.GetComponent<CanvasScaler>();
-        FindPerson();
+        if (AllowCameraFollow)
+            FindPerson();
+
+        //Here is the event that PlayText support. 
+        EventCenter.GetInstance().AddEventListener<DialogueGraph>("PlayText.Play", StartTalking);
+        EventCenter.GetInstance().AddEventListener("PlayText.Next", PlayTextNext);
+        EventCenter.GetInstance().AddEventListener("PlayText.TalkingFinished", FinishTalking);
+        EventCenter.GetInstance().AddEventListener("PlayText.Stop", StopTalking);
+        EventCenter.GetInstance().AddEventListener<string>("PlayText.ChangeLanguage", ChangeLanguage);
+        EventCenter.GetInstance().AddEventListener<int>("PlayText.OptionSelect", OptionSelect);
+        EventCenter.GetInstance().AddEventListener<int>("PlayText.OptionHover", OptionHover);
+        EventCenter.GetInstance().AddEventListener("PlayText.OptionUp", OptionUp);
+        EventCenter.GetInstance().AddEventListener("PlayText.OptionDown", OptionDown);
     }
 
     void FindPerson()
@@ -178,20 +195,6 @@ public class PlayText : MonoBehaviour
             if (obj != null)
                 TalkingPersonTransform.Add(item.Name, obj.transform);
         }
-    }
-
-    void Start()
-    {
-        //Here is the event that PlayText support. 
-        EventCenter.GetInstance().AddEventListener<DialogueGraph>("PlayText.Play", StartTalking);
-        EventCenter.GetInstance().AddEventListener("PlayText.Next", PlayTextNext);
-        EventCenter.GetInstance().AddEventListener("PlayText.Stop", StopTalking);
-        EventCenter.GetInstance().AddEventListener("PlayText.TalkingFinished", FinishTalking);
-        EventCenter.GetInstance().AddEventListener<string>("PlayText.ChangeLanguage", ChangeLanguage);
-        EventCenter.GetInstance().AddEventListener<int>("PlayText.OptionSelect", OptionSelect);
-        EventCenter.GetInstance().AddEventListener<int>("PlayText.OptionHover", OptionHover);
-        EventCenter.GetInstance().AddEventListener("PlayText.OptionUp", OptionUp);
-        EventCenter.GetInstance().AddEventListener("PlayText.OptionDown", OptionDown);
     }
 
     void OptionUp()
@@ -225,30 +228,19 @@ public class PlayText : MonoBehaviour
                 AudioMgr.GetInstance().PlayAudio(GetCurVoice(), 0.6f, false);
         } 
     }
-    
-    void StopTalking()
-    {
-        dialogueGraph.current = null;
-        IsFinished = true;
-        GoToState(STATE.PAUSED);
-        PlayTextNext();
-        if (!hasOptionShowed)
-        {
-            return;
-        }
-        foreach (var item in OptionGameObject)
-        {
-            Destroy(item.gameObject);
-        }
-        OptionPanel.gameObject.SetActive(false);
-        OptionGameObject.Clear();
-        hasOptionShowed = false;
-        OptionIndex = 0;
-    }
 
     void FinishTalking()
     {
         IsFinished = true;
+        cam.Follow = GameObject.FindGameObjectWithTag("Player").transform;
+    }
+
+    void StopTalking()
+    {
+        IsFinished = true;
+        GoToState(STATE.OFF);
+        cam.Follow = GameObject.FindGameObjectWithTag("Player").transform;
+        dialogueGraph = null;
     }
 
     void ChangeLanguage(string Lan)
@@ -267,6 +259,12 @@ public class PlayText : MonoBehaviour
         OptionIndex = Index;
     }
 
+    private void Start()
+    {
+        state = STATE.OFF;
+        current = Current.Dialogue;
+    }
+
     void Update()
     {
         if (IsBubbleFollow)
@@ -277,7 +275,10 @@ public class PlayText : MonoBehaviour
                 Bubble.rectTransform.sizeDelta = new Vector2(20, 20);
         }
 
-        cam.enabled = IsCameraFollow;
+        if (AllowCameraFollow)
+            cam.enabled = IsCameraFollow;
+        else
+            cam.enabled = false;
 
         if (current == Current.Dialogue)
         {
@@ -355,7 +356,7 @@ public class PlayText : MonoBehaviour
                             }
                         }
                     }
-                    else
+                    else if(IsCameraFollow && AllowCameraFollow)
                     {
                         cam.Follow = GameObject.FindGameObjectWithTag("Player").transform;
                         Debug.LogWarning("Couldn't Find Talking Person");
@@ -441,6 +442,8 @@ public class PlayText : MonoBehaviour
             case STATE.OFF:
                 if (justEnter)
                 {
+                    if(NextIcon)
+                        NextIcon.SetActive(false);
                     DisplayText.text = string.Empty;
                     LastFollow = null;
                     justEnter = false;
@@ -452,6 +455,8 @@ public class PlayText : MonoBehaviour
             case STATE.TYPING:
                 if (justEnter)
                 {
+                    if(NextIcon)
+                        NextIcon.SetActive(false);
                     if (IsWaiting)
                     {
                         IsWaiting = false;
@@ -471,7 +476,7 @@ public class PlayText : MonoBehaviour
                     if(current == Current.Dialogue)
                     {
                         DialogueNode dia = CurrentNode as DialogueNode;
-                        OptionNode opt = CurrentNode as OptionNode;
+                        EventCenter.GetInstance().EventTriggered("PlayText.NextDialogue");
                         EventCenter.GetInstance().EventTriggered("PlayText." + dia.TalkingPerson + "." + dia.Expression);
                         if (dia.Facing == FacingDirection.FacingPerson)
                         {
@@ -488,6 +493,17 @@ public class PlayText : MonoBehaviour
                         Bubble.enabled = IsShowBubble;
                         if(IsBubbleFollow)
                             BubblePointer.enabled = IsShowBubble;
+
+                        if (dia.Audio != null)
+                        {
+                            if (!dia.PlayPerChar)
+                            {
+                                if (IsChangingVolume)
+                                    AudioMgr.GetInstance().PlayAudio(dia.Audio, Volume, false);
+                                else
+                                    AudioMgr.GetInstance().PlayAudio(dia.Audio, 0.35f, false);
+                            }
+                        }
                     }
                     else if (current == Current.Option)
                     {
@@ -549,12 +565,30 @@ public class PlayText : MonoBehaviour
                     {
                         UpdateContentString();
                     }
+                    CheckTypingFinished();
                 }
                 else if(current == Current.Option)
                 {
                     GoToState(STATE.PAUSED);
                 }
-                CheckTypingFinished();
+                else if(current == Current.Event)
+                {
+                    EventNode node = dialogueGraph.current as EventNode;
+                    if (!node.IsWaiting)
+                    {
+                        GoToState(STATE.PAUSED);
+                        PlayTextNext();
+                    }
+                }
+                else if(current == Current.ReceiveFromCode)
+                {
+                    ReceiveFromCode node = dialogueGraph.current as ReceiveFromCode;
+                    if (!node.IsWaiting)
+                    {
+                        GoToState(STATE.PAUSED);
+                        PlayTextNext();
+                    }
+                }
                 break;
             case STATE.PAUSED:
                 if (justEnter)
@@ -562,12 +596,16 @@ public class PlayText : MonoBehaviour
                     //ShowTips();
                     justEnter = false;
                     TypingSpeed = DefaultTypingSpeed;
+                    if(NextIcon)
+                        NextIcon.SetActive(true);
                 }
                 break;
             default:
                 break;
         }
     }
+
+    //TODO: IEnumerator Next()
 
     void LoadContent()
     {
@@ -583,10 +621,9 @@ public class PlayText : MonoBehaviour
                 temp = temp.Replace("；", ";");
                 temp = temp.Replace("：", ":");
             }
-            string pattern = "(?<=\\<)[^\\>]+";
             DisplayText.maxVisibleCharacters = 0;
             
-            UpdateContent(temp, pattern);
+            UpdateContent(temp, "(?<=\\<)[^\\>]+");
             DisplayText.maxVisibleCharacters = 0;
             if (EnableVertexEffect)
                 StartCoroutine(Animate());
@@ -601,8 +638,6 @@ public class PlayText : MonoBehaviour
         MatchCollection match = Regex.Matches(temp, pattern);
         int StartingIndex = 0;
         int SymbolLength = 0;
-        int WaveCount = 0;
-        int JitterCount = 0;
         EnableVertexEffect = true;
         for (int i = 0; i < match.Count; i++)
         {
@@ -622,72 +657,86 @@ public class PlayText : MonoBehaviour
             }
             else
             {
-                string Value = d_match.Value;
-                if(Value.Contains("p=") || Value.Contains("w=") || Value.Contains("sp=") || Value.Contains("v=") || Value.Equals("w") || Value.Equals("wi") || Value.Equals("c") || Value.Equals("sp") || Value.Equals("/sp") || Value.Equals("/v"))
+                StartingIndex += d_match.Index + d_match.Value.Length;
+                SymbolLength += d_match.Value.Length + 2;
+            }
+        }
+
+        match = Regex.Matches(temp, pattern);
+        StartingIndex = 0;
+        SymbolLength = 0;
+        int WaveCount = 0;
+        int JitterCount = 0;
+        EnableVertexEffect = true;
+
+        for (int i = 0; i < match.Count; i++)
+        {
+            Match d_match = Regex.Match(temp.Substring(StartingIndex, temp.Length - StartingIndex - 1), pattern);
+            string Value = d_match.Value;
+            if(Value.Contains("p=") || Value.Contains("w=") || Value.Contains("sp=") || Value.Contains("v=") || Value.Equals("w") || Value.Equals("wi") || Value.Equals("c") || Value.Equals("sp") || Value.Equals("/sp") || Value.Equals("/v"))
+            {
+                int StringNum = Value.Length + 2;
+                int Index = d_match.Index - 1;
+                temp = temp.Remove(Index + StartingIndex, StringNum);
+                if (EventList.ContainsKey(Index + StartingIndex - SymbolLength))
                 {
-                    int StringNum = Value.Length + 2;
-                    int Index = d_match.Index - 1;
-                    temp = temp.Remove(Index + StartingIndex, StringNum);
-                    if (EventList.ContainsKey(Index + StartingIndex - SymbolLength))
-                    {
-                        EventList[Index + StartingIndex - SymbolLength].Add(Value);
-                    }
-                    else
-                    {
-                        EventList.Add(Index + StartingIndex - SymbolLength, new List<string>() { Value });
-                    }
-                }
-                else if(Value.Contains("wa="))
-                {
-                    int StringNum = Value.Length + 2;
-                    int Index = d_match.Index - 1;
-                    temp = temp.Remove(Index + StartingIndex, StringNum);
-                    float MatchCurveScale = FloatParse(Regex.Match(Value, @"(?<==).+").Value);
-                    waveEffects.Add(new WaveEffect {StartIndex = Index + StartingIndex - SymbolLength, EndIndex = Index + StartingIndex - SymbolLength, CurveScale = MatchCurveScale});
-                }
-                else if(Value.Contains("sh="))
-                {
-                    int StringNum = Value.Length + 2;
-                    int Index = d_match.Index - 1;
-                    temp = temp.Remove(Index + StartingIndex, StringNum);
-                    string AfterE = Regex.Match(Value, @"(?<==).+").Value;
-                    AfterE = AfterE.Replace("，", ",");
-                    string[] ThreeValue = Regex.Split(AfterE, ",");
-                    jitterEffects.Add(new JitterEffect { StartIndex = Index + StartingIndex - SymbolLength, EndIndex = Index + StartingIndex - SymbolLength, AngleMultiplier = FloatParse(ThreeValue[0]), CurveScale = FloatParse(ThreeValue[1])});
-                }
-                else if(Value.Equals("/wa"))
-                {
-                    int StringNum = Value.Length + 2;
-                    int Index = d_match.Index - 1;
-                    temp = temp.Remove(Index + StartingIndex, StringNum);
-                    if (WaveCount <= waveEffects.Count - 1)
-                    {
-                        waveEffects[WaveCount].EndIndex = Index + StartingIndex - 1 - SymbolLength;
-                    }
-                    WaveCount++;
-                }
-                else if(Value.Equals("/sh"))
-                {
-                    int StringNum = Value.Length + 2;
-                    int Index = d_match.Index - 1;
-                    temp = temp.Remove(Index + StartingIndex, StringNum);
-                    if (JitterCount <= jitterEffects.Count - 1)
-                    {
-                        jitterEffects[JitterCount].EndIndex = Index + StartingIndex - 1 - SymbolLength;
-                    }
-                    JitterCount++;
-                }
-                else if(Value.Contains("sprite="))
-                {
-                    EnableVertexEffect = false;
-                    StartingIndex += d_match.Index + Value.Length;
-                    SymbolLength += Value.Length + 1;
+                    EventList[Index + StartingIndex - SymbolLength].Add(Value);
                 }
                 else
                 {
-                    StartingIndex += d_match.Index + Value.Length;
-                    SymbolLength += Value.Length + 2;
+                    EventList.Add(Index + StartingIndex - SymbolLength, new List<string>() { Value });
                 }
+            }
+            else if(Value.Contains("wa="))
+            {
+                int StringNum = Value.Length + 2;
+                int Index = d_match.Index - 1;
+                temp = temp.Remove(Index + StartingIndex, StringNum);
+                float MatchCurveScale = float.Parse(Regex.Match(Value, @"(?<==).+").Value);
+                waveEffects.Add(new WaveEffect {StartIndex = Index + StartingIndex - SymbolLength, EndIndex = Index + StartingIndex - SymbolLength, CurveScale = MatchCurveScale});
+            }
+            else if(Value.Contains("sh="))
+            {
+                int StringNum = Value.Length + 2;
+                int Index = d_match.Index - 1;
+                temp = temp.Remove(Index + StartingIndex, StringNum);
+                string AfterE = Regex.Match(Value, @"(?<==).+").Value;
+                AfterE = AfterE.Replace("，", ",");
+                string[] ThreeValue = Regex.Split(AfterE, ",");
+                jitterEffects.Add(new JitterEffect { StartIndex = Index + StartingIndex - SymbolLength, EndIndex = Index + StartingIndex - SymbolLength, AngleMultiplier = float.Parse(ThreeValue[0]), CurveScale = float.Parse(ThreeValue[1])});
+            }
+            else if(Value.Equals("/wa"))
+            {
+                int StringNum = Value.Length + 2;
+                int Index = d_match.Index - 1;
+                temp = temp.Remove(Index + StartingIndex, StringNum);
+                if (WaveCount <= waveEffects.Count - 1)
+                {
+                    waveEffects[WaveCount].EndIndex = Index + StartingIndex - 1 - SymbolLength;
+                }
+                WaveCount++;
+            }
+            else if(Value.Equals("/sh"))
+            {
+                int StringNum = Value.Length + 2;
+                int Index = d_match.Index - 1;
+                temp = temp.Remove(Index + StartingIndex, StringNum);
+                if (JitterCount <= jitterEffects.Count - 1)
+                {
+                    jitterEffects[JitterCount].EndIndex = Index + StartingIndex - 1 - SymbolLength;
+                }
+                JitterCount++;
+            }
+            else if(Value.Contains("sprite="))
+            {
+                EnableVertexEffect = false;
+                StartingIndex += d_match.Index + Value.Length;
+                SymbolLength += Value.Length + 1;
+            }
+            else
+            {
+                StartingIndex += d_match.Index + Value.Length;
+                SymbolLength += Value.Length + 2;
             }
         }
         WordCount = temp.Length - SymbolLength;
@@ -720,13 +769,31 @@ public class PlayText : MonoBehaviour
             }
             else
             {
+                DialogueNode dia = dialogueGraph.current as DialogueNode;
                 DisplayText.maxVisibleCharacters++;
                 if (!IsSkipping)
                 {
-                    if (IsChangingVolume)
-                        AudioMgr.GetInstance().PlayAudio(GetCurVoice(), Volume, false);
-                    else
-                        AudioMgr.GetInstance().PlayAudio(GetCurVoice(), 0.35f, false);
+                    if (current == Current.Dialogue)
+                    {
+                        if(dia.Audio != null)
+                        {
+                            if (dia.PlayPerChar)
+                            {
+                                if (IsChangingVolume)
+                                    AudioMgr.GetInstance().PlayAudio(dia.Audio, Volume, false);
+                                else
+                                    AudioMgr.GetInstance().PlayAudio(dia.Audio, 0.35f, false);
+                            }
+                        }
+
+                        if (dia.Audio == null || dia.PlayTyping)
+                        {
+                            if (IsChangingVolume)
+                                AudioMgr.GetInstance().PlayAudio(GetCurVoice(), Volume, false);
+                            else
+                                AudioMgr.GetInstance().PlayAudio(GetCurVoice(), 0.35f, false);
+                        }
+                    }
                 }
             }
         }
@@ -780,11 +847,6 @@ public class PlayText : MonoBehaviour
         return dialogueProfile.DefaultVoice;
     }
 
-    float FloatParse(string str)
-    {
-        return float.Parse(str, CultureInfo.InvariantCulture);
-    }
-
     void EventTrigger(string str)
     {
         switch (str)
@@ -827,18 +889,18 @@ public class PlayText : MonoBehaviour
             {
                 case "w":
                     IsWaitingTime = true;
-                    WaitingTime = FloatParse(AValue);
+                    WaitingTime = float.Parse(AValue);
                     break;
                 case "sp":
                     IsTypingSpeed = true;
-                    ChangeTypingSpeed = FloatParse(AValue);
+                    ChangeTypingSpeed = float.Parse(AValue);
                     break;
                 case "p":
                     Match m_intensity = Regex.Match(AValue, BeforeComma);
                     Match m_time = Regex.Match(AValue, AfterComma);
                     string intensity = m_intensity.Value;
                     string time = m_time.Value;
-                    Root.DOShakePosition(FloatParse(time), FloatParse(intensity), 10, 50, false, true);
+                    Root.DOShakePosition(float.Parse(time), float.Parse(intensity), 10, 50, false, true);
                     break;
                 case "e":
                     Match m_event = Regex.Match(AValue, BeforeComma);
@@ -849,7 +911,7 @@ public class PlayText : MonoBehaviour
                     break;
                 case "v":
                     IsChangingVolume = true;
-                    Volume = FloatParse(AValue);
+                    Volume = float.Parse(AValue);
                     break;
                 default:
                     break;
@@ -877,7 +939,10 @@ public class PlayText : MonoBehaviour
     public void StartTalking(DialogueGraph Graph)
     {
         if(dialogueGraph != Graph)
+        {
+            EventCenter.GetInstance().AddEventListener("PlayText.Stop", StopTalking);
             dialogueGraph = Graph;
+        }
         PlayTextNext();
     }
 
@@ -886,93 +951,106 @@ public class PlayText : MonoBehaviour
         switch (state)
         {
             case STATE.OFF:
-                IsFinished = false;
-                IsSkipping = false;
-                TypingSpeed = DefaultTypingSpeed;
-                dialogueGraph.SetStartPoint(Language);
-                dialogueGraph.Continue();
-                CurrentNode = dialogueGraph.current;
-                DialogueNode diaaa = dialogueGraph.current as DialogueNode;
-                OptionNode opttt = dialogueGraph.current as OptionNode;
-                EventNode evtttt = dialogueGraph.current as EventNode;
-                if (diaaa != null)
+                if(dialogueGraph != null)
                 {
-                    IsCameraFollow = diaaa.CameraFollow;
-                    current = Current.Dialogue;
-                    DisplayText.TryGetComponent(out LayoutElement LayEleText);
-                    if (LayEleText != null && diaaa.Width != 0)
+                    IsFinished = false;
+                    IsSkipping = false;
+                    TypingSpeed = DefaultTypingSpeed;
+                    dialogueGraph.SetStartPoint(Language);
+                    dialogueGraph.Continue();
+                    CurrentNode = dialogueGraph.current;
+                    DialogueNode diaaa = dialogueGraph.current as DialogueNode;
+                    OptionNode opttt = dialogueGraph.current as OptionNode;
+                    
+                    if (diaaa != null)
                     {
-                        LayEleText.preferredWidth = diaaa.Width;
-                    }
-                    else if (LayEleText != null)
-                    {
-                        LayEleText.preferredWidth = DefaultWidth;
-                    }
-                    GoToState(STATE.TYPING);
-                }
-                else if(opttt != null)
-                {
-                    IsCameraFollow = opttt.CameraFollow;
-                    IsShowBubble = true;
-                    current = Current.Option;
-                    if (!hasOptionShowed)
-                    {
-                        OptionIndex = 0;
-                        foreach (var item in OptionGameObject)
-                        {
-                            Destroy(item.gameObject);
-                        }
-                        OptionGameObject.Clear();
-                        OptionPanel.TryGetComponent(out LayoutElement LayEle);
-                        if (LayEle != null && opttt.Width != 0)
-                        {
-                            LayEle.preferredWidth = opttt.Width;
-                        }
-                        else if (LayEle != null)
-                        {
-                            LayEle.preferredWidth = DefaultWidth;
-                        }
+                        IsCameraFollow = diaaa.CameraFollow;
+                        current = Current.Dialogue;
                         DisplayText.TryGetComponent(out LayoutElement LayEleText);
-                        if (LayEleText != null && opttt.Width != 0)
+                        if (LayEleText != null && diaaa.Width != 0)
                         {
-                            LayEleText.preferredWidth = opttt.Width;
+                            LayEleText.preferredWidth = diaaa.Width;
                         }
                         else if (LayEleText != null)
                         {
                             LayEleText.preferredWidth = DefaultWidth;
                         }
-                        StartCoroutine(OptionShowing(opttt));
+                        GoToState(STATE.TYPING);
                     }
-                    else
+                    else if (opttt != null)
                     {
-                        if (IsChangingVolume)
-                            AudioMgr.GetInstance().PlayAudio(GetCurVoice(), Volume, false);
-                        else
-                            AudioMgr.GetInstance().PlayAudio(GetCurVoice(), 0.6f, false);
-                        if (!IsOptionShowing)
+                        IsCameraFollow = opttt.CameraFollow;
+                        IsShowBubble = true;
+                        current = Current.Option;
+                        if (!hasOptionShowed)
                         {
+                            OptionIndex = 0;
                             foreach (var item in OptionGameObject)
                             {
                                 Destroy(item.gameObject);
                             }
-                            OptionPanel.gameObject.SetActive(false);
                             OptionGameObject.Clear();
-                            hasOptionShowed = false;
-                            dialogueGraph.Continue(OptionIndex);
-                            OptionIndex = 0;
-                            PlayTextNext();
+                            OptionPanel.TryGetComponent(out LayoutElement LayEle);
+                            if (LayEle != null && opttt.Width != 0)
+                            {
+                                LayEle.preferredWidth = opttt.Width;
+                            }
+                            else if (LayEle != null)
+                            {
+                                LayEle.preferredWidth = DefaultWidth;
+                            }
+                            DisplayText.TryGetComponent(out LayoutElement LayEleText);
+                            if (LayEleText != null && opttt.Width != 0)
+                            {
+                                LayEleText.preferredWidth = opttt.Width;
+                            }
+                            else if (LayEleText != null)
+                            {
+                                LayEleText.preferredWidth = DefaultWidth;
+                            }
+                            StartCoroutine(OptionShowing(opttt));
+                        }
+                        else
+                        {
+                            if (IsChangingVolume)
+                                AudioMgr.GetInstance().PlayAudio(GetCurVoice(), Volume, false);
+                            else
+                                AudioMgr.GetInstance().PlayAudio(GetCurVoice(), 0.6f, false);
+                            if (!IsOptionShowing)
+                            {
+                                foreach (var item in OptionGameObject)
+                                {
+                                    Destroy(item.gameObject);
+                                }
+                                OptionPanel.gameObject.SetActive(false);
+                                OptionGameObject.Clear();
+                                hasOptionShowed = false;
+                                dialogueGraph.Continue(OptionIndex);
+                                OptionIndex = 0;
+                                PlayTextNext();
+                            }
                         }
                     }
-                }
-                else if (evtttt != null)
-                {
-                    current = Current.Event;
+                    else if (dialogueGraph.current is EventNode)
+                    {
+                        current = Current.Event;
+                        GoToState(STATE.TYPING);
+                    }
+                    else if (dialogueGraph.current is ReceiveFromCode)
+                    {
+                        current = Current.ReceiveFromCode;
+                        GoToState(STATE.TYPING);
+                    }
                     GoToState(STATE.TYPING);
                 }
-                GoToState(STATE.TYPING);
                 break;
             case STATE.TYPING:
-                if(LastTimerValue >= 1)
+                if (IsFinished)
+                {
+                    GoToState(STATE.OFF);
+                    break;
+                }
+                if (LastTimerValue >= 1 && current == Current.Dialogue)
                 {
                     TypingSpeed = SkippingTypingSpeed;
                     IsSkipping = true;
@@ -981,7 +1059,7 @@ public class PlayText : MonoBehaviour
             case STATE.PAUSED:
                 IsSkipping = false;
                 TypingSpeed = DefaultTypingSpeed;
-                if(!IsWaiting && current != Current.Option)
+                if (!IsWaiting && current != Current.Option)
                 {
                     dialogueGraph.Continue();
                 }
@@ -993,7 +1071,6 @@ public class PlayText : MonoBehaviour
                 CurrentNode = dialogueGraph.current;
                 OptionNode opt = dialogueGraph.current as OptionNode;
                 DialogueNode dia = dialogueGraph.current as DialogueNode;
-                EventNode evt = dialogueGraph.current as EventNode;
                 if (opt != null)
                 {
                     IsCameraFollow = opt.CameraFollow;
@@ -1063,9 +1140,14 @@ public class PlayText : MonoBehaviour
                     }
                     GoToState(STATE.TYPING);
                 }
-                else if (evt != null)
+                else if (dialogueGraph.current is EventNode)
                 {
                     current = Current.Event;
+                    GoToState(STATE.TYPING);
+                }
+                else if(dialogueGraph.current is ReceiveFromCode)
+                {
+                    current = Current.ReceiveFromCode;
                     GoToState(STATE.TYPING);
                 }
                 break;

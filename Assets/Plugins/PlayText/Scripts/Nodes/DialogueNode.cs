@@ -20,12 +20,22 @@ namespace GraphSpace
         public float Width;
         public bool ShowBubble = true;
         public bool CameraFollow = true;
+        public AudioClip Audio;
+        public bool PlayPerChar = false;
+        public bool PlayTyping = false;
 
         [TextArea(5,5)]
         public List<string> Dialogue = new List<string>();
 
         public bool IsMax = true;
         public int curIndex = 0;
+
+        private void Awake()
+        {
+#if UNITY_EDITOR
+            CameraFollow = XNodeEditor.NodeEditorPreferences.GetSettings().CameraFollow;
+#endif
+        }
 
         // Use this for initialization
         protected override void Init()
@@ -80,26 +90,14 @@ namespace GraphSpace
                 }
 
                 Node node = exitPort.Connection.node;
-                DialogueNode dia = node as DialogueNode;
-                if (dia != null)
-                {
-                    return dia as Node;
-                }
 
-                OptionNode opt = node as OptionNode;
-                if (opt != null)
+                if (DialogueGraph.IsVaildNodeForMoveNext(node))
+                    return node;
+                else
                 {
-                    return opt as Node;
+                    EventCenter.GetInstance().EventTriggered("PlayText.TalkingFinished");
+                    return this;
                 }
-
-                EventNode evt = node as EventNode;
-                if (evt != null)
-                {
-                    return evt as Node;
-                }
-
-                EventCenter.GetInstance().EventTriggered("PlayText.TalkingFinished");
-                return this;
             }
         }
     }

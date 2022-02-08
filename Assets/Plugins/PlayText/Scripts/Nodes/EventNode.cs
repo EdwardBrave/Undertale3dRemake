@@ -14,16 +14,22 @@ namespace GraphSpace
     {
         [Tooltip("Event that will sent to EventCenter")]
         public string EventName = string.Empty;
+        public bool WaitCallback = false;
         public List<EventValueClass> EventValue = new List<EventValueClass>();
+        List<EventValueClass> SentEventValue = new List<EventValueClass>();
         public bool IsMax = true;
+        public bool IsWaiting = false;
         [Input] public Empty Input;
         [Output] public Empty Output;
+
+        string guid = string.Empty;
 
         // Use this for initialization
         protected override void Init()
         {
             base.Init();
             name = "Event";
+            IsWaiting = false;
         }
 
         // Return the correct value of an output port when requested
@@ -32,37 +38,66 @@ namespace GraphSpace
             return null; // Replace this
         }
 
+        public void Trigger()
+        {
+            IsWaiting = false;
+            SentEventValue.Clear();
+            SentEventValue.AddRange(EventValue);
+            if (WaitCallback)
+            {
+                IsWaiting = true;
+                if (guid == string.Empty)
+                    guid = Guid.NewGuid().ToString();
+                EventCenter.GetInstance().AddEventListener("PlayText.FinishWait." + guid, FinishWaiting);
+
+                if (SentEventValue.Count == 0)
+                {
+                    EventValueClass nValue = new EventValueClass();
+                    nValue.guid = guid;
+                    SentEventValue.Add(nValue);
+                }
+                else if (SentEventValue[0].guid != guid)
+                    SentEventValue[0].guid = guid;
+            }
+            EventCenter.GetInstance().EventTriggered(EventName, SentEventValue);
+        }
+
+        public static void FinishThisNode(List<EventValueClass> Value)
+        {
+            string uid = Value[0].guid;
+            EventCenter.GetInstance().EventTriggered("PlayText.FinishWait." + uid);
+        }
+
+        public void FinishWaiting()
+        {
+            EventCenter.GetInstance().RemoveEventListener("PlayText.FinishWait." + guid, FinishWaiting);
+            IsWaiting = false;
+        }
+
         public Node MoveNext()
         {
-            NodePort exitPort = GetOutputPort("Output");
-            EventCenter.GetInstance().EventTriggered(EventName, EventValue);
-            if (!exitPort.IsConnected)
+            if (IsWaiting)
             {
-                EventCenter.GetInstance().EventTriggered("PlayText.TalkingFinished");
-                return null;
+                return this;
             }
-
-            Node node = exitPort.Connection.node;
-            DialogueNode dia = node as DialogueNode;
-            if (dia != null)
+            else
             {
-                return dia as Node;
-            }
+                NodePort exitPort = GetOutputPort("Output");
+                if (!exitPort.IsConnected)
+                {
+                    EventCenter.GetInstance().EventTriggered("PlayText.TalkingFinished");
+                    return null;
+                }
 
-            OptionNode opt = node as OptionNode;
-            if (opt != null)
-            {
-                return opt as Node;
+                Node node = exitPort.Connection.node;
+                if (DialogueGraph.IsVaildNodeForMoveNext(node))
+                    return node;
+                else
+                {
+                    EventCenter.GetInstance().EventTriggered("PlayText.TalkingFinished");
+                    return this;
+                }
             }
-
-            EventNode evt = node as EventNode;
-            if (evt != null)
-            {
-                return evt as Node;
-            }
-
-            EventCenter.GetInstance().EventTriggered("PlayText.TalkingFinished");
-            return null;
         }
 
         public string GetBriefEvent()
@@ -82,6 +117,7 @@ namespace GraphSpace
         }
     }
 }
+
 [Serializable]
 public class EventValueClass
 {
@@ -90,4 +126,5 @@ public class EventValueClass
     public float floatValue = 0;
     public string stringValue = string.Empty;
     public bool boolValue = false;
+    public string guid = string.Empty;
 }

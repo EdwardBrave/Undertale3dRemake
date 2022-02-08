@@ -52,6 +52,7 @@ public class PlayTextEditor : Editor
         playText.DisplayPanel = EditorGUILayout.ObjectField(new GUIContent { text = "Display Panel" }, playText.DisplayPanel, typeof(RectTransform), true) as RectTransform;
         playText.BubblePointer = EditorGUILayout.ObjectField(new GUIContent { text = "Bubble Pointer" }, playText.BubblePointer, typeof(Image), true) as Image;
         playText.OptionPanel = EditorGUILayout.ObjectField(new GUIContent { text = "Option Panel" }, playText.OptionPanel, typeof(RectTransform), true) as RectTransform;
+        EditorGUILayout.PropertyField(serializedObject.FindProperty("NextIcon"));
         EditorGUILayout.PropertyField(serializedObject.FindProperty("DefaultWidth"));
         EditorGUILayout.Space(10);
         EditorGUILayout.PropertyField(serializedObject.FindProperty("OptionObject"));
@@ -63,7 +64,7 @@ public class PlayTextEditor : Editor
         {
             playText.BubbleRangePosition = EditorGUILayout.Vector2Field("Bubble Range Postion", playText.BubbleRangePosition);
             playText.BubbleRangeSize = EditorGUILayout.Vector2Field("Bubble Range Scale", playText.BubbleRangeSize);
-            CanvasScaler sc = FindObjectOfType<CanvasScaler>();
+            CanvasScaler sc = playText.canvas.gameObject.GetComponent<CanvasScaler>();
             if (sc != null)
             {
                 if (sc.uiScaleMode != CanvasScaler.ScaleMode.ScaleWithScreenSize)
@@ -78,7 +79,7 @@ public class PlayTextEditor : Editor
         }
         EditorGUILayout.Space(10);
         playText.IsBubbleFollow = EditorGUILayout.Toggle("Is Bubble Follow", playText.IsBubbleFollow);
-        playText.IsCameraFollow = EditorGUILayout.Toggle("Is Camera Follow", playText.IsCameraFollow);
+        playText.AllowCameraFollow = EditorGUILayout.Toggle("Allow Camera Follow", playText.AllowCameraFollow);
         EditorGUILayout.Space(10);
         playText.BubblePositionOffset = EditorGUILayout.Vector2Field("Bubble Position Offset", playText.BubblePositionOffset);
         playText.BubbleSizeOffset = EditorGUILayout.Vector2Field("Bubble Size Offset", playText.BubbleSizeOffset);
@@ -92,6 +93,9 @@ public class PlayTextEditor : Editor
         EditorGUILayout.PropertyField(serializedObject.FindProperty("ConvertHalfToFull"));
         EditorGUILayout.EndVertical();
         EditorGUILayout.Space(10);
+        EditorGUILayout.LabelField("State: " + playText.state.ToString());
+        EditorGUILayout.LabelField("Current: " + playText.current.ToString());
+
         serializedObject.ApplyModifiedProperties();
         if (GUI.changed)
         {

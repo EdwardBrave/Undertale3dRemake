@@ -132,11 +132,20 @@ namespace GraphSpace
                     }
                 }
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("Width"));
+
                 EditorGUILayout.BeginHorizontal();
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("ShowBubble"));
                 EditorGUILayout.PropertyField(serializedObject.FindProperty("CameraFollow"));
-                
                 EditorGUILayout.EndHorizontal();
+
+                NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("Audio"));
+                if(dialogueNode.Audio != null)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("PlayPerChar"));
+                    EditorGUILayout.PropertyField(serializedObject.FindProperty("PlayTyping"));
+                    EditorGUILayout.EndHorizontal();
+                }
                 NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("Dialogue"));
                 if (GUILayout.Button("Minimize", EditorStyles.miniButton))
                     dialogueNode.IsMax = false;

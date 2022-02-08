@@ -3,6 +3,7 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using System;
+using System.Text;
 using Object = UnityEngine.Object;
 
 namespace XNodeEditor {
@@ -198,8 +199,8 @@ namespace XNodeEditor {
         /// <summary>Open the provided graph in the NodeEditor</summary>
         public static NodeEditorWindow Open(XNode.NodeGraph graph) {
             if (!graph) return null;
-
-            NodeEditorWindow w = GetWindow(typeof(NodeEditorWindow), false, "Node Editor", true) as NodeEditorWindow;
+            NodeEditorWindow w = GetWindow(typeof(NodeEditorWindow), false, graph.name, true) as NodeEditorWindow;
+            w.titleContent = new GUIContent(new StringBuilder("Node Editor | ").Append(graph.name).ToString());
             w.wantsMouseMove = true;
             w.graph = graph;
             return w;

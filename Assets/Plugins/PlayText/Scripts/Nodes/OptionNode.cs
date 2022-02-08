@@ -17,6 +17,13 @@ namespace GraphSpace
         public float Width;
         [Output(dynamicPortList =true)] public List<OptionClass> Option;
 
+        private void Awake()
+        {
+#if UNITY_EDITOR
+            CameraFollow = XNodeEditor.NodeEditorPreferences.GetSettings().CameraFollow;
+#endif
+        }
+
         // Use this for initialization
         protected override void Init()
         {
@@ -42,7 +49,8 @@ namespace GraphSpace
                 if(port.fieldName == "Option " + index.ToString())
                 {
                     if (!port.IsConnected) return temp;
-                    temp = port.Connection.node;
+                    if (DialogueGraph.IsVaildNodeForMoveNext(port.Connection.node))
+                        temp = port.Connection.node;
                 }
             }
             if(temp == this)

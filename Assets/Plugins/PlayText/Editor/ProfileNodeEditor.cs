@@ -10,6 +10,20 @@ namespace GraphSpace
     {
         private DialogueGraph dialogueGraph;
 
+        public override void OnCreate()
+        {
+            base.OnCreate();
+            //if (dialogueGraph == null) dialogueGraph = window.graph as DialogueGraph;
+            //DialogueProfile profile = dialogueGraph.GetProfile();
+            //for (int i = 0; i < profile.Language.Count; i++)
+            //{
+            //    StartNode startNode = dialogueGraph.AddNode(typeof(StartNode)) as StartNode;
+            //    startNode.position = new Vector2(-504, -56 - (-112 * i));
+            //    startNode.Language = profileNode.dialogueProfile.Language[i];
+            //}
+            //dialogueGraph.RemoveNode
+        }
+
         public override void OnBodyGUI()
         {
             base.OnBodyGUI();

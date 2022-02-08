@@ -14,8 +14,6 @@ namespace Main.Features
 
             Add(new UiEventsHandlerSystem(contexts));
             Add(new CreateWindowSystem(contexts));
-
-            Add(new WindowAnimationSystem(contexts));
             Add(new UiEventsCleanupSystem(contexts));
             Add(new CloseWindowCleanupSystem(contexts));
         }

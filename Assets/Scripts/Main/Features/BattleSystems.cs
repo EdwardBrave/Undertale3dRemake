@@ -18,7 +18,6 @@ namespace Main.Features
             Add(new InputGameEventsSystem(contexts));
             Add(new PlayerControllerSystem(contexts));
             Add(new MotionSystem(contexts));
-            Add(new ReactionSystem(contexts));
             Add(new AnimationSystem(contexts));
             Add(new FollowSystem(contexts));
 

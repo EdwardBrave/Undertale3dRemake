@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace GraphSpace
 {
@@ -159,11 +160,11 @@ namespace GraphSpace
             if (eventNode == null) eventNode = target as EventNode;
             foreach (XNode.NodePort Port in target.Ports)
                 NodeEditorGUILayout.PortField(Port);
-
             
             if(eventNode.IsMax == true)
             {
                 NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("EventName"));
+                NodeEditorGUILayout.PropertyField(serializedObject.FindProperty("WaitCallback"));
                 EventValue.DoLayoutList();
                 if (GUILayout.Button("Minimize", EditorStyles.miniButton))
                     eventNode.IsMax = false;
@@ -173,7 +174,6 @@ namespace GraphSpace
                 if (GUILayout.Button("Maximize", EditorStyles.miniButton))
                     eventNode.IsMax = true;
             }
-            
 
             serializedObject.ApplyModifiedProperties();
         }

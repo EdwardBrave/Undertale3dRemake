@@ -38,6 +38,7 @@ namespace XNodeEditor {
             public bool dragToCreate = true;
             public bool zoomToMouse = true;
             public bool portTooltips = true;
+            public bool CameraFollow = true;
             [SerializeField] private string typeColorsData = "";
             [NonSerialized] public Dictionary<string, Color> typeColors = new Dictionary<string, Color>();
             [FormerlySerializedAs("noodleType")] public NoodlePath noodlePath = NoodlePath.Curvy;
@@ -149,6 +150,7 @@ namespace XNodeEditor {
             //Label
             EditorGUILayout.LabelField("System", EditorStyles.boldLabel);
             settings.autoSave = EditorGUILayout.Toggle(new GUIContent("Autosave", "Disable for better editor performance"), settings.autoSave);
+            settings.CameraFollow = EditorGUILayout.Toggle(new GUIContent("Camera Follow", "Enable camera follow option in default or not"), settings.CameraFollow);
             if (GUI.changed) SavePrefs(key, settings);
             EditorGUILayout.Space();
         }

@@ -15,11 +15,10 @@ public static class GameComponentsLookup {
     public const int Motion = 4;
     public const int MoveInDirection = 5;
     public const int Collider = 6;
-    public const int Reaction = 7;
-    public const int View = 8;
-    public const int GlobalEvents = 9;
+    public const int View = 7;
+    public const int GlobalEvents = 8;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
         "Animator",
@@ -29,7 +28,6 @@ public static class GameComponentsLookup {
         "Motion",
         "MoveInDirection",
         "Collider",
-        "Reaction",
         "View",
         "GlobalEvents"
     };
@@ -42,7 +40,6 @@ public static class GameComponentsLookup {
         typeof(Game.Motion.MotionComponent),
         typeof(Game.Motion.MoveInDirectionComponent),
         typeof(Game.Reaction.ColliderComponent),
-        typeof(Game.Reaction.ReactionComponent),
         typeof(Game.ViewComponent),
         typeof(Main.Globals.GlobalEventsComponent)
     };
