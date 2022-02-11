@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace UI.Data
 {
-    [Ui, Unique]
     [CreateAssetMenu(fileName = "NewUiConfig", menuName = "Configs/UiConfig")]
     public class UiConfig: ScriptableObject
     {

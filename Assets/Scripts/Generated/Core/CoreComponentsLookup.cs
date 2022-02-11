@@ -10,22 +10,25 @@ public static class CoreComponentsLookup {
 
     public const int SaveUserProgress = 0;
     public const int UserData = 1;
-    public const int GameController = 2;
-    public const int GlobalEvents = 3;
+    public const int ChangeGameState = 2;
+    public const int GameState = 3;
+    public const int GlobalEvents = 4;
 
-    public const int TotalComponents = 4;
+    public const int TotalComponents = 5;
 
     public static readonly string[] componentNames = {
         "SaveUserProgress",
         "UserData",
-        "GameController",
+        "ChangeGameState",
+        "GameState",
         "GlobalEvents"
     };
 
     public static readonly System.Type[] componentTypes = {
         typeof(Core.Save.SaveUserProgressComponent),
         typeof(Core.Save.UserDataComponent),
-        typeof(GameControllerComponent),
+        typeof(Main.ChangeGameStateComponent),
+        typeof(Main.GameStateComponent),
         typeof(Main.Globals.GlobalEventsComponent)
     };
 }

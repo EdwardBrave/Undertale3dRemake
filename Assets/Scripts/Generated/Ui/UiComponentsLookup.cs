@@ -23,9 +23,8 @@ public static class UiComponentsLookup {
     public const int Container = 12;
     public const int CreateWindow = 13;
     public const int View = 14;
-    public const int UiConfig = 15;
 
-    public const int TotalComponents = 16;
+    public const int TotalComponents = 15;
 
     public static readonly string[] componentNames = {
         "GlobalEvents",
@@ -42,8 +41,7 @@ public static class UiComponentsLookup {
         "OpenWindow",
         "Container",
         "CreateWindow",
-        "View",
-        "UiConfig"
+        "View"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -61,7 +59,6 @@ public static class UiComponentsLookup {
         typeof(UI.Global.OpenWindowComponent),
         typeof(UI.Open.ContainerComponent),
         typeof(UI.Open.CreateWindowComponent),
-        typeof(UI.ViewComponent),
-        typeof(UiConfigComponent)
+        typeof(UI.ViewComponent)
     };
 }

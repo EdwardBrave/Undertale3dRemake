@@ -388,7 +388,7 @@ GameObject:
   - component: {fileID: 2045255662}
   - component: {fileID: 2045255661}
   m_Layer: 0
-  m_Name: GameController
+  m_Name: GameInitialozation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -406,7 +406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ed959708e0f59489aa5fed61d98bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: 5
+  gameState: 2
+  stateMode: 0
   uiConfig: {fileID: 11400000, guid: ebcaa0b75b51cc94c9f69f7700a99b45, type: 2}
 --- !u!4 &2045255662
 Transform:

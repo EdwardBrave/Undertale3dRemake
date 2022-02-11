@@ -12,7 +12,7 @@ namespace UI.Open
         public InitWindowsSystem(Contexts contexts)
         {
             _context = contexts.ui;
-            _uiConfig = _context.uiConfig.value;
+            //_uiConfig = _context.uiConfig.value;
         }
 
         public void Initialize()
