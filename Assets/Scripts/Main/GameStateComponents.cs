@@ -1,13 +1,12 @@
-﻿using System;
-using Entitas;
+﻿using Entitas;
 using Entitas.CodeGeneration.Attributes;
 
 namespace Main
 {
     [Core, Unique]
-    public class GameStateComponent: IComponent
+    public class GameStateComponent : IComponent
     {
-        public RegisteredGameState value;
+        public RegisteredGameState type;
     }
     
     [Core]

@@ -1,10 +1,9 @@
-using UI.Animation;
 using UI.Close;
 using UI.Events;
 using UI.Global;
 using UI.Open;
 
-namespace Main.Features
+namespace Main.GameStates
 {
     public sealed class UISystems: Feature
     {

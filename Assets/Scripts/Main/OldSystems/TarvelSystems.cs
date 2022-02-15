@@ -6,11 +6,11 @@ using Game.InitLogic;
 using Game.Motion;
 using Logic.Systems.Input;
 
-namespace Main.Features
+namespace Main.GameStates
 {
-    public sealed class BattleSystems: Feature
+    public sealed class TravelSystems: Feature
     {
-        public BattleSystems(Contexts contexts)
+        public TravelSystems(Contexts contexts)
         {
             Add(new InitFromSceneSystem(contexts));
 
@@ -20,6 +20,8 @@ namespace Main.Features
             Add(new AnimationSystem(contexts));
             Add(new FollowSystem(contexts));
 
+            Add(new UISystems(contexts));
+            
             Add(new DestroyedCleanupSystem(contexts));
         }
     }

@@ -4,14 +4,13 @@ using Game.Controllers;
 using Game.Follow;
 using Game.InitLogic;
 using Game.Motion;
-using Game.Reaction;
 using Logic.Systems.Input;
 
-namespace Main.Features
+namespace Main.GameStates
 {
-    public sealed class TravelSystems: Feature
+    public sealed class BattleSystems: Feature
     {
-        public TravelSystems(Contexts contexts)
+        public BattleSystems(Contexts contexts)
         {
             Add(new InitFromSceneSystem(contexts));
 
@@ -21,8 +20,6 @@ namespace Main.Features
             Add(new AnimationSystem(contexts));
             Add(new FollowSystem(contexts));
 
-            Add(new UISystems(contexts));
-            
             Add(new DestroyedCleanupSystem(contexts));
         }
     }

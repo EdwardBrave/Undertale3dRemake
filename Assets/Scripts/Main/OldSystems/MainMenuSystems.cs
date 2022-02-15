@@ -1,4 +1,5 @@
-﻿namespace Main.Features
+﻿
+namespace Main.GameStates
 {
     public sealed class MainMenuSystems : Feature
     {

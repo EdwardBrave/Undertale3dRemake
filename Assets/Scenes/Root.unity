@@ -406,9 +406,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ed959708e0f59489aa5fed61d98bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: 2
+  gameState: 1
   stateMode: 0
-  uiConfig: {fileID: 11400000, guid: ebcaa0b75b51cc94c9f69f7700a99b45, type: 2}
 --- !u!4 &2045255662
 Transform:
   m_ObjectHideFlags: 0

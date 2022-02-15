@@ -1,7 +1,6 @@
 ﻿using Entitas;
-using Main.Features;
 
-namespace Main
+namespace Main.GameStates
 {
     public class BattleGameState: GameState
     {

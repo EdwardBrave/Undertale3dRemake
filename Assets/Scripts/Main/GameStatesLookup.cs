@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
+using Main.GameStates;
 
 namespace Main
 {
     public enum RegisteredGameState
     {
         None,
-        TestGameState,
+        InitGameState,
         BattleGameState,
         CutSceneGameState,
     }
@@ -17,7 +17,7 @@ namespace Main
     {
         private static Dictionary<RegisteredGameState, Type> _states = new Dictionary<RegisteredGameState, Type>
         {
-            {RegisteredGameState.TestGameState, typeof(TestGameState)},
+            {RegisteredGameState.InitGameState, typeof(InitGameState)},
             {RegisteredGameState.BattleGameState, typeof(BattleGameState)},
             {RegisteredGameState.CutSceneGameState, typeof(CutSceneGameState)},
         };

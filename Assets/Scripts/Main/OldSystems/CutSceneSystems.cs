@@ -1,6 +1,6 @@
 using Game.InitLogic;
 
-namespace Main.Features
+namespace Main.GameStates
 {
     public sealed class CutSceneSystems: Feature
     {

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEngine;
 using StateMode = Main.ChangeGameStateComponent.StateMode;
 
 namespace Main

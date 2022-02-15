@@ -1,6 +1,5 @@
 ﻿using Entitas;
 using Entitas.VisualDebugging.Unity;
-using UnityEngine;
 
 namespace Main
 {
@@ -56,12 +55,12 @@ namespace Main
         public override void Initialize()
         {
             base.Initialize();
-            var components = UnityEngine.GameObject.FindObjectsOfType<DebugSystemsBehaviour>();
+            var components = UnityEngine.Object.FindObjectsOfType<DebugSystemsBehaviour>();
             foreach(var component in components)
             {
                 if (component.systems == this)
                 {
-                    UnityEngine.GameObject.DontDestroyOnLoad(component.gameObject);
+                    UnityEngine.Object.DontDestroyOnLoad(component.gameObject);
                 }
             }
         }
@@ -69,12 +68,12 @@ namespace Main
         public override void TearDown()
         {
             base.TearDown();
-            var components = UnityEngine.GameObject.FindObjectsOfType<DebugSystemsBehaviour>();
+            var components = UnityEngine.Object.FindObjectsOfType<DebugSystemsBehaviour>();
             foreach(var component in components)
             {
                 if (component.systems == this)
                 {
-                    UnityEngine.GameObject.Destroy(component.gameObject);
+                    UnityEngine.Object.Destroy(component.gameObject);
                 }
             }
         }

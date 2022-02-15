@@ -1,46 +1,67 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+#if UNITY_EDITOR
+using Sirenix.OdinInspector;
+#endif
 
 namespace Main
 {
     [DisallowMultipleComponent]
-    public class EcsRoot: MonoBehaviour
+    public sealed class EcsRoot : MonoBehaviour
     {
         ////////////////////////////////////////////////////////////////////
-        #region Data
+        #region Variables
         
-        public static bool IsActive => _instance.enabled;
-
         private static EcsRoot _instance;
         
-        private RootStateMachine _rootStateMachine;
+#if UNITY_EDITOR
+        [OnValueChanged(nameof(OnStateChanged))]
+#endif
+        [SerializeField] private RegisteredGameState gameState;
+        [SerializeField] private ChangeGameStateComponent.StateMode stateMode;
         
+        private RootStateMachine _rootStateMachine;
+
         #endregion
         ////////////////////////////////////////////////////////////////////
-        #region UnityEvents Implementation
+        #region Implementation
+
+#if UNITY_EDITOR
+        private void OnStateChanged()
+        {
+            if (Application.isPlaying)
+            {
+                Contexts.sharedInstance.core.gameStateEntity.AddChangeGameState(gameState, stateMode);
+            }
+        }
+#endif
         
         private void Awake()
         {
+            var contexts = Contexts.sharedInstance;
             if (_instance)
             {
-                throw new Exception("Attempt to instantiate a second time. EcsRoot is already instantiated!");
+                
+                if (contexts.core.gameState.type != gameState)
+                {
+                    contexts.core.gameStateEntity.AddChangeGameState(gameState, stateMode);
+                }
+                Destroy(this);
             }
+            else
+            {
+                _instance = this;
+                DontDestroyOnLoad(this);
+                
+                contexts.Reset();
+                contexts.game.isGlobalEvents = true;
+                contexts.ui.isGlobalEvents = true;
+                contexts.core.isGlobalEvents = true;
+                contexts.input.isGlobalEvents = true;
             
-            DontDestroyOnLoad(this);
+                _rootStateMachine = new RootStateMachine(gameState, Contexts.sharedInstance);
+            }
         }
-
-        public void Init(RegisteredGameState gameState)
-        {
-            var contexts = Contexts.sharedInstance;
-            contexts.Reset();
-            contexts.game.isGlobalEvents = true;
-            contexts.ui.isGlobalEvents = true;
-            contexts.core.isGlobalEvents = true;
-            contexts.input.isGlobalEvents = true;
-            
-            _rootStateMachine = new RootStateMachine(gameState, Contexts.sharedInstance);
-        }
-
+        
         private void Update()
         {
             _rootStateMachine.Execute();
