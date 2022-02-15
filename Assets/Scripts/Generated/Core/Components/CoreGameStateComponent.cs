@@ -12,22 +12,22 @@ public partial class CoreContext {
     public Main.GameStateComponent gameState { get { return gameStateEntity.gameState; } }
     public bool hasGameState { get { return gameStateEntity != null; } }
 
-    public CoreEntity SetGameState(Main.RegisteredGameState newValue) {
+    public CoreEntity SetGameState(Main.RegisteredGameState newType) {
         if (hasGameState) {
             throw new Entitas.EntitasException("Could not set GameState!\n" + this + " already has an entity with Main.GameStateComponent!",
                 "You should check if the context already has a gameStateEntity before setting it or use context.ReplaceGameState().");
         }
         var entity = CreateEntity();
-        entity.AddGameState(newValue);
+        entity.AddGameState(newType);
         return entity;
     }
 
-    public void ReplaceGameState(Main.RegisteredGameState newValue) {
+    public void ReplaceGameState(Main.RegisteredGameState newType) {
         var entity = gameStateEntity;
         if (entity == null) {
-            entity = SetGameState(newValue);
+            entity = SetGameState(newType);
         } else {
-            entity.ReplaceGameState(newValue);
+            entity.ReplaceGameState(newType);
         }
     }
 
@@ -49,17 +49,17 @@ public partial class CoreEntity {
     public Main.GameStateComponent gameState { get { return (Main.GameStateComponent)GetComponent(CoreComponentsLookup.GameState); } }
     public bool hasGameState { get { return HasComponent(CoreComponentsLookup.GameState); } }
 
-    public void AddGameState(Main.RegisteredGameState newValue) {
+    public void AddGameState(Main.RegisteredGameState newType) {
         var index = CoreComponentsLookup.GameState;
         var component = (Main.GameStateComponent)CreateComponent(index, typeof(Main.GameStateComponent));
-        component.value = newValue;
+        component.type = newType;
         AddComponent(index, component);
     }
 
-    public void ReplaceGameState(Main.RegisteredGameState newValue) {
+    public void ReplaceGameState(Main.RegisteredGameState newType) {
         var index = CoreComponentsLookup.GameState;
         var component = (Main.GameStateComponent)CreateComponent(index, typeof(Main.GameStateComponent));
-        component.value = newValue;
+        component.type = newType;
         ReplaceComponent(index, component);
     }
 
