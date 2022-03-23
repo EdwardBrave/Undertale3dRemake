@@ -4,7 +4,6 @@ using Game.Controllers;
 using Game.Follow;
 using Game.InitLogic;
 using Game.Motion;
-using Logic.Systems.Input;
 
 namespace Main.GameStates
 {
@@ -14,7 +13,7 @@ namespace Main.GameStates
         {
             Add(new InitFromSceneSystem(contexts));
 
-            Add(new InputGameEventsSystem(contexts));
+            // Add(new InputGameEventsSystem(contexts));
             Add(new PlayerControllerSystem(contexts));
             Add(new MotionSystem(contexts));
             Add(new AnimationSystem(contexts));

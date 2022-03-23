@@ -8,27 +8,39 @@
 //------------------------------------------------------------------------------
 public static class InputComponentsLookup {
 
-    public const int KeyboardEvents = 0;
-    public const int KeyDown = 1;
-    public const int KeyPressed = 2;
-    public const int KeyUp = 3;
-    public const int GlobalEvents = 4;
+    public const int Active = 0;
+    public const int BattleInput = 1;
+    public const int InputControls = 2;
+    public const int MotionInput = 3;
+    public const int UiInput = 4;
+    public const int Fire = 5;
+    public const int Look = 6;
+    public const int Move = 7;
+    public const int GlobalEvents = 8;
 
-    public const int TotalComponents = 5;
+    public const int TotalComponents = 9;
 
     public static readonly string[] componentNames = {
-        "KeyboardEvents",
-        "KeyDown",
-        "KeyPressed",
-        "KeyUp",
+        "Active",
+        "BattleInput",
+        "InputControls",
+        "MotionInput",
+        "UiInput",
+        "Fire",
+        "Look",
+        "Move",
         "GlobalEvents"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Logic.Components.Input.KeyboardEventsComponent),
-        typeof(Logic.Components.Input.KeyDownComponent),
-        typeof(Logic.Components.Input.KeyPressedComponent),
-        typeof(Logic.Components.Input.KeyUpComponent),
+        typeof(Input.Components.ActiveComponent),
+        typeof(Input.Components.BattleInputComponent),
+        typeof(Input.Components.InputControlsComponent),
+        typeof(Input.Components.MotionInputComponent),
+        typeof(Input.Components.UiInputComponent),
+        typeof(Input.Processing.Components.FireComponent),
+        typeof(Input.Processing.Components.LookComponent),
+        typeof(Input.Processing.Components.MoveComponent),
         typeof(Main.Globals.GlobalEventsComponent)
     };
 }
