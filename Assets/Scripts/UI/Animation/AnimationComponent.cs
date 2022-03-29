@@ -1,7 +1,11 @@
+using UI.Components;
 using UnityEngine;
 
 namespace UI.Animation
 {
     [Ui]
-    public class AnimationComponent: IUiComponent { }
+    public class AnimationComponent : UiComponent
+    {
+        
+    }
 }

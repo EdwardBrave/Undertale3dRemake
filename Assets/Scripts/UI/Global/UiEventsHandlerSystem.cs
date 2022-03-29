@@ -23,8 +23,7 @@ namespace UI.Global
             {
                 if (entity.isGlobalEvents)
                 {
-                    var newEntity = _uiContext.CreateEntity();
-                    newEntity.AddCreateWindow(entity.openWindow.data);
+                    
                 }
                 entity.RemoveOpenWindow();
             }

@@ -12,25 +12,29 @@ public static class UiComponentsLookup {
     public const int Animation = 1;
     public const int Close = 2;
     public const int Protected = 3;
-    public const int Cancel = 4;
-    public const int Check = 5;
-    public const int Confirm = 6;
-    public const int Pressed = 7;
-    public const int Reject = 8;
-    public const int CloseAll = 9;
-    public const int CloseWindows = 10;
-    public const int OpenWindow = 11;
-    public const int Container = 12;
-    public const int CreateWindow = 13;
-    public const int View = 14;
+    public const int Container = 4;
+    public const int MainScreen = 5;
+    public const int View = 6;
+    public const int Cancel = 7;
+    public const int Check = 8;
+    public const int Confirm = 9;
+    public const int Pressed = 10;
+    public const int Reject = 11;
+    public const int CloseAll = 12;
+    public const int CloseWindows = 13;
+    public const int OpenWindow = 14;
+    public const int CreateWindow = 15;
 
-    public const int TotalComponents = 15;
+    public const int TotalComponents = 16;
 
     public static readonly string[] componentNames = {
         "GlobalEvents",
         "Animation",
         "Close",
         "Protected",
+        "Container",
+        "MainScreen",
+        "View",
         "Cancel",
         "Check",
         "Confirm",
@@ -39,9 +43,7 @@ public static class UiComponentsLookup {
         "CloseAll",
         "CloseWindows",
         "OpenWindow",
-        "Container",
-        "CreateWindow",
-        "View"
+        "CreateWindow"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -49,6 +51,9 @@ public static class UiComponentsLookup {
         typeof(UI.Animation.AnimationComponent),
         typeof(UI.Close.CloseComponent),
         typeof(UI.Close.ProtectedComponent),
+        typeof(UI.Components.ContainerComponent),
+        typeof(UI.Components.MainScreenComponent),
+        typeof(UI.Components.ViewComponent),
         typeof(UI.Events.CancelComponent),
         typeof(UI.Events.CheckComponent),
         typeof(UI.Events.ConfirmComponent),
@@ -57,8 +62,6 @@ public static class UiComponentsLookup {
         typeof(UI.Global.CloseAllComponent),
         typeof(UI.Global.CloseWindowsComponent),
         typeof(UI.Global.OpenWindowComponent),
-        typeof(UI.Open.ContainerComponent),
-        typeof(UI.Open.CreateWindowComponent),
-        typeof(UI.ViewComponent)
+        typeof(UI.Open.Components.CreateWindowComponent)
     };
 }

@@ -230,8 +230,6 @@ GameObject:
   - component: {fileID: 7112541044116966137}
   - component: {fileID: 3644909644753352602}
   - component: {fileID: 7475787348328512329}
-  - component: {fileID: 6719192780164025537}
-  - component: {fileID: 5519301335827967369}
   m_Layer: 5
   m_Name: Credits_box
   m_TagString: Untagged
@@ -364,7 +362,7 @@ MonoBehaviour:
     SerializationNodes:
     - Name: components
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[UI.IUiComponent, Assembly-CSharp]],
+      Data: 0|System.Collections.Generic.List`1[[UI.Components.UiComponent, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
@@ -381,39 +379,6 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  containerPrefab: {fileID: 2871705779050457634, guid: 43d3cd73695fcab48836cb733a6f2ef2,
-    type: 3}
---- !u!114 &6719192780164025537
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5775697615533680704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -1465209106, guid: c8d0ad23af520fe46aabe2b1fecf6462, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"declarations":{"collection":{"$content":[],"$version":"A"},"$version":"A"}}'
-    _objectReferences: []
---- !u!114 &5519301335827967369
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5775697615533680704}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: -57143145, guid: a040fb66244a7f54289914d98ea4ef7d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _data:
-    _json: '{"nest":{"source":"Macro","macro":0,"embed":null}}'
-    _objectReferences:
-    - {fileID: 11400000, guid: a1925d45804e3184fa85cd0b3ea54151, type: 2}
 --- !u!1 &5775697615861548583
 GameObject:
   m_ObjectHideFlags: 0
@@ -896,7 +861,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000025514231, y: 0}
+  m_AnchoredPosition: {x: -0.000007865779, y: 0}
   m_SizeDelta: {x: -50, y: 1505.8511}
   m_Pivot: {x: 0, y: 1}
 --- !u!222 &8541699398708272533
@@ -1090,7 +1055,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 8541699397103162170}
   m_Direction: 0
   m_Value: 0
-  m_Size: 0.9999364
+  m_Size: 0.9999954
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

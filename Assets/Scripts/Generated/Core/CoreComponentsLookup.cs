@@ -15,11 +15,12 @@ public static class CoreComponentsLookup {
     public const int Scene = 4;
     public const int SceneLoading = 5;
     public const int SceneOffset = 6;
-    public const int ChangeGameState = 7;
-    public const int GameState = 8;
-    public const int GlobalEvents = 9;
+    public const int GlobalGameConfigs = 7;
+    public const int ChangeGameState = 8;
+    public const int GameState = 9;
+    public const int GlobalEvents = 10;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
         "SaveUserProgress",
@@ -29,6 +30,7 @@ public static class CoreComponentsLookup {
         "Scene",
         "SceneLoading",
         "SceneOffset",
+        "GlobalGameConfigs",
         "ChangeGameState",
         "GameState",
         "GlobalEvents"
@@ -42,6 +44,7 @@ public static class CoreComponentsLookup {
         typeof(Core.UnityScene.Components.SceneComponent),
         typeof(Core.UnityScene.Components.SceneLoadingComponent),
         typeof(Core.UnityScene.Components.SceneOffsetComponent),
+        typeof(GlobalGameConfigsComponent),
         typeof(Main.ChangeGameStateComponent),
         typeof(Main.GameStateComponent),
         typeof(Main.Globals.GlobalEventsComponent)

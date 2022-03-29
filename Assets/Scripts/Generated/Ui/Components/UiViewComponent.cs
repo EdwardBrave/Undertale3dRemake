@@ -8,12 +8,12 @@
 //------------------------------------------------------------------------------
 public partial class UiEntity {
 
-    public UI.ViewComponent view { get { return (UI.ViewComponent)GetComponent(UiComponentsLookup.View); } }
+    public UI.Components.ViewComponent view { get { return (UI.Components.ViewComponent)GetComponent(UiComponentsLookup.View); } }
     public bool hasView { get { return HasComponent(UiComponentsLookup.View); } }
 
     public void AddView(UnityEngine.GameObject newObj, UiEntity newParent) {
         var index = UiComponentsLookup.View;
-        var component = (UI.ViewComponent)CreateComponent(index, typeof(UI.ViewComponent));
+        var component = (UI.Components.ViewComponent)CreateComponent(index, typeof(UI.Components.ViewComponent));
         component.obj = newObj;
         component.parent = newParent;
         AddComponent(index, component);
@@ -21,7 +21,7 @@ public partial class UiEntity {
 
     public void ReplaceView(UnityEngine.GameObject newObj, UiEntity newParent) {
         var index = UiComponentsLookup.View;
-        var component = (UI.ViewComponent)CreateComponent(index, typeof(UI.ViewComponent));
+        var component = (UI.Components.ViewComponent)CreateComponent(index, typeof(UI.Components.ViewComponent));
         component.obj = newObj;
         component.parent = newParent;
         ReplaceComponent(index, component);

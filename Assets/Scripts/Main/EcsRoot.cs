@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Data;
+using UnityEngine;
 #if UNITY_EDITOR
 using Sirenix.OdinInspector;
 #endif
@@ -18,6 +19,7 @@ namespace Main
 #endif
         [SerializeField] private RegisteredGameState gameState;
         [SerializeField] private ChangeGameStateComponent.StateMode stateMode;
+        [SerializeField] private GlobalGameConfigs globalGameConfigs;
         
         private RootStateMachine _rootStateMachine;
 
@@ -50,13 +52,13 @@ namespace Main
             else
             {
                 _instance = this;
-                DontDestroyOnLoad(this);
-                
+
                 contexts.Reset();
                 contexts.game.isGlobalEvents = true;
                 contexts.ui.isGlobalEvents = true;
                 contexts.core.isGlobalEvents = true;
                 contexts.input.isGlobalEvents = true;
+                contexts.core.SetGlobalGameConfigs(globalGameConfigs);
             
                 _rootStateMachine = new RootStateMachine(gameState, Contexts.sharedInstance);
             }

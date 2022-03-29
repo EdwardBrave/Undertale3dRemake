@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Entitas;
 using Entitas.Unity;
 using UnityEngine;
@@ -10,15 +9,9 @@ namespace UI.Open
 {
     public class CreateWindowSystem: ReactiveSystem<UiEntity>
     {
-        private readonly UiContext _uiContext;
-        private readonly IGroup<UiEntity> _containers;
-        private readonly IGroup<UiEntity> _views;
-        
+
         public CreateWindowSystem(Contexts contexts) : base(contexts.ui)
         {
-            _uiContext = contexts.ui;
-            _containers = _uiContext.GetGroup(UiMatcher.AllOf(UiMatcher.View, UiMatcher.Container));
-            _views = _uiContext.GetGroup(UiMatcher.AllOf(UiMatcher.View).NoneOf(UiMatcher.Container));
         }
 
         protected override ICollector<UiEntity> GetTrigger(IContext<UiEntity> context)
@@ -28,53 +21,46 @@ namespace UI.Open
 
         protected override bool Filter(UiEntity entity)
         {
-            return !entity.hasView;
+            return entity.hasCreateWindow && !entity.hasView;
         }
 
         protected override void Execute(List<UiEntity> entities)
         {
             foreach (var entity in entities)
             {
-                InitWindow(entity, entity.createWindow.data);
+                InitWindow(entity, entity.createWindow.prefab, entity.createWindow.container);
             }
         }
 
-        private UiEntity InitWindow(UiEntity uiEntity, InitUiEntity initData)
+        private void InitWindow(UiEntity uiEntity, InitUiEntity basePrefab, UiEntity container)
         {
             Transform parent = null;
-            UiEntity containerEntity = null;
-            
-            if (initData.containerPrefab)
-            {
-                containerEntity = 
-                    _containers.AsEnumerable().FirstOrDefault(entity => entity.view.obj.name == initData.containerPrefab.name) ?? 
-                    _views.AsEnumerable().FirstOrDefault(entity => entity.view.obj.name == initData.containerPrefab.name) ?? 
-                    InitWindow(_uiContext.CreateEntity(), initData.containerPrefab);
 
-                var windowsList = containerEntity.hasContainer ? containerEntity.container.windows : new List<UiEntity>();
+            if (container is {hasContainer: true, hasView: true})
+            {
+
+                var windowsList = container.container.windows;
                 windowsList.Add(uiEntity);
-                containerEntity.ReplaceContainer(windowsList);
-                parent = containerEntity.view.obj.transform;
+                container.ReplaceContainer(windowsList);
+                parent = container.view.obj.transform;
+            }
+            else
+            {
+                container = null;
             }
             
-            var newView = Object.Instantiate(initData.gameObject, parent);
-            newView.name = initData.name;
-            newView.Link(uiEntity);
-            uiEntity.AddView(newView, containerEntity);
+            var newViewObject = Object.Instantiate(basePrefab.gameObject, parent);
+            newViewObject.Link(uiEntity);
+            uiEntity.AddView(newViewObject, container);
 
-            foreach (var component in initData.components)
+            foreach (var component in basePrefab.components)
             {
                 int index = Array.IndexOf(UiComponentsLookup.componentTypes, component.GetType());
                 uiEntity.AddComponent(index, component);
             }
 
-            newView.GetComponent<InitUiEntity>()?.DestroySelf();
-            if (uiEntity.hasCreateWindow)
-            {
-                uiEntity.RemoveCreateWindow();
-            }
-            
-            return uiEntity;
+            newViewObject.GetComponent<InitUiEntity>()?.DestroySelf();
+            uiEntity.RemoveCreateWindow();
         }
     }
 }

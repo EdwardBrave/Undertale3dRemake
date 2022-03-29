@@ -13,8 +13,9 @@ GameObject:
   - component: {fileID: 8331843630215801497}
   - component: {fileID: 3960259582130174587}
   - component: {fileID: 2871705779050457634}
+  - component: {fileID: 364594331778813563}
   m_Layer: 5
-  m_Name: BaseCanvas
+  m_Name: MainScreenCanvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -123,8 +124,17 @@ MonoBehaviour:
     SerializationNodes:
     - Name: components
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[UI.IUiComponent, Assembly-CSharp]],
+      Data: 0|System.Collections.Generic.List`1[[UI.Components.UiComponent, Assembly-CSharp]],
         mscorlib
+    - Name: 
+      Entry: 12
+      Data: 1
+    - Name: 
+      Entry: 7
+      Data: 1|UI.Components.ContainerComponent, Assembly-CSharp
+    - Name: windows
+      Entry: 7
+      Data: 2|System.Collections.Generic.List`1[[UiEntity, Assembly-CSharp]], mscorlib
     - Name: 
       Entry: 12
       Data: 0
@@ -134,4 +144,24 @@ MonoBehaviour:
     - Name: 
       Entry: 8
       Data: 
-  containerPrefab: {fileID: 0}
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+--- !u!114 &364594331778813563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738658818642732903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd426f41ac6548a7ae1596b36258ccce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

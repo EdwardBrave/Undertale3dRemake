@@ -1,15 +1,13 @@
 ﻿using System.Collections.Generic;
-using DG.Tweening;
 using Sirenix.OdinInspector;
+using UI.Components;
 using UnityEngine;
 
 namespace UI.Open
 {
     public class InitUiEntity: SerializedMonoBehaviour
     {
-        [SerializeField] internal InitUiEntity containerPrefab;
-        
-        [SerializeField] internal List<IUiComponent> components = new List<IUiComponent>();
+        [SerializeField] internal List<UiComponent> components = new List<UiComponent>();
 
         internal void DestroySelf()
         {

@@ -1,7 +1,7 @@
 ﻿using Entitas;
 using UnityEngine;
 
-namespace UI
+namespace UI.Components
 {
     [Ui]
     public class ViewComponent : IComponent

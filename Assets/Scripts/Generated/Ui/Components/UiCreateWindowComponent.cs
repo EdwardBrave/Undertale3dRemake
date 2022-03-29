@@ -8,20 +8,22 @@
 //------------------------------------------------------------------------------
 public partial class UiEntity {
 
-    public UI.Open.CreateWindowComponent createWindow { get { return (UI.Open.CreateWindowComponent)GetComponent(UiComponentsLookup.CreateWindow); } }
+    public UI.Open.Components.CreateWindowComponent createWindow { get { return (UI.Open.Components.CreateWindowComponent)GetComponent(UiComponentsLookup.CreateWindow); } }
     public bool hasCreateWindow { get { return HasComponent(UiComponentsLookup.CreateWindow); } }
 
-    public void AddCreateWindow(UI.Open.InitUiEntity newData) {
+    public void AddCreateWindow(UI.Open.InitUiEntity newPrefab, UiEntity newContainer) {
         var index = UiComponentsLookup.CreateWindow;
-        var component = (UI.Open.CreateWindowComponent)CreateComponent(index, typeof(UI.Open.CreateWindowComponent));
-        component.data = newData;
+        var component = (UI.Open.Components.CreateWindowComponent)CreateComponent(index, typeof(UI.Open.Components.CreateWindowComponent));
+        component.prefab = newPrefab;
+        component.container = newContainer;
         AddComponent(index, component);
     }
 
-    public void ReplaceCreateWindow(UI.Open.InitUiEntity newData) {
+    public void ReplaceCreateWindow(UI.Open.InitUiEntity newPrefab, UiEntity newContainer) {
         var index = UiComponentsLookup.CreateWindow;
-        var component = (UI.Open.CreateWindowComponent)CreateComponent(index, typeof(UI.Open.CreateWindowComponent));
-        component.data = newData;
+        var component = (UI.Open.Components.CreateWindowComponent)CreateComponent(index, typeof(UI.Open.Components.CreateWindowComponent));
+        component.prefab = newPrefab;
+        component.container = newContainer;
         ReplaceComponent(index, component);
     }
 

@@ -1,6 +1,7 @@
-﻿
+﻿using UI.Components;
+
 namespace UI.Close
 {
     [Ui]
-    public class ProtectedComponent : IUiComponent { }
+    public class ProtectedComponent : UiComponent { }
 }

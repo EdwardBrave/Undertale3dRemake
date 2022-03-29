@@ -1,6 +1,7 @@
 ﻿using Core.UnityScene;
 using Entitas;
 using Input;
+using UI;
 
 namespace Main.GameStates
 {
@@ -12,7 +13,9 @@ namespace Main.GameStates
             return new ISystem[]
             {
                 new UnityInputInitSystem(contexts),
+                new UiInitSystem(contexts),
                 new InputProcessingSystems(contexts),
+                new UISystems(contexts),
                 new SceneInitSystem(contexts),
                 new SceneOffsetSystem(contexts),
                 new SceneCleanupSystem(contexts)
