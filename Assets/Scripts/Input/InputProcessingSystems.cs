@@ -7,7 +7,6 @@ namespace Input
         public InputProcessingSystems(Contexts contexts)
         {
             Add(new MotionInputProcessingSystem(contexts));
-            Add(new UIInputProcessingSystem(contexts));
             Add(new BattleInputProcessingSystem(contexts));
         }
     }
