@@ -15,17 +15,13 @@ public static class UiComponentsLookup {
     public const int Container = 4;
     public const int MainScreen = 5;
     public const int View = 6;
-    public const int Cancel = 7;
-    public const int Check = 8;
-    public const int Confirm = 9;
-    public const int Pressed = 10;
-    public const int Reject = 11;
-    public const int CloseAll = 12;
-    public const int CloseWindows = 13;
-    public const int OpenWindow = 14;
-    public const int CreateWindow = 15;
+    public const int UiEvent = 7;
+    public const int CloseAll = 8;
+    public const int CloseWindows = 9;
+    public const int OpenWindow = 10;
+    public const int CreateWindow = 11;
 
-    public const int TotalComponents = 16;
+    public const int TotalComponents = 12;
 
     public static readonly string[] componentNames = {
         "GlobalEvents",
@@ -35,11 +31,7 @@ public static class UiComponentsLookup {
         "Container",
         "MainScreen",
         "View",
-        "Cancel",
-        "Check",
-        "Confirm",
-        "Pressed",
-        "Reject",
+        "UiEvent",
         "CloseAll",
         "CloseWindows",
         "OpenWindow",
@@ -54,11 +46,7 @@ public static class UiComponentsLookup {
         typeof(UI.Components.ContainerComponent),
         typeof(UI.Components.MainScreenComponent),
         typeof(UI.Components.ViewComponent),
-        typeof(UI.Events.CancelComponent),
-        typeof(UI.Events.CheckComponent),
-        typeof(UI.Events.ConfirmComponent),
-        typeof(UI.Events.PressedComponent),
-        typeof(UI.Events.RejectComponent),
+        typeof(UI.Events.UiEventComponent),
         typeof(UI.Global.CloseAllComponent),
         typeof(UI.Global.CloseWindowsComponent),
         typeof(UI.Global.OpenWindowComponent),

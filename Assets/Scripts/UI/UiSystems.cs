@@ -1,4 +1,5 @@
 using UI.Close;
+using UI.Events;
 using UI.Open;
 
 namespace UI
@@ -9,6 +10,7 @@ namespace UI
         {
             Add(new CreateWindowSystem(contexts));
             Add(new CloseWindowCleanupSystem(contexts));
+            Add(new UiEventsCleanupSystem(contexts));
         }
     }
 }
