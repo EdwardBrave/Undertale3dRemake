@@ -129,23 +129,148 @@ MonoBehaviour:
     - {fileID: 4688731411528540544}
     valueData:
     - m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 8520199860604510170}
+          m_TargetAssemblyTypeName: UI.Events.UiDispatcher, Assembly-CSharp
+          m_MethodName: ActCloseAllWindows
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8520199860604510170}
+          m_TargetAssemblyTypeName: UI.Events.UiDispatcher, Assembly-CSharp
+          m_MethodName: ActOpenWindow
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1727056211955681344, guid: 6827498821d84494fbc90fe998111f2e,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UI.Open.InitUiEntity, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     - m_PersistentCalls:
         m_Calls: []
     - m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 8520199860604510170}
+          m_TargetAssemblyTypeName: UI.Events.UiDispatcher, Assembly-CSharp
+          m_MethodName: ActCloseAllWindows
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8520199860604510170}
+          m_TargetAssemblyTypeName: UI.Events.UiDispatcher, Assembly-CSharp
+          m_MethodName: ActOpenWindow
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 3844885341327234376, guid: 849944c6d2ecb4581b241e5b8268f86e,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UI.Open.InitUiEntity, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     - m_PersistentCalls:
         m_Calls: []
     - m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 8520199860604510170}
+          m_TargetAssemblyTypeName: UI.Events.UiDispatcher, Assembly-CSharp
+          m_MethodName: ActCloseAllWindows
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8520199860604510170}
+          m_TargetAssemblyTypeName: UI.Events.UiDispatcher, Assembly-CSharp
+          m_MethodName: ActOpenWindow
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4119333112501806833, guid: 9fb3fa39f5ef545acaba152049cbc6cf,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UI.Open.InitUiEntity, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     - m_PersistentCalls:
         m_Calls: []
     - m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 8520199860604510170}
+          m_TargetAssemblyTypeName: UI.Events.UiDispatcher, Assembly-CSharp
+          m_MethodName: ActCloseAllWindows
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8520199860604510170}
+          m_TargetAssemblyTypeName: UI.Events.UiDispatcher, Assembly-CSharp
+          m_MethodName: ActOpenWindow
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 7475787348328512329, guid: d5be9b1745c134a748ce3ff8e19ed7a9,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UI.Open.InitUiEntity, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     - m_PersistentCalls:
         m_Calls: []
     - m_PersistentCalls:
-        m_Calls: []
+        m_Calls:
+        - m_Target: {fileID: 8520199860604510170}
+          m_TargetAssemblyTypeName: UI.Events.UiDispatcher, Assembly-CSharp
+          m_MethodName: ActCloseAllWindows
+          m_Mode: 6
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 8520199860604510170}
+          m_TargetAssemblyTypeName: UI.Events.UiDispatcher, Assembly-CSharp
+          m_MethodName: ActOpenWindow
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 4616639416582013730, guid: 32040fc3d41014208b4a405badf4cb0c,
+              type: 3}
+            m_ObjectArgumentAssemblyTypeName: UI.Open.InitUiEntity, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
     - m_PersistentCalls:
         m_Calls: []
 --- !u!114 &3148819183217781770
@@ -171,20 +296,14 @@ MonoBehaviour:
     SerializationNodes:
     - Name: components
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[UI.Components.UiComponent, Assembly-CSharp]],
+      Data: 0|System.Collections.Generic.List`1[[UI.Common.UiComponent, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
-      Data: 2
+      Data: 1
     - Name: 
       Entry: 7
       Data: 1|UI.Close.ProtectedComponent, Assembly-CSharp
-    - Name: 
-      Entry: 8
-      Data: 
-    - Name: 
-      Entry: 7
-      Data: 2|UI.Animation.AnimationComponent, Assembly-CSharp
     - Name: 
       Entry: 8
       Data: 

@@ -8,19 +8,19 @@
 //------------------------------------------------------------------------------
 public partial class UiEntity {
 
-    public UI.Components.ContainerComponent container { get { return (UI.Components.ContainerComponent)GetComponent(UiComponentsLookup.Container); } }
+    public UI.Common.ContainerComponent container { get { return (UI.Common.ContainerComponent)GetComponent(UiComponentsLookup.Container); } }
     public bool hasContainer { get { return HasComponent(UiComponentsLookup.Container); } }
 
     public void AddContainer(System.Collections.Generic.List<UiEntity> newWindows) {
         var index = UiComponentsLookup.Container;
-        var component = (UI.Components.ContainerComponent)CreateComponent(index, typeof(UI.Components.ContainerComponent));
+        var component = (UI.Common.ContainerComponent)CreateComponent(index, typeof(UI.Common.ContainerComponent));
         component.windows = newWindows;
         AddComponent(index, component);
     }
 
     public void ReplaceContainer(System.Collections.Generic.List<UiEntity> newWindows) {
         var index = UiComponentsLookup.Container;
-        var component = (UI.Components.ContainerComponent)CreateComponent(index, typeof(UI.Components.ContainerComponent));
+        var component = (UI.Common.ContainerComponent)CreateComponent(index, typeof(UI.Common.ContainerComponent));
         component.windows = newWindows;
         ReplaceComponent(index, component);
     }

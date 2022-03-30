@@ -1,6 +1,6 @@
 ﻿using Entitas;
 
-namespace UI.Open.Components
+namespace UI.Open
 {
     [Ui]
     public class CreateWindowComponent : IComponent

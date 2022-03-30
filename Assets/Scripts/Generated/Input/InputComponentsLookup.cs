@@ -16,9 +16,8 @@ public static class InputComponentsLookup {
     public const int Fire = 5;
     public const int Look = 6;
     public const int Move = 7;
-    public const int GlobalEvents = 8;
 
-    public const int TotalComponents = 9;
+    public const int TotalComponents = 8;
 
     public static readonly string[] componentNames = {
         "Active",
@@ -28,8 +27,7 @@ public static class InputComponentsLookup {
         "UiInput",
         "Fire",
         "Look",
-        "Move",
-        "GlobalEvents"
+        "Move"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -40,7 +38,6 @@ public static class InputComponentsLookup {
         typeof(Input.Components.UiInputComponent),
         typeof(Input.Processing.Components.FireComponent),
         typeof(Input.Processing.Components.LookComponent),
-        typeof(Input.Processing.Components.MoveComponent),
-        typeof(Main.Globals.GlobalEventsComponent)
+        typeof(Input.Processing.Components.MoveComponent)
     };
 }

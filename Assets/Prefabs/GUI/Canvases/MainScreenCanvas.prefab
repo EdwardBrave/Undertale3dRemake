@@ -124,14 +124,14 @@ MonoBehaviour:
     SerializationNodes:
     - Name: components
       Entry: 7
-      Data: 0|System.Collections.Generic.List`1[[UI.Components.UiComponent, Assembly-CSharp]],
+      Data: 0|System.Collections.Generic.List`1[[UI.Common.UiComponent, Assembly-CSharp]],
         mscorlib
     - Name: 
       Entry: 12
       Data: 1
     - Name: 
       Entry: 7
-      Data: 1|UI.Components.ContainerComponent, Assembly-CSharp
+      Data: 1|UI.Common.ContainerComponent, Assembly-CSharp
     - Name: windows
       Entry: 7
       Data: 2|System.Collections.Generic.List`1[[UiEntity, Assembly-CSharp]], mscorlib

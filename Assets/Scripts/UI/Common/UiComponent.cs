@@ -1,7 +1,7 @@
 using Entitas;
 using Entitas.CodeGeneration.Attributes;
 
-namespace UI.Components
+namespace UI.Common
 {
     // Used for defining allowed entities for editing in the inspector
     [DontGenerate]

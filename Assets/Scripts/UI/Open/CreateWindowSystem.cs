@@ -50,6 +50,7 @@ namespace UI.Open
             }
             
             var newViewObject = Object.Instantiate(basePrefab.gameObject, parent);
+            newViewObject.name = basePrefab.gameObject.name;
             newViewObject.Link(uiEntity);
             uiEntity.AddView(newViewObject, container);
 

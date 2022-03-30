@@ -22,14 +22,23 @@ namespace UI.Close
                     entity.RemoveClose();
                     continue;
                 }
-                
+
+                if (entity.hasContainer && entity.container.windows.Count > 0)
+                {
+                    foreach (var childEntity in entity.container.windows)
+                    {
+                        if (!childEntity.hasClose)
+                        {
+                            childEntity.AddClose(entity.close.isForce);
+                        }
+                    }
+                    continue;
+                }
+
                 if (entity.hasView)
                 {
                     entity.view.obj.Unlink();
-                    if (!entity.isAnimation)
-                    {
-                        entity.view.obj.DestroyGameObject();
-                    }
+                    entity.view.obj.DestroyGameObject();
                     entity.view.parent?.container.windows.Remove(entity);
                 }
 

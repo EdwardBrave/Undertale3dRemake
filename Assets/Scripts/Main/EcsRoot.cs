@@ -54,10 +54,6 @@ namespace Main
                 _instance = this;
 
                 contexts.Reset();
-                contexts.game.isGlobalEvents = true;
-                contexts.ui.isGlobalEvents = true;
-                contexts.core.isGlobalEvents = true;
-                contexts.input.isGlobalEvents = true;
                 contexts.core.SetGlobalGameConfigs(globalGameConfigs);
             
                 _rootStateMachine = new RootStateMachine(gameState, Contexts.sharedInstance);

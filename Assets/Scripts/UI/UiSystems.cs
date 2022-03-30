@@ -9,8 +9,8 @@ namespace UI
         public UISystems(Contexts contexts)
         {
             Add(new CreateWindowSystem(contexts));
-            Add(new CloseWindowCleanupSystem(contexts));
             Add(new UiEventsCleanupSystem(contexts));
+            Add(new CloseWindowCleanupSystem(contexts));
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace UI.Components
+namespace UI.Common
 {
     [Ui]
     public class ContainerComponent : UiComponent

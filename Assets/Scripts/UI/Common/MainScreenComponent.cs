@@ -1,7 +1,7 @@
 ﻿using Entitas;
 using Entitas.CodeGeneration.Attributes;
 
-namespace UI.Components
+namespace UI.Common
 {
     [Ui, Unique]
     public class MainScreenComponent: IComponent

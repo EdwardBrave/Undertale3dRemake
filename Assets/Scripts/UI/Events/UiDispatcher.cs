@@ -1,6 +1,6 @@
 ﻿using System;
+using Entitas;
 using Entitas.Unity;
-using Main.Globals;
 using Sirenix.OdinInspector;
 using Tools;
 using Tools.UiListeners;
@@ -25,23 +25,61 @@ namespace UI.Events
         private ButtonEventsDictionary buttonEvents = new ButtonEventsDictionary();
 
         private UiEntity _linkedEntity = null;
+        private UiContext _uiContext = null;
         
         #endregion
         ////////////////////////////////////////////////////////////////////
         #region Interface
 
-        public void ActOpenWindow(InitUiEntity data) => EcsEnvironment.UiEventsEntity.ReplaceOpenWindow(data);
-
-        public void ActClose(InitUiEntity data) => EcsEnvironment.UiEventsEntity.ReplaceCloseWindows(data, false);
+        public void ActOpenWindow(InitUiEntity prefab)
+        {
+            var newEntity = _uiContext.CreateEntity();
+            newEntity.AddCreateWindow(prefab, _uiContext.mainScreenEntity);
+        }
         
-        public void ActForceClose(InitUiEntity data) => EcsEnvironment.UiEventsEntity.ReplaceCloseWindows(data, true);
+        public void ActCloseSelf(bool isForce = false) => LinkedEntity.ReplaceClose(isForce);
 
-        public void ActCloseAllWindows(bool isForce = false) => EcsEnvironment.UiEventsEntity.ReplaceCloseAll(isForce);
+        public void ActClose(InitUiEntity example) => CloseViewsWithName(example.name, false);
+        
+        public void ActForceClose(InitUiEntity example) => CloseViewsWithName(example.name, true);
+
+        public void ActCloseAllWindows(bool isForce = false)
+        {
+            foreach (var entity in _uiContext.GetEntities(UiMatcher.AllOf(UiMatcher.View).NoneOf(UiMatcher.Container)))
+            {
+                entity.ReplaceClose(isForce);
+            }
+        }
 
         #endregion
         ////////////////////////////////////////////////////////////////////
-        #region Implementation
+        #region Unity Events
+        
+        private void Awake()
+        {
+            _uiContext = Contexts.sharedInstance.ui;
+        }
 
+        private void OnEnable()
+        {
+            foreach (var button in buttonEvents.Keys)
+            {
+                button.AddListener(OnEvent);
+            }
+        }
+        
+        private void OnDisable()
+        {
+            foreach (var button in buttonEvents.Keys)
+            {
+                button.RemoveListener(OnEvent);
+            }
+        }
+        
+        #endregion
+        ////////////////////////////////////////////////////////////////////
+        #region Implementation
+        
         private UiEntity LinkedEntity
         {
             get
@@ -67,26 +105,21 @@ namespace UI.Events
             buttonEvents = newButtonEvents;
         }
 
-        private void OnEnable()
-        {
-            foreach (var button in buttonEvents.Keys)
-            {
-                button.AddListener(OnEvent);
-            }
-        }
-        
-        private void OnDisable()
-        {
-            foreach (var button in buttonEvents.Keys)
-            {
-                button.RemoveListener(OnEvent);
-            }
-        }
-        
         private void OnEvent(UIButton sender)
         {
             buttonEvents[sender]?.Invoke();
             LinkedEntity?.ReplaceUiEvent(sender);
+        }
+
+        private void CloseViewsWithName(string viewName, bool isForce = false)
+        {
+            foreach(var entity in _uiContext.GetEntities(UiMatcher.View))
+            {
+                if (entity.view.obj.name == viewName)
+                {
+                    entity.ReplaceClose(isForce);
+                }
+            }
         }
         
         #endregion

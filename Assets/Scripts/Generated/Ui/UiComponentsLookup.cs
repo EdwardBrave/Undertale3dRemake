@@ -8,48 +8,33 @@
 //------------------------------------------------------------------------------
 public static class UiComponentsLookup {
 
-    public const int GlobalEvents = 0;
-    public const int Animation = 1;
-    public const int Close = 2;
-    public const int Protected = 3;
-    public const int Container = 4;
-    public const int MainScreen = 5;
-    public const int View = 6;
-    public const int UiEvent = 7;
-    public const int CloseAll = 8;
-    public const int CloseWindows = 9;
-    public const int OpenWindow = 10;
-    public const int CreateWindow = 11;
+    public const int Close = 0;
+    public const int Protected = 1;
+    public const int Container = 2;
+    public const int MainScreen = 3;
+    public const int View = 4;
+    public const int UiEvent = 5;
+    public const int CreateWindow = 6;
 
-    public const int TotalComponents = 12;
+    public const int TotalComponents = 7;
 
     public static readonly string[] componentNames = {
-        "GlobalEvents",
-        "Animation",
         "Close",
         "Protected",
         "Container",
         "MainScreen",
         "View",
         "UiEvent",
-        "CloseAll",
-        "CloseWindows",
-        "OpenWindow",
         "CreateWindow"
     };
 
     public static readonly System.Type[] componentTypes = {
-        typeof(Main.Globals.GlobalEventsComponent),
-        typeof(UI.Animation.AnimationComponent),
         typeof(UI.Close.CloseComponent),
         typeof(UI.Close.ProtectedComponent),
-        typeof(UI.Components.ContainerComponent),
-        typeof(UI.Components.MainScreenComponent),
-        typeof(UI.Components.ViewComponent),
+        typeof(UI.Common.ContainerComponent),
+        typeof(UI.Common.MainScreenComponent),
+        typeof(UI.Common.ViewComponent),
         typeof(UI.Events.UiEventComponent),
-        typeof(UI.Global.CloseAllComponent),
-        typeof(UI.Global.CloseWindowsComponent),
-        typeof(UI.Global.OpenWindowComponent),
-        typeof(UI.Open.Components.CreateWindowComponent)
+        typeof(UI.Open.CreateWindowComponent)
     };
 }

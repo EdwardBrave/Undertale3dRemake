@@ -1,4 +1,4 @@
-﻿using UI.Components;
+﻿using UI.Common;
 
 namespace UI.Close
 {

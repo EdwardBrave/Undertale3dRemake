@@ -35,7 +35,7 @@ public partial class UiContext {
 //------------------------------------------------------------------------------
 public partial class UiEntity {
 
-    static readonly UI.Components.MainScreenComponent mainScreenComponent = new UI.Components.MainScreenComponent();
+    static readonly UI.Common.MainScreenComponent mainScreenComponent = new UI.Common.MainScreenComponent();
 
     public bool isMainScreen {
         get { return HasComponent(UiComponentsLookup.MainScreen); }
