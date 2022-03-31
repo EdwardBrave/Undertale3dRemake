@@ -1,5 +1,6 @@
 ﻿using Data;
 using UnityEngine;
+using UnityEngine.Localization.Settings;
 #if UNITY_EDITOR
 using Sirenix.OdinInspector;
 #endif
@@ -52,12 +53,17 @@ namespace Main
             else
             {
                 _instance = this;
-
-                contexts.Reset();
-                contexts.core.SetGlobalGameConfigs(globalGameConfigs);
-            
+                InitGlobals(contexts);
                 _rootStateMachine = new RootStateMachine(gameState, Contexts.sharedInstance);
             }
+        }
+
+        private void InitGlobals(Contexts contexts)
+        {
+            contexts.Reset();
+            var coreEntity = contexts.core.CreateEntity();
+            coreEntity.AddLocale(LocalizationSettings.SelectedLocale.Identifier);
+            coreEntity.AddGlobalGameConfigs(globalGameConfigs);
         }
         
         private void Update()

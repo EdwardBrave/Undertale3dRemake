@@ -8,20 +8,22 @@
 //------------------------------------------------------------------------------
 public static class CoreComponentsLookup {
 
-    public const int SaveUserProgress = 0;
-    public const int UserData = 1;
-    public const int CloseScene = 2;
-    public const int LoadScene = 3;
-    public const int Scene = 4;
-    public const int SceneLoading = 5;
-    public const int SceneOffset = 6;
-    public const int GlobalGameConfigs = 7;
-    public const int ChangeGameState = 8;
-    public const int GameState = 9;
+    public const int Locale = 0;
+    public const int SaveUserProgress = 1;
+    public const int UserData = 2;
+    public const int CloseScene = 3;
+    public const int LoadScene = 4;
+    public const int Scene = 5;
+    public const int SceneLoading = 6;
+    public const int SceneOffset = 7;
+    public const int GlobalGameConfigs = 8;
+    public const int ChangeGameState = 9;
+    public const int GameState = 10;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
+        "Locale",
         "SaveUserProgress",
         "UserData",
         "CloseScene",
@@ -35,6 +37,7 @@ public static class CoreComponentsLookup {
     };
 
     public static readonly System.Type[] componentTypes = {
+        typeof(Core.Localization.LocaleComponent),
         typeof(Core.Save.SaveUserProgressComponent),
         typeof(Core.Save.UserDataComponent),
         typeof(Core.UnityScene.Components.CloseSceneComponent),

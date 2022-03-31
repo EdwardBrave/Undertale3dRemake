@@ -7,6 +7,7 @@ using Tools.UiListeners;
 using UI.Open;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Localization;
 using UIButton = UnityEngine.UI.Button;
 
 namespace UI.Events
@@ -25,7 +26,7 @@ namespace UI.Events
         private ButtonEventsDictionary buttonEvents = new ButtonEventsDictionary();
 
         private UiEntity _linkedEntity = null;
-        private UiContext _uiContext = null;
+        private Contexts _contexts = null;
         
         #endregion
         ////////////////////////////////////////////////////////////////////
@@ -33,8 +34,8 @@ namespace UI.Events
 
         public void ActOpenWindow(InitUiEntity prefab)
         {
-            var newEntity = _uiContext.CreateEntity();
-            newEntity.AddCreateWindow(prefab, _uiContext.mainScreenEntity);
+            var newEntity = _contexts.ui.CreateEntity();
+            newEntity.AddCreateWindow(prefab, _contexts.ui.mainScreenEntity);
         }
         
         public void ActCloseSelf(bool isForce = false) => LinkedEntity.ReplaceClose(isForce);
@@ -45,10 +46,15 @@ namespace UI.Events
 
         public void ActCloseAllWindows(bool isForce = false)
         {
-            foreach (var entity in _uiContext.GetEntities(UiMatcher.AllOf(UiMatcher.View).NoneOf(UiMatcher.Container)))
+            foreach (var entity in _contexts.ui.GetEntities(UiMatcher.AllOf(UiMatcher.View).NoneOf(UiMatcher.Container)))
             {
                 entity.ReplaceClose(isForce);
             }
+        }
+        
+        public void ActChangeLocale(string lang)
+        {
+            _contexts.core.ReplaceLocale(new LocaleIdentifier(lang));
         }
 
         #endregion
@@ -57,7 +63,7 @@ namespace UI.Events
         
         private void Awake()
         {
-            _uiContext = Contexts.sharedInstance.ui;
+            _contexts = Contexts.sharedInstance;
         }
 
         private void OnEnable()
@@ -113,7 +119,7 @@ namespace UI.Events
 
         private void CloseViewsWithName(string viewName, bool isForce = false)
         {
-            foreach(var entity in _uiContext.GetEntities(UiMatcher.View))
+            foreach(var entity in _contexts.ui.GetEntities(UiMatcher.View))
             {
                 if (entity.view.obj.name == viewName)
                 {
