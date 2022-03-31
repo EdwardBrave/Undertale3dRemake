@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Entitas;
 using UnityEngine;
 
 namespace UI.Common
@@ -7,6 +8,6 @@ namespace UI.Common
     public class ContainerComponent : UiComponent
     {
         [HideInInspector]
-        public List<UiEntity> windows = new List<UiEntity>();
+        public List<IEntity> windows = new List<IEntity>();
     }
 }

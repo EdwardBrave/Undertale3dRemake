@@ -11,14 +11,14 @@ public partial class UiEntity {
     public UI.Common.ContainerComponent container { get { return (UI.Common.ContainerComponent)GetComponent(UiComponentsLookup.Container); } }
     public bool hasContainer { get { return HasComponent(UiComponentsLookup.Container); } }
 
-    public void AddContainer(System.Collections.Generic.List<UiEntity> newWindows) {
+    public void AddContainer(System.Collections.Generic.List<Entitas.IEntity> newWindows) {
         var index = UiComponentsLookup.Container;
         var component = (UI.Common.ContainerComponent)CreateComponent(index, typeof(UI.Common.ContainerComponent));
         component.windows = newWindows;
         AddComponent(index, component);
     }
 
-    public void ReplaceContainer(System.Collections.Generic.List<UiEntity> newWindows) {
+    public void ReplaceContainer(System.Collections.Generic.List<Entitas.IEntity> newWindows) {
         var index = UiComponentsLookup.Container;
         var component = (UI.Common.ContainerComponent)CreateComponent(index, typeof(UI.Common.ContainerComponent));
         component.windows = newWindows;

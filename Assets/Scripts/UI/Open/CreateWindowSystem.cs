@@ -39,7 +39,7 @@ namespace UI.Open
             if (container is {hasContainer: true, hasView: true})
             {
 
-                var windowsList = container.container.windows;
+                var windowsList = container.container.windows ?? new List<IEntity>();
                 windowsList.Add(uiEntity);
                 container.ReplaceContainer(windowsList);
                 parent = container.view.obj.transform;

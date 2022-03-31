@@ -27,9 +27,9 @@ namespace UI.Close
                 {
                     foreach (var childEntity in entity.container.windows)
                     {
-                        if (!childEntity.hasClose)
+                        if (childEntity is UiEntity {hasClose: true} uiChildEntity)
                         {
-                            childEntity.AddClose(entity.close.isForce);
+                            uiChildEntity.AddClose(entity.close.isForce);
                         }
                     }
                     continue;
@@ -52,7 +52,7 @@ namespace UI.Close
             {
                 foreach (var subEntity in entity.container.windows)
                 {
-                    if (IsRecursiveProtected(subEntity))
+                    if (subEntity is UiEntity uiSubEntity && IsRecursiveProtected(uiSubEntity))
                     {
                         return true;
                     }
