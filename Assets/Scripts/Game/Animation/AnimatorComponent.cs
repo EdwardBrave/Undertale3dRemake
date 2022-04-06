@@ -1,9 +1,10 @@
+using Game.Common;
 using UnityEngine;
 
 namespace Game.Animation
 {
     [Game]
-    public class AnimatorComponent: IGameComponent
+    public class AnimatorComponent: GameComponent
     {
         public Animator value;
     }

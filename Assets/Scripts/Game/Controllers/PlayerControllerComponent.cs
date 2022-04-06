@@ -1,5 +1,7 @@
+using Game.Common;
+
 namespace Game.Controllers
 {
     [Game]
-    public class PlayerControllerComponent: IGameComponent { }
+    public class PlayerControllerComponent: GameComponent { }
 }

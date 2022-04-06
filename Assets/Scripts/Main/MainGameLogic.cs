@@ -1,6 +1,7 @@
-﻿using Core.Localization;
-using Core.UnityScene;
+﻿using Core;
+using Core.Localization;
 using Entitas;
+using Game;
 using Input;
 using UI;
 
@@ -17,9 +18,8 @@ namespace Main
                 new UiInitSystem(contexts),
                 new InputProcessingSystems(contexts),
                 new UISystems(contexts),
-                new SceneInitSystem(contexts),
-                new SceneOffsetSystem(contexts),
-                new SceneCleanupSystem(contexts),
+                new GameBindingSystems(contexts),
+                new SceneSystems(contexts),
             };
         }
     }

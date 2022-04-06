@@ -53,7 +53,6 @@ namespace Main
             else
             {
                 _instance = this;
-                contexts.Reset();
                 contexts.core.SetGlobalGameConfigs(globalGameConfigs);
                 _mainGameLogic = new MainGameLogic();
                 _mainGameLogic.InitSystems(contexts);

@@ -8,26 +8,20 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Game.ViewComponent view { get { return (Game.ViewComponent)GetComponent(GameComponentsLookup.View); } }
+    public Game.Common.ViewComponent view { get { return (Game.Common.ViewComponent)GetComponent(GameComponentsLookup.View); } }
     public bool hasView { get { return HasComponent(GameComponentsLookup.View); } }
 
-    public void AddView(UnityEngine.GameObject newObj, UnityEngine.Vector3 newPosition, UnityEngine.Vector3 newRotation, UnityEngine.Vector3 newScale) {
+    public void AddView(UnityEngine.GameObject newObj) {
         var index = GameComponentsLookup.View;
-        var component = (Game.ViewComponent)CreateComponent(index, typeof(Game.ViewComponent));
+        var component = (Game.Common.ViewComponent)CreateComponent(index, typeof(Game.Common.ViewComponent));
         component.obj = newObj;
-        component.Position = newPosition;
-        component.Rotation = newRotation;
-        component.Scale = newScale;
         AddComponent(index, component);
     }
 
-    public void ReplaceView(UnityEngine.GameObject newObj, UnityEngine.Vector3 newPosition, UnityEngine.Vector3 newRotation, UnityEngine.Vector3 newScale) {
+    public void ReplaceView(UnityEngine.GameObject newObj) {
         var index = GameComponentsLookup.View;
-        var component = (Game.ViewComponent)CreateComponent(index, typeof(Game.ViewComponent));
+        var component = (Game.Common.ViewComponent)CreateComponent(index, typeof(Game.Common.ViewComponent));
         component.obj = newObj;
-        component.Position = newPosition;
-        component.Rotation = newRotation;
-        component.Scale = newScale;
         ReplaceComponent(index, component);
     }
 

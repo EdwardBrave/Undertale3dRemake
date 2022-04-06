@@ -7,26 +7,18 @@ using Object = UnityEngine.Object;
 
 namespace UI.Open
 {
-    public class CreateWindowSystem: ReactiveSystem<UiEntity>
+    public class CreateWindowSystem: IExecuteSystem
     {
+        private readonly IGroup<UiEntity> _creatorsGroup;
 
-        public CreateWindowSystem(Contexts contexts) : base(contexts.ui)
+        public CreateWindowSystem(Contexts contexts)
         {
+            _creatorsGroup = contexts.ui.GetGroup(UiMatcher.CreateWindow);
         }
-
-        protected override ICollector<UiEntity> GetTrigger(IContext<UiEntity> context)
+        
+        public void Execute()
         {
-            return context.CreateCollector(UiMatcher.CreateWindow);
-        }
-
-        protected override bool Filter(UiEntity entity)
-        {
-            return entity.hasCreateWindow && !entity.hasView;
-        }
-
-        protected override void Execute(List<UiEntity> entities)
-        {
-            foreach (var entity in entities)
+            foreach (var entity in _creatorsGroup.GetEntities())
             {
                 InitWindow(entity, entity.createWindow.prefab, entity.createWindow.container);
             }
@@ -53,14 +45,18 @@ namespace UI.Open
             newViewObject.name = basePrefab.gameObject.name;
             newViewObject.Link(uiEntity);
             uiEntity.AddView(newViewObject, container);
+            var initUiEntity = newViewObject.GetComponent<InitUiEntity>();
 
-            foreach (var component in basePrefab.components)
+            foreach (var component in initUiEntity.components)
             {
                 int index = Array.IndexOf(UiComponentsLookup.componentTypes, component.GetType());
-                uiEntity.AddComponent(index, component);
+                if (!uiEntity.HasComponent(index))
+                {
+                    uiEntity.AddComponent(index, component);
+                }
             }
 
-            newViewObject.GetComponent<InitUiEntity>()?.DestroySelf();
+            initUiEntity.DestroySelf();
             uiEntity.RemoveCreateWindow();
         }
     }

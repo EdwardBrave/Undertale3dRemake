@@ -38,11 +38,11 @@ namespace Game.Motion
                     entity.motion.speed, entity.motion.maxSpeed, 10 * Time.deltaTime);
                 entity.ReplaceMotion(entity.motion.maxSpeed, deltaSpeed);
                 
-                entity.view.Position += entity.motion.speed * Time.deltaTime * vector;
+                entity.view.transform.position += entity.motion.speed * Time.deltaTime * vector;
                 float angle = Mathf.Atan2(vector.x, vector.z) * 57.2957795f;
-                float speed = (Mathf.Abs(entity.view.Rotation.y - angle) + 360 ) * Time.deltaTime;
-                angle = Mathf.MoveTowardsAngle(entity.view.Rotation.y, angle, speed);
-                entity.view.Rotation = new Vector3(entity.view.Rotation.x, angle, entity.view.Rotation.z);
+                float speed = (Mathf.Abs(entity.view.transform.eulerAngles.y - angle) + 360 ) * Time.deltaTime;
+                angle = Mathf.MoveTowardsAngle(entity.view.transform.eulerAngles.y, angle, speed);
+                entity.view.transform.eulerAngles = new Vector3(entity.view.transform.eulerAngles.x, angle, entity.view.transform.eulerAngles.z);
             }
         }
 
