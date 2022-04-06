@@ -8,16 +8,20 @@ namespace Main
     public enum RegisteredGameState
     {
         None,
-        BattleGameState,
+        MainMenuGameState,
+        TravelGameState,
         CutSceneGameState,
+        BattleGameState,
     }
 
     public static class GameStatesLookup
     {
         private static Dictionary<RegisteredGameState, Type> _states = new Dictionary<RegisteredGameState, Type>
         {
-            {RegisteredGameState.BattleGameState, typeof(BattleGameState)},
+            {RegisteredGameState.MainMenuGameState, typeof(MainMenuGameState)},
+            {RegisteredGameState.TravelGameState, typeof(TravelGameState)},
             {RegisteredGameState.CutSceneGameState, typeof(CutSceneGameState)},
+            {RegisteredGameState.BattleGameState, typeof(BattleGameState)},
         };
 
         public static GameState GetState(RegisteredGameState gameStateTag)

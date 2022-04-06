@@ -2,7 +2,7 @@
 
 namespace Main.GameStates
 {
-    public class BattleGameState: GameState
+    public class MainMenuGameState: GameState
     {
         
         protected override ISystem[] GetSystems(Contexts contexts)

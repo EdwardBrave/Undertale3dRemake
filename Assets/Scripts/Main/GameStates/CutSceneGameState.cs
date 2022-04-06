@@ -7,7 +7,7 @@ namespace Main.GameStates
         
         protected override ISystem[] GetSystems(Contexts contexts)
         {
-            return new ISystem[]{ new CutSceneSystems(contexts) };
+            return new ISystem[]{ };
         }
     }
 }
