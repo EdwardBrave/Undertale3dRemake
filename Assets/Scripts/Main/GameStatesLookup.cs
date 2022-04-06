@@ -8,7 +8,6 @@ namespace Main
     public enum RegisteredGameState
     {
         None,
-        InitGameState,
         BattleGameState,
         CutSceneGameState,
     }
@@ -17,7 +16,6 @@ namespace Main
     {
         private static Dictionary<RegisteredGameState, Type> _states = new Dictionary<RegisteredGameState, Type>
         {
-            {RegisteredGameState.InitGameState, typeof(InitGameState)},
             {RegisteredGameState.BattleGameState, typeof(BattleGameState)},
             {RegisteredGameState.CutSceneGameState, typeof(CutSceneGameState)},
         };

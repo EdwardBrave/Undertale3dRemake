@@ -1,6 +1,5 @@
 ﻿using Data;
 using UnityEngine;
-using UnityEngine.Localization.Settings;
 #if UNITY_EDITOR
 using Sirenix.OdinInspector;
 #endif
@@ -23,6 +22,7 @@ namespace Main
         [SerializeField] private GlobalGameConfigs globalGameConfigs;
         
         private RootStateMachine _rootStateMachine;
+        private MainGameLogic _mainGameLogic;
 
         #endregion
         ////////////////////////////////////////////////////////////////////
@@ -53,29 +53,34 @@ namespace Main
             else
             {
                 _instance = this;
-                InitGlobals(contexts);
-                _rootStateMachine = new RootStateMachine(gameState, Contexts.sharedInstance);
+                contexts.Reset();
+                contexts.core.SetGlobalGameConfigs(globalGameConfigs);
+                _mainGameLogic = new MainGameLogic();
+                _mainGameLogic.InitSystems(contexts);
+                _mainGameLogic.Activate();
+                _rootStateMachine = new RootStateMachine(gameState, contexts);
             }
-        }
-
-        private void InitGlobals(Contexts contexts)
-        {
-            contexts.Reset();
-            var coreEntity = contexts.core.CreateEntity();
-            coreEntity.AddLocale(LocalizationSettings.SelectedLocale.Identifier);
-            coreEntity.AddGlobalGameConfigs(globalGameConfigs);
         }
         
         private void Update()
         {
+            _mainGameLogic.Execute();
             _rootStateMachine.Execute();
         }
         
         private void LateUpdate()
         {
+            _mainGameLogic.Cleanup();
             _rootStateMachine.Cleanup();
         }
         
+        private void OnDestroy()
+        {
+            _rootStateMachine.TearDown();
+            _mainGameLogic.Deactivate();
+            _mainGameLogic.TearDown();
+        }
+
         #endregion
         ////////////////////////////////////////////////////////////////////
     }

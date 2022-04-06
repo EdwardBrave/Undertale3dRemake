@@ -4,11 +4,10 @@ using Entitas;
 using Input;
 using UI;
 
-namespace Main.GameStates
+namespace Main
 {
-    public class InitGameState: GameState
+    public class MainGameLogic: GameState
     {
-        
         protected override ISystem[] GetSystems(Contexts contexts)
         {
             return new ISystem[]
@@ -20,7 +19,7 @@ namespace Main.GameStates
                 new UISystems(contexts),
                 new SceneInitSystem(contexts),
                 new SceneOffsetSystem(contexts),
-                new SceneCleanupSystem(contexts)
+                new SceneCleanupSystem(contexts),
             };
         }
     }

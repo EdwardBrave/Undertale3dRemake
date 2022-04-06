@@ -78,7 +78,7 @@ namespace Main
             }
         }
 
-        private void TearDown()
+        public void TearDown()
         {
             while (_states.Count > 0)
             {

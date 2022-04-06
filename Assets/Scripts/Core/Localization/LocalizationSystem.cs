@@ -5,22 +5,21 @@ using UnityEngine.Localization.Settings;
 
 namespace Core.Localization
 {
-    public class LocalizationSystem: IReactiveSystem
+    public class LocalizationSystem: IInitializeSystem, IExecuteSystem, ITearDownSystem
     {
         private readonly CoreContext _coreContext;
-        private readonly ICollector<CoreEntity> _localeCollector;
+        private ICollector<CoreEntity> _localeCollector;
 
         public LocalizationSystem(Contexts contexts)
         {
             _coreContext = contexts.core;
-            _localeCollector = _coreContext.CreateCollector(CoreMatcher.Locale);
-            _localeCollector.Deactivate();
         }
-
-        public void Activate()
+        
+        public void Initialize()
         {
+            _coreContext.globalGameConfigsEntity.AddLocale(LocalizationSettings.SelectedLocale.Identifier);
             LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
-            _localeCollector.Activate();
+            _localeCollector = _coreContext.CreateCollector(CoreMatcher.Locale);
         }
 
         public void Execute()
@@ -46,14 +45,9 @@ namespace Core.Localization
             _localeCollector.ClearCollectedEntities();
         }
 
-        public void Deactivate()
+        public void TearDown()
         {
-            LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
             _localeCollector.Deactivate();
-        }
-
-        public void Clear()
-        {
             LocalizationSettings.SelectedLocaleChanged -= OnLocaleChanged;
             _localeCollector.ClearCollectedEntities();
         }
