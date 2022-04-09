@@ -1,4 +1,5 @@
 ﻿using Entitas;
+using Game;
 
 namespace Main.GameStates
 {
@@ -7,7 +8,10 @@ namespace Main.GameStates
         
         protected override ISystem[] GetSystems(Contexts contexts)
         {
-            return new ISystem[]{ };
+            return new ISystem[]
+            {
+                new CollisionSystems(contexts),
+            };
         }
     }
 }

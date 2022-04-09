@@ -8,20 +8,20 @@
 //------------------------------------------------------------------------------
 public partial class GameEntity {
 
-    public Game.Reaction.ColliderComponent collider { get { return (Game.Reaction.ColliderComponent)GetComponent(GameComponentsLookup.Collider); } }
+    public Game.Collision.ColliderComponent collider { get { return (Game.Collision.ColliderComponent)GetComponent(GameComponentsLookup.Collider); } }
     public bool hasCollider { get { return HasComponent(GameComponentsLookup.Collider); } }
 
-    public void AddCollider(System.Collections.Generic.List<GameEntity> newList) {
+    public void AddCollider(Game.Collision.CollisionListener newListener) {
         var index = GameComponentsLookup.Collider;
-        var component = (Game.Reaction.ColliderComponent)CreateComponent(index, typeof(Game.Reaction.ColliderComponent));
-        component.list = newList;
+        var component = (Game.Collision.ColliderComponent)CreateComponent(index, typeof(Game.Collision.ColliderComponent));
+        component.listener = newListener;
         AddComponent(index, component);
     }
 
-    public void ReplaceCollider(System.Collections.Generic.List<GameEntity> newList) {
+    public void ReplaceCollider(Game.Collision.CollisionListener newListener) {
         var index = GameComponentsLookup.Collider;
-        var component = (Game.Reaction.ColliderComponent)CreateComponent(index, typeof(Game.Reaction.ColliderComponent));
-        component.list = newList;
+        var component = (Game.Collision.ColliderComponent)CreateComponent(index, typeof(Game.Collision.ColliderComponent));
+        component.listener = newListener;
         ReplaceComponent(index, component);
     }
 

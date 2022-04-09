@@ -12,26 +12,28 @@ public static class GameComponentsLookup {
     public const int BindEntity = 1;
     public const int CreateEntity = 2;
     public const int Dispose = 3;
-    public const int View = 4;
-    public const int PlayerController = 5;
-    public const int Follow = 6;
-    public const int Motion = 7;
-    public const int MoveInDirection = 8;
-    public const int Collider = 9;
+    public const int Collider = 4;
+    public const int Collisions = 5;
+    public const int Triggers = 6;
+    public const int View = 7;
+    public const int PlayerController = 8;
+    public const int Motion = 9;
+    public const int MoveInDirection = 10;
 
-    public const int TotalComponents = 10;
+    public const int TotalComponents = 11;
 
     public static readonly string[] componentNames = {
         "Animator",
         "BindEntity",
         "CreateEntity",
         "Dispose",
+        "Collider",
+        "Collisions",
+        "Triggers",
         "View",
         "PlayerController",
-        "Follow",
         "Motion",
-        "MoveInDirection",
-        "Collider"
+        "MoveInDirection"
     };
 
     public static readonly System.Type[] componentTypes = {
@@ -39,11 +41,12 @@ public static class GameComponentsLookup {
         typeof(Game.Binding.Components.BindEntityComponent),
         typeof(Game.Binding.Components.CreateEntityComponent),
         typeof(Game.Binding.Components.DisposeComponent),
+        typeof(Game.Collision.ColliderComponent),
+        typeof(Game.Collision.CollisionsComponent),
+        typeof(Game.Collision.TriggersComponent),
         typeof(Game.Common.ViewComponent),
         typeof(Game.Controllers.PlayerControllerComponent),
-        typeof(Game.Follow.FollowComponent),
         typeof(Game.Motion.MotionComponent),
-        typeof(Game.Motion.MoveInDirectionComponent),
-        typeof(Game.Reaction.ColliderComponent)
+        typeof(Game.Motion.MoveInDirectionComponent)
     };
 }
