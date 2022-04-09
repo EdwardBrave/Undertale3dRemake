@@ -25,6 +25,7 @@ namespace Game.Binding
         private void InitEntity(GameEntity gameEntity, BindGameEntity basePrefab)
         {
             var newViewObject = Object.Instantiate(basePrefab.gameObject);
+            newViewObject.name = basePrefab.gameObject.name;
             newViewObject.Link(gameEntity);
             gameEntity.AddView(newViewObject);
             var loadGameEntity = newViewObject.GetComponent<BindGameEntity>();
