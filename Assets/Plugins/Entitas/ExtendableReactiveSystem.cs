@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Entitas
+namespace Entitas.Unity
 {
     public abstract class ExtendableReactiveSystem<TEntity> : IReactiveSystem, IExecuteSystem, ISystem
         where TEntity : class, IEntity
@@ -11,14 +11,26 @@ namespace Entitas
       
       protected ExtendableReactiveSystem(IContext<TEntity> context)
     {
-      this._collector = this.GetTrigger(context);
-      this._buffer = new List<TEntity>();
+      _collector = GetTrigger(context);
+      _buffer = new List<TEntity>();
     }
 
     protected ExtendableReactiveSystem(ICollector<TEntity> collector)
     {
-      this._collector = collector;
-      this._buffer = new List<TEntity>();
+      _collector = collector;
+      _buffer = new List<TEntity>();
+    }
+
+    /// <summary>
+    /// Manually add some entities to the _collector
+    /// </summary>
+    protected void AddCollectedEntities(IEnumerable<TEntity> entities)
+    {
+      foreach (var entity in entities)
+      {
+        _collector.collectedEntities.Add(entity);
+        entity.Retain((object) _collector);
+      }
     }
 
     /// Specify the collector that will trigger the ExtendedReactiveSystem.
@@ -35,56 +47,56 @@ namespace Entitas
     ///             based on the specified Collector.
     ///             ReactiveSystem are activated by default.
     ///         <footer><a href="https://www.google.com/search?q=Entitas.ReactiveSystem%601.Activate">`ReactiveSystem.Activate` on google.com</a></footer>
-    public virtual void Activate() => this._collector.Activate();
+    public virtual void Activate() => _collector.Activate();
 
     /// Deactivates the ReactiveSystem.
     ///             No changes will be tracked while deactivated.
     ///             This will also clear the ReactiveSystem.
     ///             ReactiveSystem are activated by default.
     ///         <footer><a href="https://www.google.com/search?q=Entitas.ReactiveSystem%601.Deactivate">`ReactiveSystem.Deactivate` on google.com</a></footer>
-    public virtual void Deactivate() => this._collector.Deactivate();
+    public virtual void Deactivate() => _collector.Deactivate();
 
     /// Clears all accumulated changes.
     ///         <footer><a href="https://www.google.com/search?q=Entitas.ReactiveSystem%601.Clear">`ReactiveSystem.Clear` on google.com</a></footer>
-    public virtual void Clear() => this._collector.ClearCollectedEntities();
+    public virtual void Clear() => _collector.ClearCollectedEntities();
 
     /// Will call Execute(entities) with changed entities
     ///             if there are any. Otherwise it will not call Execute(entities).
     ///         <footer><a href="https://www.google.com/search?q=Entitas.ReactiveSystem%601.Execute">`ReactiveSystem.Execute` on google.com</a></footer>
     public virtual void Execute()
     {
-      if (this._collector.count == 0)
+      if (_collector.count == 0)
         return;
-      foreach (TEntity collectedEntity in this._collector.collectedEntities)
+      foreach (TEntity collectedEntity in _collector.collectedEntities)
       {
-        if (this.Filter(collectedEntity))
+        if (Filter(collectedEntity))
         {
           collectedEntity.Retain((object) this);
-          this._buffer.Add(collectedEntity);
+          _buffer.Add(collectedEntity);
         }
       }
-      this._collector.ClearCollectedEntities();
-      if (this._buffer.Count == 0)
+      _collector.ClearCollectedEntities();
+      if (_buffer.Count == 0)
         return;
       try
       {
-        this.Execute(this._buffer);
+        Execute(_buffer);
       }
       finally
       {
-        for (int index = 0; index < this._buffer.Count; ++index)
-          this._buffer[index].Release((object) this);
-        this._buffer.Clear();
+        for (int index = 0; index < _buffer.Count; ++index)
+          _buffer[index].Release((object) this);
+        _buffer.Clear();
       }
     }
 
     public override string ToString()
     {
-      if (this._toStringCache == null)
-        this._toStringCache = "ReactiveSystem(" + this.GetType().Name + ")";
-      return this._toStringCache;
+      if (_toStringCache == null)
+        _toStringCache = "ReactiveSystem(" + GetType().Name + ")";
+      return _toStringCache;
     }
 
-    ~ExtendableReactiveSystem() => this.Deactivate();
+    ~ExtendableReactiveSystem() => Deactivate();
     }
 }
