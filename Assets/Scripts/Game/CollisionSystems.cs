@@ -1,4 +1,5 @@
 ﻿using Game.Collision;
+using Game.Reaction.Collision;
 
 namespace Game
 {
@@ -7,6 +8,7 @@ namespace Game
         public CollisionSystems(Contexts contexts)
         {
             Add(new CollisionHandlerSystem(contexts));
+            Add(new CollisionReactionSystem(contexts));
             Add(new CollisionCleanupSystem(contexts));
         }
     }
