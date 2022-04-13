@@ -12,29 +12,21 @@ namespace Game.Reaction
         private List<CollisionUnityEvent> onCollisions = new List<CollisionUnityEvent>();
         
         [SerializeField]
-        private List<TriggerUnityEvent> onTriggers = new List<TriggerUnityEvent>();
+        private List<CollisionUnityEvent> onTriggers = new List<CollisionUnityEvent>();
 
         public void OnAnyEntityEvent(GameEntity entity, EventArgs args)
         {
             switch (args)
             {
                 case CollisionEventArgs collisionArgs:
-                    foreach (var collisionEvent in onCollisions)
+                    var eventsList = collisionArgs.IsTrigger ? onTriggers : onCollisions;
+                    
+                    foreach (var collisionEvent in eventsList)
                     {
                         if (collisionEvent.IsTagAllowed(collisionArgs.Other.gameObject.tag) && 
                             collisionEvent.IsStatusEqual(collisionArgs.Status))
                         {
                             collisionEvent.Invoke(collisionArgs);
-                        }
-                    }
-                    break;
-                case TriggerEventArgs triggerArgs:
-                    foreach (var triggerEvent in onTriggers)
-                    {
-                        if (triggerEvent.IsTagAllowed(triggerArgs.Other.tag) && 
-                            triggerEvent.IsStatusEqual(triggerArgs.Status))
-                        {
-                            triggerEvent.Invoke(triggerArgs);
                         }
                     }
                     break;

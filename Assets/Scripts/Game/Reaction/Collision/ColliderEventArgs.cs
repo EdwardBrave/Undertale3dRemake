@@ -4,29 +4,20 @@ using UnityEngine;
 
 namespace Game.Reaction.Collision
 {
+    [Serializable]
     public class CollisionEventArgs: EventArgs
-    {
-        public readonly UnityEngine.Collision Other;
-
-        public readonly TemporaryStatus Status;
-
-        public CollisionEventArgs(UnityEngine.Collision other, TemporaryStatus status)
-        {
-            Other = other;
-            Status = status;
-        }
-    }
-    
-    public class TriggerEventArgs: EventArgs
     {
         public readonly Collider Other;
 
         public readonly TemporaryStatus Status;
 
-        public TriggerEventArgs(Collider other, TemporaryStatus status)
+        public readonly bool IsTrigger;
+
+        public CollisionEventArgs(Collider other, TemporaryStatus status, bool isTrigger = false)
         {
             Other = other;
             Status = status;
+            IsTrigger = isTrigger;
         }
     }
 }

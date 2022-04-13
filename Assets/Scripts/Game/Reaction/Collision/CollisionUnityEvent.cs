@@ -8,7 +8,7 @@ using UnityEngine.Events;
 namespace Game.Reaction.Collision
 {
     [Serializable]
-    public abstract class ColliderUnityEvent<T> where T : EventArgs
+    public abstract class CollisionUnityEvent : EventArgs
     {
         [TagSelector]
         [SerializeField]
@@ -18,18 +18,12 @@ namespace Game.Reaction.Collision
         private TemporaryStatus _status;
 
         [SerializeField]
-        private UnityEvent<T> Event;
+        private UnityEvent<CollisionEventArgs> Event;
 
         public bool IsTagAllowed(string tag) => _tag.IsNullOrWhitespace() || _tag == tag;
             
         public bool IsStatusEqual(TemporaryStatus status) => _status == status;
 
-        public void Invoke(T args) => Event.Invoke(args);
+        public void Invoke(CollisionEventArgs args) => Event.Invoke(args);
     }
-    
-    [Serializable]
-    public class CollisionUnityEvent : ColliderUnityEvent<CollisionEventArgs>{}
-    
-    [Serializable]
-    public class TriggerUnityEvent : ColliderUnityEvent<TriggerEventArgs>{}
 }

@@ -30,35 +30,23 @@ namespace Game.Reaction.Collision
             {
                 if (entity.hasCollisions)
                 {
-                    DispatchCollisions(entity, entity.collisions.list);
+                    DispatchCollisions(entity, entity.collisions.list, false);
                 }
 
                 if (entity.hasTriggers)
                 {
-                    DispatchTriggers(entity, entity.triggers.list);
+                    DispatchCollisions(entity, entity.triggers.list, true);
                 }
             }
         }
 
-        private void DispatchCollisions(GameEntity entity, List<Temporary<UnityEngine.Collision>> collisions)
+        private void DispatchCollisions(GameEntity entity, List<Temporary<Collider>> collisions, bool isTriggers)
         {
             foreach (var collision in collisions)
             {
                 if (collision.Status != TemporaryStatus.Stay)
                 {
-                    entity.SendReactionEvent(new CollisionEventArgs(collision.Data, collision.Status));
-                }
-            }
-        }
-        
-        
-        private void DispatchTriggers(GameEntity entity, List<Temporary<Collider>> triggers)
-        {
-            foreach (var collider in triggers)
-            {
-                if (collider.Status != TemporaryStatus.Stay)
-                {
-                    entity.SendReactionEvent(new TriggerEventArgs(collider.Data, collider.Status));
+                    entity.SendReactionEvent(new CollisionEventArgs(collision.Data, collision.Status, isTriggers));
                 }
             }
         }

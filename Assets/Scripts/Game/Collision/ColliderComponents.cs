@@ -15,7 +15,7 @@ namespace Game.Collision
     [Game]
     public class CollisionsComponent : IComponent
     {
-        public List<Temporary<UnityEngine.Collision>> list;
+        public List<Temporary<Collider>> list;
     }
     
     [Game]

@@ -148,14 +148,14 @@ namespace Game.Collision
             }
             if (gameEntity.hasCollisions)
             {
-                gameEntity.collisions.list.Add(new Temporary<UnityEngine.Collision>(collision));
+                gameEntity.collisions.list.Add(new Temporary<Collider>(collision.collider));
                 gameEntity.ReplaceCollisions(gameEntity.collisions.list);
             }
             else
             {
-                gameEntity.AddCollisions(new List<Temporary<UnityEngine.Collision>>
+                gameEntity.AddCollisions(new List<Temporary<Collider>>
                 {
-                    new Temporary<UnityEngine.Collision>(collision)
+                    new Temporary<Collider>(collision.collider)
                 });
             }
         }
@@ -170,7 +170,7 @@ namespace Game.Collision
             bool isChanged = false;
             foreach (var temporaryCollision in gameEntity.collisions.list)
             {
-                if (temporaryCollision.Data == collision)
+                if (temporaryCollision.Data == collision.collider)
                 {
                     isChanged = true;
                     temporaryCollision.Status = TemporaryStatus.Ended;

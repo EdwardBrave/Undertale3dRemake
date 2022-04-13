@@ -11,14 +11,14 @@ public partial class GameEntity {
     public Game.Collision.CollisionsComponent collisions { get { return (Game.Collision.CollisionsComponent)GetComponent(GameComponentsLookup.Collisions); } }
     public bool hasCollisions { get { return HasComponent(GameComponentsLookup.Collisions); } }
 
-    public void AddCollisions(System.Collections.Generic.List<Tools.Temporary<UnityEngine.Collision>> newList) {
+    public void AddCollisions(System.Collections.Generic.List<Tools.Temporary<UnityEngine.Collider>> newList) {
         var index = GameComponentsLookup.Collisions;
         var component = (Game.Collision.CollisionsComponent)CreateComponent(index, typeof(Game.Collision.CollisionsComponent));
         component.list = newList;
         AddComponent(index, component);
     }
 
-    public void ReplaceCollisions(System.Collections.Generic.List<Tools.Temporary<UnityEngine.Collision>> newList) {
+    public void ReplaceCollisions(System.Collections.Generic.List<Tools.Temporary<UnityEngine.Collider>> newList) {
         var index = GameComponentsLookup.Collisions;
         var component = (Game.Collision.CollisionsComponent)CreateComponent(index, typeof(Game.Collision.CollisionsComponent));
         component.list = newList;
