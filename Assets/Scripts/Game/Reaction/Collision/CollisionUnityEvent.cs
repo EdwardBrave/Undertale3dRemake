@@ -8,8 +8,11 @@ using UnityEngine.Events;
 namespace Game.Reaction.Collision
 {
     [Serializable]
-    public abstract class CollisionUnityEvent : EventArgs
+    public class CollisionEventWrapper
     {
+        [Serializable]
+        public class CollisionUnityEvent : UnityEvent2<GameEntity, CollisionEventArgs> {}
+        
         [TagSelector]
         [SerializeField]
         private string _tag;
@@ -18,12 +21,12 @@ namespace Game.Reaction.Collision
         private TemporaryStatus _status;
 
         [SerializeField]
-        private UnityEvent<CollisionEventArgs> Event;
+        private CollisionUnityEvent Event;
 
         public bool IsTagAllowed(string tag) => _tag.IsNullOrWhitespace() || _tag == tag;
             
         public bool IsStatusEqual(TemporaryStatus status) => _status == status;
 
-        public void Invoke(CollisionEventArgs args) => Event.Invoke(args);
+        public void Invoke(GameEntity sender, CollisionEventArgs args) => Event?.Invoke(sender, args);
     }
 }

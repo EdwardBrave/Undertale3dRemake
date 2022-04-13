@@ -7,12 +7,11 @@ namespace Game.Reaction
 {
     public class Reactions: MonoBehaviour
     {
+        [SerializeField]
+        private List<CollisionEventWrapper> onCollisions = new List<CollisionEventWrapper>();
         
         [SerializeField]
-        private List<CollisionUnityEvent> onCollisions = new List<CollisionUnityEvent>();
-        
-        [SerializeField]
-        private List<CollisionUnityEvent> onTriggers = new List<CollisionUnityEvent>();
+        private List<CollisionEventWrapper> onTriggers = new List<CollisionEventWrapper>();
 
         public void OnAnyEntityEvent(GameEntity entity, EventArgs args)
         {
@@ -26,7 +25,7 @@ namespace Game.Reaction
                         if (collisionEvent.IsTagAllowed(collisionArgs.Other.gameObject.tag) && 
                             collisionEvent.IsStatusEqual(collisionArgs.Status))
                         {
-                            collisionEvent.Invoke(collisionArgs);
+                            collisionEvent.Invoke(entity, collisionArgs);
                         }
                     }
                     break;
