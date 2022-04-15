@@ -10,10 +10,12 @@ namespace UI.Open
     public class CreateWindowSystem: IExecuteSystem
     {
         private readonly IGroup<UiEntity> _creatorsGroup;
+        private readonly Transform _canvasContainer;
 
         public CreateWindowSystem(Contexts contexts)
         {
             _creatorsGroup = contexts.ui.GetGroup(UiMatcher.CreateWindow);
+            _canvasContainer = contexts.core.ecsRoot.value.CanvasContainer;
         }
         
         public void Execute()
@@ -26,7 +28,7 @@ namespace UI.Open
 
         private void InitWindow(UiEntity uiEntity, InitUiEntity basePrefab, UiEntity container)
         {
-            Transform parent = null;
+            Transform parent = _canvasContainer;
 
             if (container is {hasContainer: true, hasView: true})
             {

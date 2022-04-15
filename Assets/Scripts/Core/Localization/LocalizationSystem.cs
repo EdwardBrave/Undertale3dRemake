@@ -17,7 +17,7 @@ namespace Core.Localization
         
         public void Initialize()
         {
-            _coreContext.globalGameConfigsEntity.AddLocale(LocalizationSettings.SelectedLocale.Identifier);
+            _coreContext.ecsRootEntity.AddLocale(LocalizationSettings.SelectedLocale.Identifier);
             LocalizationSettings.SelectedLocaleChanged += OnLocaleChanged;
             _localeCollector = _coreContext.CreateCollector(CoreMatcher.Locale);
         }

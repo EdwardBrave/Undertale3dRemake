@@ -1,4 +1,5 @@
 ﻿using Core;
+using Core.Camera;
 using Core.Localization;
 using Entitas;
 using Game;
@@ -14,6 +15,7 @@ namespace Main
             return new ISystem[]
             {
                 new LocalizationSystem(contexts),
+                new CameraInitSystem(contexts),
                 new UnityInputInitSystem(contexts),
                 new UiInitSystem(contexts),
                 new InputProcessingSystems(contexts),

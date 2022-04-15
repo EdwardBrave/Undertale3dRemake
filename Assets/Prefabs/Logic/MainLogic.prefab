@@ -130,6 +130,36 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inspectorUpdater: 0
+--- !u!1 &1134685927827774569
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3258290345016464371}
+  m_Layer: 0
+  m_Name: Canvases
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3258290345016464371
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1134685927827774569}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5797747434080071496}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5797747434080071498
 GameObject:
   m_ObjectHideFlags: 0
@@ -142,8 +172,8 @@ GameObject:
   - component: {fileID: 5797747434080071499}
   - component: {fileID: 8791474391013930395}
   m_Layer: 0
-  m_Name: GameInitialozation
-  m_TagString: Untagged
+  m_Name: MainLogic
+  m_TagString: MainLogic
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -161,6 +191,7 @@ Transform:
   m_Children:
   - {fileID: 1532819632}
   - {fileID: 1748254860}
+  - {fileID: 3258290345016464371}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -176,9 +207,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e5ed959708e0f59489aa5fed61d98bbd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameState: 1
+  gameState: 2
   stateMode: 0
   globalGameConfigs: {fileID: 11400000, guid: 62349ca9109ae6e4fb0966a432b1884b, type: 2}
+  canvasContainer: {fileID: 3258290345016464371}
 --- !u!114 &8791474391013930395
 MonoBehaviour:
   m_ObjectHideFlags: 0

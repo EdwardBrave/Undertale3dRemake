@@ -1,4 +1,5 @@
 ﻿using Data;
+using Entitas.CodeGeneration.Attributes;
 using UnityEngine;
 #if UNITY_EDITOR
 using Sirenix.OdinInspector;
@@ -6,24 +7,36 @@ using Sirenix.OdinInspector;
 
 namespace Main
 {
-    [DisallowMultipleComponent]
+    [Core, Unique][DisallowMultipleComponent]
     public sealed class EcsRoot : MonoBehaviour
     {
         ////////////////////////////////////////////////////////////////////
         #region Variables
-        
-        private static EcsRoot _instance;
-        
+
 #if UNITY_EDITOR
         [OnValueChanged(nameof(OnStateChanged))]
 #endif
-        [SerializeField] private RegisteredGameState gameState;
-        [SerializeField] private ChangeGameStateComponent.StateMode stateMode;
-        [SerializeField] private GlobalGameConfigs globalGameConfigs;
-        
+        [Title("Game initialization configs")]
+        [SerializeField] 
+        private RegisteredGameState gameState;
+        [SerializeField] 
+        private ChangeGameStateComponent.StateMode stateMode;
+        [SerializeField] 
+        private GlobalGameConfigs globalGameConfigs;
+
+        [Title("Scene references")] 
+        [SerializeField]
+        private Transform canvasContainer;
+
         private RootStateMachine _rootStateMachine;
         private MainGameLogic _mainGameLogic;
 
+        #endregion
+        ////////////////////////////////////////////////////////////////////
+        #region Interface
+
+        public Transform CanvasContainer => canvasContainer;
+        
         #endregion
         ////////////////////////////////////////////////////////////////////
         #region Implementation
@@ -41,9 +54,8 @@ namespace Main
         private void Awake()
         {
             var contexts = Contexts.sharedInstance;
-            if (_instance)
+            if (contexts.core.hasEcsRoot)
             {
-                
                 if (contexts.core.gameState.type != gameState)
                 {
                     contexts.core.gameStateEntity.AddChangeGameState(gameState, stateMode);
@@ -52,8 +64,8 @@ namespace Main
             }
             else
             {
-                _instance = this;
-                contexts.core.SetGlobalGameConfigs(globalGameConfigs);
+                contexts.core.SetEcsRoot(this);
+                contexts.core.ecsRootEntity.AddGlobalGameConfigs(globalGameConfigs);
                 _mainGameLogic = new MainGameLogic();
                 _mainGameLogic.InitSystems(contexts);
                 _mainGameLogic.Activate();
@@ -75,9 +87,9 @@ namespace Main
         
         private void OnDestroy()
         {
-            _rootStateMachine.TearDown();
-            _mainGameLogic.Deactivate();
-            _mainGameLogic.TearDown();
+            _rootStateMachine?.TearDown();
+            _mainGameLogic?.Deactivate();
+            _mainGameLogic?.TearDown();
         }
 
         #endregion

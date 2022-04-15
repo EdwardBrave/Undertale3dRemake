@@ -1,4 +1,5 @@
-﻿using Entitas.CodeGeneration.Attributes;
+﻿using Cinemachine;
+using Entitas.CodeGeneration.Attributes;
 using UnityEngine;
 
 namespace Data
@@ -7,6 +8,7 @@ namespace Data
     [CreateAssetMenu(fileName = "new GlobalGameConfigs", menuName = "Configs/GlobalGameConfigs")]
     public class GlobalGameConfigs: ScriptableObject
     {
+        public CinemachineBrain mainCameraPrefab;
         public UiConfig uiConfig;
         
         
